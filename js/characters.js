@@ -61,10 +61,10 @@ function useSkill(character, skill){
     
     critLuck = getRandomInt(0,100) / 100; // Crit ihtimali için sayı oluştur.
     if(critLuck < character.criticalRate){ // Sayı karakterin şansının içindeyse criticalDamage katı vur.
-        console.log("Critical Hit!");
+        //console.log("Critical Hit!");
         damage *= character.criticalDamage;
     }
-    console.log("Damage: " + damage);
+    //console.log("Damage: " + damage);
     // intelligence       : Karakterin int i
     // chSkill.damageRate : Skill Gücü
     // getRandomInt       : Vuruş farklılığı yaratmak için

@@ -77,12 +77,17 @@ var start = function () {
             }
             $("#container").append('</div></div><br>');
         }
+        refreshInputLine();
     }
     function createDialog(dialogName){
         var inputValue = $("#input").val(); // input değerini alıyor
         askQuestion(dialogName);
 
-        $(document).keypress(function(e) {
+
+        $(document).off("keypress");
+
+        //pressEnter();
+        $(document).on("keypress",function(e) {
             if(e.which == 13) {
                 //console.log(dialogName);
                 inputValue = $("#input").val(); // input değerini alıyor
@@ -90,12 +95,11 @@ var start = function () {
                     answerQuestion(dialogName, inputValue);
                 }
             }
-        });
+        }); 
     }
     createDialog("do_you_like_beer");
+    dialogCount = 1;
     
-
-
 
 
     function newLine(){ // Asıl iş burada dönüyor. Burayı düşünelim :D
@@ -103,9 +107,10 @@ var start = function () {
 
         var inputValue = $("#input").val(); // input değerini alıyor
         
-        if(actionType == 0){ // Action yok ise
+        if(actionType == 0 && dialogCount < 2){ // Action yok ise
+            dialogCount++;
             $("#container").append('<div class="line"><div class="text">'+URL+'>'+inputValue+'</div></div>');  // Cevap yanlış ise doğru şıkları gösterir
-            //createDialog("do_you_like_girls");
+            createDialog("do_you_like_girls");
         }
         if(actionType == -1){actionType++;} // Actiondan yeni çıkıldı ise fazladan girdili satır oluşmasını engelleme
 
@@ -137,7 +142,7 @@ var start = function () {
     var mainCharacter = Characters.Gandalf; // Karakteri oluşturduk.
     //console.log(mainCharacter);
     
-    useSkill(mainCharacter, 1); // Skill kullandık.
+    //useSkill(mainCharacter, 1); // Skill kullandık.
     
     
 

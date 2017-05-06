@@ -1,8 +1,11 @@
+
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min)) + min;
 }
+
+
 
 var Characters = {
     Gandalf : {
@@ -13,51 +16,56 @@ var Characters = {
         speed : 1, // ???
         intelligence: 55,
         evade: 10, // %0 - %100
-        skill1: function () {
-            critLuck = getRandomInt(0,100)
-            if(critLuck){
-
+        criticalRate: 0.15,
+        criticalDamage: 2,
+        skills: [
+            skill1 = {
+                name : "Q",
+                damageRate : 0.11,
+                type : "magic"
+            },
+            skill2 = {
+                name : "W",
+                damageRate : 0.15,
+                type : "magic"
+            },
+            skill3 = {
+                name : "E",
+                damageRate : 0.1,
+                type : "atk"
+            },
+            ulti = {
+                name : "R",
+                damageRate : 0.3,
+                type : "magic"
             }
-            return Math.round(this.intelligence * 0.2 * + getRandomInt(100,130)/100);
-            // intelligence : Karakterin int i
-            // 0.2          : Skill Gücü
-            // getRandomInt : Vuruş farklılığı yaratmak için
-        },
-        skill2: function () {
-            return Math.round(this.intelligence * 0.25 * + getRandomInt(100,130)/100);
-        },
-        skill3: function () {
-            this.defense = this.defense * 1.5;
-        }
+        ]
     },
-    Saruman : {
-        health: 60,
-        attack: 15,
-        defense: 15,
-        intelligence: 50,
-        skill1: function () {
-            return this.intelligence * 0.2;
-        },
-        skill2: function () {
-            return this.intelligence * 0.3;
-        },
-        skill3: function () {
-            this.defense = this.defense * 1.5;
-        }
-    },
-    Legolas : {
-        health: 40,
-        attack: 40,
-        defense: 35,
-        intelligence: 10,
-        skill1: function () {
-            return this.attack * 0.2;
-        },
-        skill2: function () {
-            return this.attack * 0.3;
-        },
-        skill3: function () {
-            this.defense = this.defense * 1.5;
-        }
+}
+
+function useSkill(character, skill){
+    
+    this.actionType = "skill";
+
+    var damage;
+    var chSkill = character.skills[skill];
+    /*
+    if(chSkill.type == "atk"){ // skill tipi atk ise character.attack'ı al
+        var power = character.attack;
+    } if(chSkill.type == "magic"){ // skill tipi magic ise character.intelligence'ı al
+        var power = character.intelligence;
+    }*/
+    var skillTypeStat = (chSkill.type == "atk") ? character.attack  : character.intelligence; // Inline if diye geçiyor. Yukarıdaki ifler ile aynı işi yapıyor.
+
+    damage = Math.round(skillTypeStat * chSkill.damageRate * + getRandomInt(100,130)/100);
+    
+    critLuck = getRandomInt(0,100) / 100; // Crit ihtimali için sayı oluştur.
+    if(critLuck < character.criticalRate){ // Sayı karakterin şansının içindeyse criticalDamage katı vur.
+        //console.log("Critical Hit!");
+        damage *= character.criticalDamage;
     }
+    //console.log("Damage: " + damage);
+    // intelligence       : Karakterin int i
+    // chSkill.damageRate : Skill Gücü
+    // getRandomInt       : Vuruş farklılığı yaratmak için
 }

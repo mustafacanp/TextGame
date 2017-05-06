@@ -1,13 +1,15 @@
+//'use strict';
 
 var start = function () {
 
     var URL = "Homepage"; // Satır başı yazısı
     var blinkCursor; // İmleç
+    this.actionType = 0;
 
-    var pressEnter = function(){ // Enter'a basınca yeni satıra geçme
+    var pressEnter = function(){ // Enter'a basınca newLine() fonksiyonu ile yeni satıra geçme
         $(document).keypress(function(e) {
             if(e.which == 13) {
-                newLine(1);
+                newLine();
             }
         });
     }
@@ -48,17 +50,52 @@ var start = function () {
         $("#container").append('<div class="line spaced"><div class="text">'+URL+'>'+input+'<br>'+message+'</div></div>');
     }
     
-    function newLine(action, value){ // Asıl iş burada dönüyor. Burayı düşünelim :D
+
+    function askQuestion(question){
+        var response = getInput("dialogue",question);
+        $("#container").append('<div class="line"><div class="text">'+URL+'>'+response+'</div></div><br>');
+    }
+    function answerQuestion(question, input){
+        var response = getInput("dialogue", question, input);
+        if(typeof response == "string"){
+            $("#container").append('<div class="line"><div class="text">'+URL+'>'+response+'</div></div><br>');
+            actionType = 0;
+        }
+        if(typeof response == "object"){
+            $("#container").append('<div class="line"><div class="text">Try:');
+            for(var i=1; i<response.length; i++){
+                //console.log(response[i]);
+                $("#container").append(response[i].id + "." + response[i].inputText + '<br>');
+            }
+            $("#container").append('</div></div><br>');
+        }
+    }
+    
+    var inputValue = $("#input").val(); // input değerini alıyor
+    $("#container").append('<div class="line"><div class="text">'+URL+'>'+inputValue+'</div></div>');
+    askQuestion("do_you_like_beer");
+
+    
+    function newLine(){ // Asıl iş burada dönüyor. Burayı düşünelim :D
+
         var inputValue = $("#input").val(); // input değerini alıyor
 
-        var isValid = checkValidity(action, value); // Girdi geçerli mi? Geçerlilik kontrollerini checkValidity() yapacak. Asıl iş burada dönüyor2 :D
+        $("#container").append('<div class="line"><div class="text">'+URL+'>'+inputValue+'</div></div>');
 
+        if(actionType == "dialogueQuestion"){
+            answerQuestion("do_you_like_beer", inputValue);
+        }
+
+        // Satırı oluşturacak, girdiyi aldık type ne ???
+
+         // Girdi geçerli mi? Geçerlilik kontrollerini getInput() yapacak. Asıl iş burada dönüyor2 :D
+
+        /*
         if(inputValue == "Help" || inputValue == "help"){ // Kaldırılacak
             isValid = true;
         }
 
         if(isValid) { // Girdi geçerli ise
-            createAction(action, value);
             var helpText = "For more information on a specific command, type HELP command-name";
             $("#container").append('<div class="line"><div class="text">'+URL+'>'+inputValue+'</div></div>');
             $("#container").append('<div class="line spaced"><div class="text">'+helpText+'</div></div>');
@@ -70,24 +107,16 @@ var start = function () {
             } else {
                 unknownCommand(inputValue,"'"+inputValue+"' is unknown command. If you need help, type help. Clever?");
             }
-        }
+        }*/
         refreshInputLine();
     }
 
-    function checkValidity(action, value){
+    var mainCharacter = Characters.Gandalf; // Karakteri oluşturduk.
+    //console.log(mainCharacter);
 
-    }
-    function createAction(action, value){
-        
-    }
-
-    // Karakter oluşturup skill attık. Skill vuruş değerine consoledan bakabilirsin, kod characters.js'de
-    var character;
-    Character = Characters['Gandalf'];
-    console.log(Character);
-    console.log("intelligence: "+Character.intelligence);
-    console.log("Skill1: "+Character.skill1());
-    console.log("Skill2: "+Character.skill2());
+    //useSkill(mainCharacter, 1); // Skill kullandık.
+    
+    
 
 
 

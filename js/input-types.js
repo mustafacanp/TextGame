@@ -5,16 +5,8 @@ function getInput(type, param1, param2) {
         console.log("getInput() fonskiyonu 3 parametre ile cagirilir. Detaylar icin intput-types.js'i inceleyin.");
         return false;
     case 2:
-        if(type == "dialogue"){ // type = "dialogue"" ise
-            this.actionType = "dialogueQuestion";
-            return dialogue(param1); // question, answer
-        }
         break;
     case 3:
-        if(type == "dialogue"){ // type = "dialogue"" ise
-            this.actionType = "dialogueAnswer";
-            return dialogueAnswer(param1, param2); // question, answer
-        }
         break;
     }
 }
@@ -46,7 +38,36 @@ function getInput(type, param1, param2) {
                     return "Wow maan... Take it and end this fucking game!";
                 }
             }
-        ],/*
+        ],
+        do_you_like_girls : [
+            {
+                question : "Do you like girls?"
+            },
+            {
+                id : 1,
+                inputText : "No i am Gay.",
+                output : function (){
+                    return "OK gay..";
+                }
+            },
+            {
+                id : 2,
+                inputText : "Yes i like",
+                output : function (){
+                    return "OK, nice.";
+                }
+            },
+            {
+                id : 3,
+                inputText : "I love it!",
+                output : function (){
+                    return "Wow maan... Take it and end this fucking game!";
+                }
+            }
+        ],
+        
+        
+        /*
         yes_no : {
             
         },
@@ -56,18 +77,17 @@ function getInput(type, param1, param2) {
         }*/
     }
     function dialogue(question){
-        
-        //console.log("Soru line'i olustur.");
         //console.log(dialogues[question][0].question);
+        this.actionType = "dialogAnswer";
         return dialogues[question][0].question;
     }
-    function dialogueAnswer(question, answer){
-        if(dialogues[question][answer]){
-            //console.log(dialogues[question][answer].output());
-            return dialogues[question][answer].output();
+    function dialogueAnswer(question, input){
+        if(dialogues[question][input]){
+            this.actionType = 0;
+            return dialogues[question][input].output(); // Girdi doğru ise
         }
         else{
-            //console.log(dialogues[question]);
+            this.actionType = "dialogAnswer";
             return dialogues[question]; // Yanlış girdi gelirse doğru girdi olan diğer şıkları görüntüleyecek...
         }
     }

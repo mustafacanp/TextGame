@@ -51,40 +51,63 @@ var start = function () {
     }
     
 
+
+
+
     function askQuestion(question){
-        var response = getInput("dialogue",question);
-        $("#container").append('<div class="line"><div class="text">'+URL+'>'+response+'</div></div><br>');
+        //console.log(actionType);
+        actionType = "dialogueQuestion";
+        var response = dialogue(question);
+        //console.log(actionType);
+        $("#container").append('<div class="line"><div class="text">'+URL+'>'+response+'</div></div><br>'); // Ekrana düşen soru
     }
     function answerQuestion(question, input){
-        var response = getInput("dialogue", question, input);
+        var response = dialogueAnswer( question, input);
         if(typeof response == "string"){
-            $("#container").append('<div class="line"><div class="text">'+URL+'>'+response+'</div></div><br>');
-            actionType = 0;
+            $("#container").append('<div class="line"><div class="text">'+URL+'>'+input+'</div></div>');
+            $("#container").append('<div class="line"><div class="text">'+response+'</div></div><br>'); // Cevap doğru ise
+            actionType = -1;
         }
-        if(typeof response == "object"){
-            $("#container").append('<div class="line"><div class="text">Try:');
+        if(typeof response == "object"){ // Cevap yanlış ise doğru şıkları göster
+            $("#container").append('<div class="line"><div class="text">'+URL+'>'+input+'</div></div>');
+            $("#container").append('<div class="line"><div class="text danger">Try:');  // Cevap yanlış ise doğru şıkları göster
             for(var i=1; i<response.length; i++){
                 //console.log(response[i]);
-                $("#container").append(response[i].id + "." + response[i].inputText + '<br>');
+                $("#container").append("<div class='text danger' style='width: 100%;'>"+response[i].id + "." + response[i].inputText + '</div>');  // Cevap yanlış ise doğru şıkları göster
             }
             $("#container").append('</div></div><br>');
         }
     }
-    
-    var inputValue = $("#input").val(); // input değerini alıyor
-    $("#container").append('<div class="line"><div class="text">'+URL+'>'+inputValue+'</div></div>');
-    askQuestion("do_you_like_beer");
+    function createDialog(dialogName){
+        var inputValue = $("#input").val(); // input değerini alıyor
+        askQuestion(dialogName);
 
+        $(document).keypress(function(e) {
+            if(e.which == 13) {
+                //console.log(dialogName);
+                inputValue = $("#input").val(); // input değerini alıyor
+                if(actionType == "dialogAnswer"){
+                    answerQuestion(dialogName, inputValue);
+                }
+            }
+        });
+    }
+    createDialog("do_you_like_beer");
     
+
+
+
+
     function newLine(){ // Asıl iş burada dönüyor. Burayı düşünelim :D
+        //console.log(actionType);
 
         var inputValue = $("#input").val(); // input değerini alıyor
-
-        $("#container").append('<div class="line"><div class="text">'+URL+'>'+inputValue+'</div></div>');
-
-        if(actionType == "dialogueQuestion"){
-            answerQuestion("do_you_like_beer", inputValue);
+        
+        if(actionType == 0){ // Action yok ise
+            $("#container").append('<div class="line"><div class="text">'+URL+'>'+inputValue+'</div></div>');  // Cevap yanlış ise doğru şıkları gösterir
+            //createDialog("do_you_like_girls");
         }
+        if(actionType == -1){actionType++;} // Actiondan yeni çıkıldı ise fazladan girdili satır oluşmasını engelleme
 
         // Satırı oluşturacak, girdiyi aldık type ne ???
 
@@ -113,8 +136,8 @@ var start = function () {
 
     var mainCharacter = Characters.Gandalf; // Karakteri oluşturduk.
     //console.log(mainCharacter);
-
-    //useSkill(mainCharacter, 1); // Skill kullandık.
+    
+    useSkill(mainCharacter, 1); // Skill kullandık.
     
     
 
@@ -134,7 +157,7 @@ jQuery(document).ready(function () {
 });
 
 
-/* Sol Üst Yazı Rengi */
+/* Sol Üst Yazı Rengi
 var color = "green";
 $("#switch-color").click(function(){
     if(color != "grey"){

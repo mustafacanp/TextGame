@@ -13,7 +13,7 @@ body{
 
 #container{
     background-color: #000;
-    color: #AAA;
+    color: #0F0;
     width: 600px;
     height: auto;
     margin: auto;
@@ -34,6 +34,9 @@ body{
     float: left;
     font-size: 16px;
 }
+.text.danger{
+    color: #F00
+}
 
 
 /*blinkCursor*/
@@ -45,7 +48,7 @@ body{
     float: left;
     width: 5px;
     height: 18px;
-    background-color: #AAA;
+    background-color: #0F0;
 }
 
 input#input{

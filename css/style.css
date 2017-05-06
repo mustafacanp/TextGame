@@ -1,0 +1,42 @@
+@font-face {
+    font-family: Consolas;
+    src: url('../fonts/Consolas.ttf');
+}
+
+
+*{
+    font-family: Consolas;
+}
+
+body{
+    background-color: #000;
+}
+
+#container{
+    background-color: #000;
+    color: #AAA;
+    width: 500px;
+    height: 500px;
+    margin: auto;
+    padding: 10px;
+}
+
+.line{
+    float: left;
+    width: 100%;
+}
+.text{
+    float: left;
+}
+
+.blink{
+    float: left;
+    width: 8px;
+    height: 4px;
+    margin-top: 13px;
+    margin-left: 2px;
+    background-color: #000;
+}
+.backgroundWhite{
+    background-color: #AAA;
+}

@@ -5,6 +5,8 @@ var start = function () {
     var URL = "Homepage"; // Satır başı yazısı
     var blinkCursor; // İmleç
     this.actionType = 0;
+    this.dialogFinished = false;
+    this.dialogCount = 1;
 
     var pressEnter = function(){ // Enter'a basınca newLine() fonksiyonu ile yeni satıra geçme
         $(document).keypress(function(e) {
@@ -66,7 +68,10 @@ var start = function () {
         if(typeof response == "string"){
             $("#container").append('<div class="line"><div class="text">'+URL+'>'+input+'</div></div>');
             $("#container").append('<div class="line"><div class="text">'+response+'</div></div><br>'); // Cevap doğru ise
-            actionType = -1;
+            actionType = "dialog_finished";
+        console.log(dialogFinished);
+        console.log(dialogCount);
+        console.log(actionType);
         }
         if(typeof response == "object"){ // Cevap yanlış ise doğru şıkları göster
             $("#container").append('<div class="line"><div class="text">'+URL+'>'+input+'</div></div>');
@@ -97,22 +102,35 @@ var start = function () {
             }
         }); 
     }
+
     createDialog("do_you_like_beer");
-    dialogCount = 1;
+
     
-
-
     function newLine(){ // Asıl iş burada dönüyor. Burayı düşünelim :D
         //console.log(actionType);
+        console.log(dialogFinished);
+        console.log(dialogCount);
+        console.log(actionType);
 
         var inputValue = $("#input").val(); // input değerini alıyor
         
-        if(actionType == 0 && dialogCount < 2){ // Action yok ise
-            dialogCount++;
-            $("#container").append('<div class="line"><div class="text">'+URL+'>'+inputValue+'</div></div>');  // Cevap yanlış ise doğru şıkları gösterir
-            createDialog("do_you_like_girls");
+        if(actionType == "create_new_dialog" && dialogCount < 10 && dialogFinished){ // Action yok ise
+            if(dialogCount == 2){
+                $("#container").append('<div class="line"><div class="text">'+URL+'>'+inputValue+'</div></div>');  // Son girdini gösterir.
+                createDialog("do_you_like_girls");
+            }
+            else if(dialogCount == 3){
+                $("#container").append('<div class="line"><div class="text">'+URL+'>'+inputValue+'</div></div>');  // Son girdini gösterir.
+                console.log("dialogCount == 3");
+                createDialog("do_you_like_beer");
+            }
+            else if(dialogCount == 4){
+                $("#container").append('<div class="line"><div class="text">'+URL+'>'+inputValue+'</div></div>');  // Son girdini gösterir.
+                console.log("dialogCount == 4");
+                createDialog("do_you_like_girls");
+            }
         }
-        if(actionType == -1){actionType++;} // Actiondan yeni çıkıldı ise fazladan girdili satır oluşmasını engelleme
+        if(actionType == "dialog_finished"){actionType="create_new_dialog";} // Actiondan yeni çıkıldı ise fazladan girdili satır oluşmasını engelleme
 
         // Satırı oluşturacak, girdiyi aldık type ne ???
 
@@ -163,7 +181,7 @@ jQuery(document).ready(function () {
 
 
 /* Sol Üst Yazı Rengi
-var color = "green";
+var color = "grey";
 $("#switch-color").click(function(){
     if(color != "grey"){
         console.log("a");

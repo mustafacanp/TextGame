@@ -15,20 +15,18 @@ function getInput(type, param1, param2) {
     var dialogues = {
         do_you_like_beer : [
             {
-                question : "Do you like beer?"
-            },
-            {
+                question : "Do you like beer?",
                 id : 1,
-                inputText : "I hate that shit.",
+                inputText : "Yes i like",
                 output : function (){
-                    return "OK man, calm down..";
+                    return "OK, nice.";
                 }
             },
             {
                 id : 2,
-                inputText : "Yes i like",
+                inputText : "I hate that shit.",
                 output : function (){
-                    return "OK, nice.";
+                    return "OK man, calm down..";
                 }
             },
             {
@@ -84,10 +82,14 @@ function getInput(type, param1, param2) {
     function dialogueAnswer(question, input){
         if(dialogues[question][input]){
             this.actionType = 0;
+            this.dialogFinished = true;
+            this.dialogCount++;
+            console.log(dialogCount);
             return dialogues[question][input].output(); // Girdi doğru ise
         }
         else{
             this.actionType = "dialogAnswer";
+            console.log(dialogCount);
             return dialogues[question]; // Yanlış girdi gelirse doğru girdi olan diğer şıkları görüntüleyecek...
         }
     }

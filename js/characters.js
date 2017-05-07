@@ -45,7 +45,7 @@ var Characters = {
 
 function useSkill(character, skill){
     
-    this.actionType = "skill";
+    actionType = "skill";
 
     var damage;
     var chSkill = character.skills[skill-1];

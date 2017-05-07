@@ -13,7 +13,7 @@ body{
 
 #container{
     background-color: #000;
-    color: #0F0;
+    color: #AAA;
     width: 600px;
     height: auto;
     margin: auto;
@@ -37,10 +37,15 @@ body{
 .text.red{
     color: #F00
 }
+.text.green{
+    color: #0F0
+}
 .text.blue{
     color: #00F
 }
-
+.text.purple{
+    color: #808
+}
 
 /*blinkCursor*/
 #cmd span {
@@ -51,7 +56,7 @@ body{
     float: left;
     width: 5px;
     height: 18px;
-    background-color: #0F0;
+    background-color: #AAA;
 }
 
 input#input{

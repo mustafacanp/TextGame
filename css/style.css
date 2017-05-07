@@ -86,6 +86,7 @@ input#input{
 }
 
 #statistics-button{
+    position: fixed;
     text-align: center;
     background-color: #000080;
     color: #FFF;

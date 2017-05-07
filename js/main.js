@@ -115,8 +115,8 @@ var start = function () {
     return {
         init: function () { // Sayfa yüklenince (initialize olunca)
             //createDialogue("name_dialogue");
-            cout("INITIALIZED", "Welcome visitor. Press any key for continue...", "green", 1);
-            refreshInputLine(); // İlk satırı oluşturdu.
+            cout("", "Welcome visitor. Press any key for continue...<br><br>", "green", 0);
+            //refreshInputLine(); // İlk satırı oluşturdu.
             focusInput(); // Sayfada herhangi bir yere basınca input alanına focus olur.
             pressEnter(); // Enter kontrolünü ekledi.
         }

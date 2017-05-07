@@ -1,4 +1,6 @@
-
+function scrollBottom(){
+    $('#container').animate({scrollTop: $('#container')[0].scrollHeight}, 300);
+}
 var focusInput = function(){ // Sayfada herhangi bir yere tıklansa da inputa focuslanması
     $("#input").focus();
     $(document).click(function(e) {
@@ -20,7 +22,7 @@ var hideInputCursor = function(){ // İmleç
     });
 }
 function cin(){
-    $("#container").append('<div class="line input-line"><div class="text">'+path+'></div><div id="cmd"><span></span><div id="cursor"></div></div><input type="text" id="input" maxlength="50" /></div>');
+    $("#container").append('<div class="line input-line"><div class="text">></div><div id="cmd"><span></span><div id="cursor"></div></div><input type="text" id="input" maxlength="50" /></div>');
 }
 function cout(path, _output, _class, isPath){
     if(isPath){ // '>' yazdırılmayan çıktılar.

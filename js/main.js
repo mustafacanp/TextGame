@@ -31,7 +31,7 @@ var start = function () {
             if(typeof response == "object"){ // Number type cevap gelmesi gerekiyor ise
                 cout(path, response.question, "", 1); // Soruyu yazdır
                 for(var i=0; i<response.answers.length; i++){
-                    cout("", response.answers[i].id + "." + response.answers[i].inputText, "purple", 0); //Cevapları yazdır
+                    cout("", response.answers[i].id + "." + response.answers[i].inputText, "purple option", 0); //Cevapları yazdır
                 }
             } else { // Text type cevap gelmesi gerekiyor ise
                 cout(path, response, "", 1); // Soruyu yazdır
@@ -40,18 +40,19 @@ var start = function () {
         function answerQuestion(question, input){
             var response = dialogueAnswer( question, input);
             if(response){ // Cevap doğru ise
-                cout(path, input, "", 1); // Son girdini yazdır
+                //cout(path, input, "", 1); // Son girdini yazdır
                 cout("", response, "green", 0); // Cevabından gelen response'u(karşı cevabı) yazdır.
                 //------------------------------------------------------------------------------------------------------------------------------------------------------------
                 //actionType = "create_dialog";
                 actionType = 0;
                 finishedAction++;
+                $(".line").each(function(){var isInputLine = $(this).children(".text").hasClass("option");if(isInputLine){$(this).remove();}}); // Doğru cevap sonrası yanlış cevapları siler.
                 //------------------------------------------------------------------------------------------------------------------------------------------------------------
                 cout("", "<br>", "", 0); // Doğru cevap sonrası boş satır atlat.
             }
             if(!response){ // Cevap yanlış ise
-                cout(path, input, "", 1); // Son girdini yazdır
-                cout("", "Invalid input.", "red spaced", 0); // Cevap yanlış ise Invalid input. yazdır
+                //cout(path, input, "", 1); // Son girdini yazdır
+                //cout("", "Invalid input.", "red spaced", 0); // Cevap yanlış ise Invalid input. yazdır
             }
             refreshInputLine();
         }
@@ -101,6 +102,7 @@ var start = function () {
                 actionType = "create_story_text";
                 initStory();
             }
+            scrollBottom();
         }
         refreshInputLine();
     }

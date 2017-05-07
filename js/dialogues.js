@@ -20,6 +20,7 @@ function dialogueAnswer(question, input){
     if(dialogues[question].type == "text" && input != ""){ // Text tipi cevap isteyen soru ise
         dialogues[question].saveAnswer(input);
         actionType = 0;
+        scrollBottom();
         return "<div style='color: #0F0'>OK, your name is "+input; // Girdi doğru ise;
     } else if(input == ""){
         actionType = "dialogue_answer";

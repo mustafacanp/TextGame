@@ -13,23 +13,61 @@ body{
     margin: 0;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+}
+body {
+  -ms-overflow-style:none;
+}
 #container{
+    float: left;
     background-color: #000;
     color: #AAA;
-    width: 600px;
-    height: auto;
+    width: 50%;
+    height: 48%;
     margin: auto;
-    margin-top: 15px;
+    position: fixed;
+    overflow-y: scroll;
     padding: 10px;
+    top: 10%;
+    left: 25%;
+    border: 4px dashed #AAA;
+}
+#container2{
+    float: left;
+    background-color: #000;
+    color: #AAA;
+    width: 50%;
+    height: 25%;
+    margin: auto;
+    position: fixed;
+    overflow: auto;
+    padding: 10px;
+    top: 60%;
+    left: 25%;
+    border: 4px dashed #AAA;
 }
 
 .line{
     float: left;
     width: 100%;
 }
-
 .line.spaced{
     margin-bottom: 20px;
+}
+.line.input-line{
+    padding-top: 10px;
+    width: 50%;
+    left: 25%;
+    position: fixed;
+    bottom: 7.4%;
+    border-top: 0;
+    border: 4px dashed #AAA;
+    padding: 10px;
 }
 
 .text{

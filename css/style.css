@@ -5,6 +5,7 @@
 
 *{
     font-family: Consolas;
+    font-size: 16px;
 }
 
 body{
@@ -32,7 +33,6 @@ body{
 
 .text{
     float: left;
-    font-size: 16px;
 }
 .text.red{
     color: #F00
@@ -82,4 +82,43 @@ input#input{
     width: 50px;
     height: 50px;
     background-color: #FFF;
+}
+
+#statistics-button{
+    text-align: center;
+    background-color: #FFF;
+}
+
+#statistics-button:hover{
+    background-color: #0F0;
+    color: #000;
+}
+
+#statistics{
+    display: none;
+    position: fixed;
+    width: 60%;
+    height: 60%;
+    left: calc(20%);
+    top: calc(20%);
+    background-color: #000080;
+    color: #FFF;
+    z-index: 10;
+    padding: 30px;
+}
+#statistics .left{
+    float: left;
+    width: 30%;
+}
+#statistics .right{
+    float: left;
+    width: 70%;
+}
+
+#statistics .title{
+
+}
+
+#general, #your_answers{
+    margin-bottom: 30px;
 }

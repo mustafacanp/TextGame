@@ -20,7 +20,7 @@ var hideInputCursor = function(){ // İmleç
     });
 }
 function cin(){
-    $("#container").append('<div class="line input-line"><div class="text">'+path+'></div><div id="cmd"><span></span><div id="cursor"></div></div><input type="text" id="input" /></div>');
+    $("#container").append('<div class="line input-line"><div class="text">'+path+'></div><div id="cmd"><span></span><div id="cursor"></div></div><input type="text" id="input" maxlength="50" /></div>');
 }
 function cout(path, _output, _class, isPath){
     if(isPath){ // '>' yazdırılmayan çıktılar.

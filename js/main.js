@@ -29,16 +29,18 @@ var start = function () {
         function askQuestion(question){
             actionType = "dialogueQuestion";
             var response = dialogue(question);
-            cout(path, response, "", 1); // Soruyu yazdır
-            /*
-            var response = dialogueAnswer( question, ''); //Cevapları yazdır
-            for(var i=0; i<response.length; i++){
-                cout("", response[i].id + "." + response[i].inputText, 'purple', 0); //Cevapları yazdır
-            }*/
+            if(typeof response == "object"){ // Number type cevap gelmesi gerekiyor ise
+                cout(path, response.question, "", 1); // Soruyu yazdır
+                for(var i=0; i<response.answers.length; i++){
+                    cout("", response.answers[i].id + "." + response.answers[i].inputText, 'purple', 0); //Cevapları yazdır
+                }
+            } else { // Text type cevap gelmesi gerekiyor ise
+                cout(path, response, "", 1); // Soruyu yazdır
+            }
         }
         function answerQuestion(question, input){
             var response = dialogueAnswer( question, input);
-            if(typeof response == "string"){ // Cevap doğru ise
+            if(response){ // Cevap doğru ise
                 cout(path, input, "", 1); // Son girdini yazdır
                 cout("", response, 'green', 0); // Cevabından gelen response'u(karşı cevabı) yazdır.
                 actionType = "dialog_finished";
@@ -51,47 +53,18 @@ var start = function () {
             refreshInputLine();
         }
     }
-
-    
-    function newLine(){ // Asıl iş burada dönüyor. Burayı düşünelim :D
-
-        var inputValue = $("#input").val(); // input değerini alıyor
-        
-        if(actionType == "create_new_dialog" && dialogCount < 10 && dialogFinished){ // Action yok ise
-            if(dialogCount == 1){
-                createDialog("do_you_like_girls");
-            }
-            else if(dialogCount == 2){
-                createDialog("do_you_like_beer");
-            }
-            else if(dialogCount == 3){
-                createDialog("do_you_like_girls");
+    function initDialogues(){
+        if(actionType == "create_new_dialog" && dialogFinished){
+            if(dialogCount <= dialogueSequence.length){
+                createDialog(dialogueSequence[dialogCount-1]); // if(dialogCount == 1){createDialog("do_you_like_girls");}
             }
         }
         if(actionType == "dialog_finished"){actionType="create_new_dialog";} // Actiondan yeni çıkıldı ise fazladan girdili satır oluşmasını engelleme
-
-        // Satırı oluşturacak, girdiyi aldık type ne ???
-
-         // Girdi geçerli mi? Geçerlilik kontrollerini getInput() yapacak. Asıl iş burada dönüyor2 :D
-
-        /*
-        if(inputValue == "Help" || inputValue == "help"){ // Kaldırılacak
-            isValid = true;
-        }
-
-        if(isValid) { // Girdi geçerli ise
-            var helpText = "For more information on a specific command, type HELP command-name";
-            $("#container").append('<div class="line"><div class="text">'+path+'>'+inputValue+'</div></div>');
-            $("#container").append('<div class="line spaced"><div class="text">'+helpText+'</div></div>');
-
-        } if(!isValid) { // Girdi geçersiz ise
-            
-            if(inputValue == ""){ // Kaldırılacak
-                $("#container").append('<div class="line"><div class="text">'+path+'></div></div>');
-            } else {
-                unknownCommand(inputValue,"'"+inputValue+"' is unknown command. If you need help, type help. Clever?");
-            }
-        }*/
+    }
+    
+    var dialogueSequence = ["do_you_like_girls", "do_you_like_beer", "do_you_like_girls", "do_you_like_beer"]; // Diyalogları sırası ile bu diziden oluşturuyor.
+    function newLine(){
+        initDialogues();
         refreshInputLine();
     }
     
@@ -132,3 +105,24 @@ $("#switch-color").click(function(){
     }
 });
 /* Gereksiz */
+
+$("#statistics-button").click(function(){
+    $("#statistics").toggle();
+    if(options){
+        var string = "";
+        for(var key in options) {
+            var value = options[key];
+            string += "<div class='left'>"+key+"</div><div class='right'>"+value+"</div>"
+        }
+        $("#general .content").html(string);
+    }
+    if(dialogueAnswers){
+        var string = "";
+        for(var key in dialogueAnswers) {
+            var value = dialogueAnswers[key];
+            string += "<div class='left'>"+key+"</div><div class='right'>"+value+"</div>"
+        }
+        $("#your_answers .content").html(string);
+    }
+});
+

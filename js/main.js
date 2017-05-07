@@ -10,7 +10,6 @@ var start = function () {
         });
     }
 
-    createDialog("do_you_like_beer");
 
     function createDialog(dialogName){
         dialogCount++;
@@ -31,11 +30,11 @@ var start = function () {
             actionType = "dialogueQuestion";
             var response = dialogue(question);
             cout(path, response, "", 1); // Soruyu yazdır
-
+            /*
             var response = dialogueAnswer( question, ''); //Cevapları yazdır
             for(var i=0; i<response.length; i++){
                 cout("", response[i].id + "." + response[i].inputText, 'purple', 0); //Cevapları yazdır
-            }
+            }*/
         }
         function answerQuestion(question, input){
             var response = dialogueAnswer( question, input);
@@ -45,7 +44,7 @@ var start = function () {
                 actionType = "dialog_finished";
                 cout("", "<br>", "", 0); // Doğru cevap sonrası boş satır atlat.
             }
-            if(typeof response == "object"){ // Cevap yanlış ise
+            if(!response){ // Cevap yanlış ise
                 cout(path, input, "", 1); // Son girdini yazdır
                 cout("", 'Invalid input.', 'red spaced', 0); // Cevap yanlış ise Invalid input. yazdır
             }
@@ -95,24 +94,16 @@ var start = function () {
         }*/
         refreshInputLine();
     }
-
-
-
-
-
-
+    
 
     var mainCharacter = Characters.Gandalf; // Karakteri oluşturduk.
     //console.log(mainCharacter);
-    
     //useSkill(mainCharacter, 1); // Skill kullandık.
     
-    
-
-
 
     return {
         init: function () { // Sayfa yüklenince (initialize olunca)
+            createDialog("name_dialog");
             refreshInputLine(); // İlk satırı oluşturdu.
             focusInput(); // Sayfada herhangi bir yere basınca input alanına focus olur.
             pressEnter(); // Enter kontrolünü ekledi.

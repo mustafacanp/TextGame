@@ -39,9 +39,7 @@ function getInput(type, param1, param2) {
         ],
         do_you_like_girls : [
             {
-                question : "Do you like girls?"
-            },
-            {
+                question : "Do you like girls?",
                 id : 1,
                 inputText : "No i am Gay.",
                 output : function (){
@@ -80,12 +78,12 @@ function getInput(type, param1, param2) {
         return dialogues[question][0].question;
     }
     function dialogueAnswer(question, input){
-        if(dialogues[question][input]){
+        if(dialogues[question][input-1]){
             this.actionType = 0;
             this.dialogFinished = true;
             this.dialogCount++;
             console.log(dialogCount);
-            return dialogues[question][input].output(); // Girdi doğru ise
+            return dialogues[question][input-1].output(); // Girdi doğru ise
         }
         else{
             this.actionType = "dialogAnswer";

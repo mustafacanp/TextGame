@@ -34,8 +34,11 @@ body{
     float: left;
     font-size: 16px;
 }
-.text.danger{
+.text.red{
     color: #F00
+}
+.text.blue{
+    color: #00F
 }
 
 

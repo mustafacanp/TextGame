@@ -67,7 +67,7 @@ var start = function () {
         var response = dialogueAnswer( question, input);
         if(typeof response == "string"){
             $("#container").append('<div class="line"><div class="text">'+URL+'>'+input+'</div></div>');
-            $("#container").append('<div class="line"><div class="text">'+response+'</div></div><br>'); // Cevap doğru ise
+            $("#container").append('<div class="line"><div class="text blue">'+response+'</div></div><br>'); // Cevap doğru ise
             actionType = "dialog_finished";
         console.log(dialogFinished);
         console.log(dialogCount);
@@ -75,10 +75,10 @@ var start = function () {
         }
         if(typeof response == "object"){ // Cevap yanlış ise doğru şıkları göster
             $("#container").append('<div class="line"><div class="text">'+URL+'>'+input+'</div></div>');
-            $("#container").append('<div class="line"><div class="text danger">Try:');  // Cevap yanlış ise doğru şıkları göster
-            for(var i=1; i<response.length; i++){
+            $("#container").append('<div class="line"><div class="text red">Try:');  // Cevap yanlış ise doğru şıkları göster
+            for(var i=0; i<response.length; i++){
                 //console.log(response[i]);
-                $("#container").append("<div class='text danger' style='width: 100%;'>"+response[i].id + "." + response[i].inputText + '</div>');  // Cevap yanlış ise doğru şıkları göster
+                $("#container").append("<div class='text red' style='width: 100%;'>"+response[i].id + "." + response[i].inputText + '</div>');  // Cevap yanlış ise doğru şıkları göster
             }
             $("#container").append('</div></div><br>');
         }

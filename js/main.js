@@ -37,50 +37,45 @@ var start = function () {
             $('#cmd span').text($(this).val());
         });
     }
+
+    function cin(){
+        $("#container").append('<div class="line input-line"><div class="text">'+URL+'></div><div id="cmd"><span></span><div id="cursor"></div></div><input type="text" id="input" /></div>');
+    }
+    function cout(URL, _output, _class, answ_ques){
+        if(answ_ques){ // '>' yazdırılmayan çıktılar.
+            $("#container").append('<div class="line"><div class="text '+_class+'">'+URL+'>'+_output+'</div></div>');
+        } else { // 'URL>' yazdırılan sonuçlar.
+            $("#container").append('<div class="line"><div class="text '+_class+'">'+_output+'</div></div>');
+        }
+    }
     
     function refreshInputLine(){ // Tüm girdi satırlarını siler.
         $(".line").each(function(){
             var isInputLine = $(this).hasClass("input-line");
             if(isInputLine){$(this).remove();}
         });
-        $("#container").append('<div class="line input-line"><div class="text">'+URL+'></div><div id="cmd"><span></span><div id="cursor"></div></div><input type="text" id="input" /></div>');
+        cin();
         hideInputCursor();
     }
-
-    function unknownCommand(input, message){ // Geçersiz girdi alınınca gösterilir. (newLine fonksiyonunun içinde isValid false gelirse)
-        $('#input').attr('readonly', true);
-        $("#container").append('<div class="line spaced"><div class="text">'+URL+'>'+input+'<br>'+message+'</div></div>');
-    }
     
-
-
-
-
     function askQuestion(question){
-        //console.log(actionType);
         actionType = "dialogueQuestion";
         var response = dialogue(question);
-        //console.log(actionType);
-        $("#container").append('<div class="line"><div class="text">'+URL+'>'+response+'</div></div><br>'); // Ekrana düşen soru
+        cout(URL, response, '', 1); // Ekrana düşen soru
     }
     function answerQuestion(question, input){
         var response = dialogueAnswer( question, input);
         if(typeof response == "string"){
-            $("#container").append('<div class="line"><div class="text">'+URL+'>'+input+'</div></div>');
-            $("#container").append('<div class="line"><div class="text blue">'+response+'</div></div><br>'); // Cevap doğru ise
+            cout(URL, input, '', 1);
+            cout('', response, 'blue', 0); // Cevap doğru ise
             actionType = "dialog_finished";
-        console.log(dialogFinished);
-        console.log(dialogCount);
-        console.log(actionType);
         }
         if(typeof response == "object"){ // Cevap yanlış ise doğru şıkları göster
-            $("#container").append('<div class="line"><div class="text">'+URL+'>'+input+'</div></div>');
-            $("#container").append('<div class="line"><div class="text red">Try:');  // Cevap yanlış ise doğru şıkları göster
+            cout(URL, input, '', 1); // Son girdini gösterir
+            cout('', 'Try', 'red', 0); // Try
             for(var i=0; i<response.length; i++){
-                //console.log(response[i]);
-                $("#container").append("<div class='text red' style='width: 100%;'>"+response[i].id + "." + response[i].inputText + '</div>');  // Cevap yanlış ise doğru şıkları göster
+                cout('', response[i].id + "." + response[i].inputText, 'red', 0); // Cevap yanlış ise doğru şıkları göster
             }
-            $("#container").append('</div></div><br>');
         }
         refreshInputLine();
     }
@@ -88,13 +83,10 @@ var start = function () {
         var inputValue = $("#input").val(); // input değerini alıyor
         askQuestion(dialogName);
 
-
         $(document).off("keypress");
-
         //pressEnter();
         $(document).on("keypress",function(e) {
             if(e.which == 13) {
-                //console.log(dialogName);
                 inputValue = $("#input").val(); // input değerini alıyor
                 if(actionType == "dialogAnswer"){
                     answerQuestion(dialogName, inputValue);
@@ -107,25 +99,21 @@ var start = function () {
 
     
     function newLine(){ // Asıl iş burada dönüyor. Burayı düşünelim :D
-        //console.log(actionType);
-        console.log(dialogFinished);
-        console.log(dialogCount);
-        console.log(actionType);
 
         var inputValue = $("#input").val(); // input değerini alıyor
         
         if(actionType == "create_new_dialog" && dialogCount < 10 && dialogFinished){ // Action yok ise
             if(dialogCount == 2){
-                $("#container").append('<div class="line"><div class="text">'+URL+'>'+inputValue+'</div></div>');  // Son girdini gösterir.
+                cout(URL, inputValue, '', 1);
                 createDialog("do_you_like_girls");
             }
             else if(dialogCount == 3){
-                $("#container").append('<div class="line"><div class="text">'+URL+'>'+inputValue+'</div></div>');  // Son girdini gösterir.
+                cout(URL, inputValue, '', 1);
                 console.log("dialogCount == 3");
                 createDialog("do_you_like_beer");
             }
             else if(dialogCount == 4){
-                $("#container").append('<div class="line"><div class="text">'+URL+'>'+inputValue+'</div></div>');  // Son girdini gösterir.
+                cout(URL, inputValue, '', 1);
                 console.log("dialogCount == 4");
                 createDialog("do_you_like_girls");
             }

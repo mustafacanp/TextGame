@@ -10,6 +10,7 @@
 
 body{
     background-color: #000;
+    margin: 0;
 }
 
 #container{
@@ -86,13 +87,15 @@ input#input{
 
 #statistics-button{
     text-align: center;
-    background-color: #FFF;
+    background-color: #000080;
+    color: #FFF;
+    float: left;
+    margin-left: 15px;
+    margin-top: 5px;
+    padding: 10px;
+    cursor: default;
 }
 
-#statistics-button:hover{
-    background-color: #0F0;
-    color: #000;
-}
 
 #statistics{
     display: none;
@@ -115,8 +118,9 @@ input#input{
     width: 70%;
 }
 
-#statistics .title{
-
+#statistics .title, #statistics .content, #general, #your_answers{
+    float: left;
+    width: 100%;
 }
 
 #general, #your_answers{

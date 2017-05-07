@@ -1,5 +1,8 @@
 
+
+
 var dialogueAnswers = {} // Diyaloglardan gelen cevaplar bu objede saklanıyor.
+
 function getdialogueAnswers(key){ // Cevapları çekmek için sorunun key'i gönderilmeli.
     return dialogueAnswers[key];
 }

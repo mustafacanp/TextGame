@@ -10,7 +10,6 @@ var start = function () {
         });
     }
 
-
     function createDialogue(dialogueName){
         dialogueCount++;
         askQuestion(dialogueName); // Soruyu sorduk.
@@ -81,17 +80,17 @@ var start = function () {
         }
     }
 
-    var dialogueSequence = ["do_you_like_girls", "do_you_like_beer", "name_dialogue", "do_you_like_girls"]; // Diyalogları sırası ile bu diziden oluşturuyor.
+    var dialogueSequence = ["name_dialogue", "do_you_like_beer", "do_you_like_girls", "do_you_like_girls"]; // Diyalogları sırası ile bu diziden oluşturuyor.
     var storySequence = ["starting_story", "second_story", "starting_story"]; // Diyalogları sırası ile bu diziden oluşturuyor.
     var akisSirasi = [
-        {id:1, type:"story"},
-        {id:2, type:"dialogue"},
-        {id:3, type:"dialogue"},
-        {id:4, type:"story"},
-        {id:3, type:"dialogue"},
-        {id:5, type:"story"},
-        {id:2, type:"dialogue"},
-    ]
+        {id:1, type:"dialogue"},
+        {id:2, type:"story"},
+        {id:3, type:"story"},
+        {id:4, type:"dialogue"},
+        {id:5, type:"dialogue"},
+        {id:6, type:"story"},
+        {id:7, type:"dialogue"},
+    ];
 
     function newLine(){
         if(actionType != "dialogue_answer" && finishedAction < akisSirasi.length){
@@ -115,7 +114,7 @@ var start = function () {
     return {
         init: function () { // Sayfa yüklenince (initialize olunca)
             //createDialogue("name_dialogue");
-            cout("", "Welcome visitor. Press any key for continue...<br><br>", "green", 0);
+            cout("", "Welcome visitor. Press enter for continue...<br><br>", "green", 0);
             //refreshInputLine(); // İlk satırı oluşturdu.
             focusInput(); // Sayfada herhangi bir yere basınca input alanına focus olur.
             pressEnter(); // Enter kontrolünü ekledi.

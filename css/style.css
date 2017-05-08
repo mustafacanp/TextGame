@@ -138,8 +138,8 @@ input#input{
     position: fixed;
     width: 60%;
     height: 60%;
-    left: calc(20%);
-    top: calc(20%);
+    left: 20%;
+    top: 20%;
     background-color: #000080;
     color: #FFF;
     z-index: 10;
@@ -161,6 +161,27 @@ input#input{
 
 #general, #your_answers{
     margin-bottom: 30px;
+}
+
+
+#main-menu{
+    display: none;
+    position: fixed;
+    width: 30%;
+    height: 60%;
+    left: calc(35% - 30px);
+    top: calc(20% - 30px);
+    background-color: #000080;
+    color: #FFF;
+    z-index: 10;
+    padding: 30px;
+}
+#main-menu .item{
+    font-size: 3vh;
+    line-height: 9.5vh;
+}
+#main-menu .item .sk{
+    font-size: 4vh;
 }
 
 
@@ -188,6 +209,16 @@ input#input{
         bottom: 0;
         width: calc(100% - 20px);
         border: 0;
+    }
+    #main-menu{
+        width: 80%;
+        height: 80%;
+        left: calc(10% - 30px);
+        top: calc(10% - 30px);
+        padding: 30px
+    }
+    #main-menu .item{
+        line-height: 13vh;
     }
 }
 @-moz-document url-prefix() { /*mozilla için*/

@@ -31,11 +31,39 @@ function cout(path, _output, _class, isPath){
         $("#container").append('<div class="line"><div class="text '+_class+'">'+_output+'</div></div>');
     }
 }
-function refreshInputLine(){ // Tüm girdi satırlarını siler.
+function removeInputLine(){ // Tüm girdi satırlarını siler.
     $(".line").each(function(){
         var isInputLine = $(this).hasClass("input-line");
         if(isInputLine){$(this).remove();}
     });
+}
+
+
+var isMenuActive = false;
+
+function refreshInputLine(){ // Yeni girdi satırı oluşturur.
+    removeInputLine();
     cin();
     hideInputCursor();
+}
+
+function loadMenu(menu){
+    if(menu == "character"){
+        $("#container2").html("character");
+    } else if(menu == "skill"){
+        $("#container2").html("skill");
+    } else if(menu == "inventory"){
+        $("#container2").html("inventory");
+    } else if(menu == "map"){
+        $("#container2").html("map");
+    }
+}
+
+function saveGame(){
+    console.log("Saving...");
+    // pc'ye cookie bırakıp ajax ile verileri gönderecek
+}
+function loadGame(){
+    console.log("Loading...");
+    // pc'den cookie alıp ajax ile verileri getirecek
 }

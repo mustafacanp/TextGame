@@ -2,10 +2,47 @@
 
 var start = function () {
 
+    var isMenuActive = false;
+
     var pressEnter = function(){ // Enter'a basınca newLine() fonksiyonu ile yeni satıra geçme
         $(document).on("keypress",function(e) {
             if(e.which == 13) {
                 newLine();
+            } if(e.keyCode == 99 && isMenuActive){
+                loadMenu("character")
+                $("#main-menu").hide();
+                isMenuActive = false;
+            } if(e.keyCode == 107 && isMenuActive){
+                loadMenu("skill")
+                $("#main-menu").hide();
+                isMenuActive = false;
+            } if(e.keyCode == 105 && isMenuActive){
+                loadMenu("inventory");
+                $("#main-menu").hide();
+                isMenuActive = false;
+            } if(e.keyCode == 109 && isMenuActive){
+                loadMenu("map");
+                $("#main-menu").hide();
+                isMenuActive = false;
+            } if(e.keyCode == 115 && isMenuActive){
+                saveGame();
+                $("#main-menu").hide();
+                isMenuActive = false;
+            } if(e.keyCode == 108 && isMenuActive){
+                loadGame();
+                $("#main-menu").hide();
+                isMenuActive = false;
+            }
+        });
+        $(document).on("keyup",function(e) {
+            if(e.keyCode == 27){
+                if(isMenuActive){
+                    $("#main-menu").hide();
+                    isMenuActive = false;
+                } else {
+                    $("#main-menu").show();
+                    isMenuActive = true;
+                }
             }
         });
     }
@@ -126,12 +163,51 @@ var start = function () {
 
 jQuery(document).ready(function () {
   start.init();
+  setInterval(drawMatrix, 35);
 });
 
 
+/* Matrix */
+var canvas = document.getElementById("matrix");
+var ctx = canvas.getContext("2d");
+canvas.height = window.innerHeight;
+canvas.width = window.innerWidth;
+var matrix = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%";
+matrix = matrix.split("");
+var font_size = 10;
+var columns = canvas.width/font_size; //number of columns for the rain
+//an array of drops - one per column
+var drops = [];
+//x below is the x coordinate
+//1 = y co-ordinate of the drop(same for every drop initially)
+for(var x = 0; x < columns; x++)
+    drops[x] = 1; 
 
+//drawing the characters
+var drawMatrix = function(){
+    ctx.fillStyle = "rgba(0, 0, 0, 0.04)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+    ctx.fillStyle = "#0F0"; //green text
+    ctx.font = font_size + "px arial";
+    //looping over drops
+    for(var i = 0; i < drops.length; i++)
+    {
+        //a random chinese character to print
+        var text = matrix[Math.floor(Math.random()*matrix.length)];
+        //x = i*font_size, y = value of drops[i]*font_size
+        ctx.fillText(text, i*font_size, drops[i]*font_size);
 
+        //sending the drop back to the top randomly after it has crossed the screen
+        //adding a randomness to the reset to make the drops scattered on the Y axis
+        if(drops[i]*font_size > canvas.height && Math.random() > 0.975)
+            drops[i] = 0;
+
+        //incrementing Y coordinate
+        drops[i]++;
+    }
+}
+/* Matrix */
 
 
 
@@ -184,45 +260,3 @@ $("#statistics-button").click(function(){
 });
 
 
-
-/*
-var canvas = document.getElementById("matrix");
-var ctx = canvas.getContext("2d");
-canvas.height = window.innerHeight;
-canvas.width = window.innerWidth;
-var matrix = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%";
-matrix = matrix.split("");
-var font_size = 10;
-//an array of drops - one per column
-var drops = [];
-//x below is the x coordinate
-//1 = y co-ordinate of the drop(same for every drop initially)
-for(var x = 0; x < columns; x++)
-    drops[x] = 1; 
-
-//drawing the characters
-function drawMatrix(){
-    ctx.fillStyle = "rgba(0, 0, 0, 0.04)";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    ctx.fillStyle = "#0F0"; //green text
-    ctx.font = font_size + "px arial";
-    //looping over drops
-    for(var i = 0; i < drops.length; i++)
-    {
-        //a random chinese character to print
-        var text = matrix[Math.floor(Math.random()*matrix.length)];
-        //x = i*font_size, y = value of drops[i]*font_size
-        ctx.fillText(text, i*font_size, drops[i]*font_size);
-
-        //sending the drop back to the top randomly after it has crossed the screen
-        //adding a randomness to the reset to make the drops scattered on the Y axis
-        if(drops[i]*font_size > canvas.height && Math.random() > 0.975)
-            drops[i] = 0;
-
-        //incrementing Y coordinate
-        drops[i]++;
-    }
-}
-setInterval(drawMatrix, 35);
-*/

@@ -1,6 +1,8 @@
 
 var path = "Homepage"; // Satır başı yazısı
 var blinkCursor; // İmleç
+var menuKeys = false;
+var isMenuActive = false;
 var actionType = 0;
 var finishedAction = 0;
 var dialogueCount = 0;

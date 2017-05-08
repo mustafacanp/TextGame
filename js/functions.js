@@ -18,7 +18,12 @@ var hideInputCursor = function(){ // İmleç
         }
     }, 500);
     $('input').keyup(function() {
-        $('#cmd span').text($(this).val());
+        if(!menuKeys){
+            $('#cmd span').text($(this).val());
+        } else {
+            $('#input').val("");
+            menuKeys = false;
+        }
     });
 }
 function cin(){

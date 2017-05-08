@@ -1,39 +1,7 @@
 //'use strict';
 
 var start = function () {
-
-    var isMenuActive = false;
-
     var pressEnter = function(){ // Enter'a basınca newLine() fonksiyonu ile yeni satıra geçme
-        $(document).on("keypress",function(e) {
-            if(e.which == 13) {
-                newLine();
-            } if(e.keyCode == 99 && isMenuActive){
-                loadMenu("character")
-                $("#main-menu").hide();
-                isMenuActive = false;
-            } if(e.keyCode == 107 && isMenuActive){
-                loadMenu("skill")
-                $("#main-menu").hide();
-                isMenuActive = false;
-            } if(e.keyCode == 105 && isMenuActive){
-                loadMenu("inventory");
-                $("#main-menu").hide();
-                isMenuActive = false;
-            } if(e.keyCode == 109 && isMenuActive){
-                loadMenu("map");
-                $("#main-menu").hide();
-                isMenuActive = false;
-            } if(e.keyCode == 115 && isMenuActive){
-                saveGame();
-                $("#main-menu").hide();
-                isMenuActive = false;
-            } if(e.keyCode == 108 && isMenuActive){
-                loadGame();
-                $("#main-menu").hide();
-                isMenuActive = false;
-            }
-        });
         $(document).on("keyup",function(e) {
             if(e.keyCode == 27){
                 if(isMenuActive){
@@ -43,6 +11,42 @@ var start = function () {
                     $("#main-menu").show();
                     isMenuActive = true;
                 }
+                //console.log(isMenuActive); TODO
+            }
+        });
+        $(document).on("keypress",function(e) {
+            if(e.which == 13) {
+                newLine();
+            } if(e.keyCode == 99 && isMenuActive){
+                loadMenu("character")
+                $("#main-menu").hide();
+                isMenuActive = false;
+                menuKeys = true;
+            } if(e.keyCode == 107 && isMenuActive){
+                loadMenu("skill")
+                $("#main-menu").hide();
+                isMenuActive = false;
+                menuKeys = true;
+            } if(e.keyCode == 105 && isMenuActive){
+                loadMenu("inventory");
+                $("#main-menu").hide();
+                isMenuActive = false;
+                menuKeys = true;
+            } if(e.keyCode == 109 && isMenuActive){
+                loadMenu("map");
+                $("#main-menu").hide();
+                isMenuActive = false;
+                menuKeys = true;
+            } if(e.keyCode == 115 && isMenuActive){
+                saveGame();
+                $("#main-menu").hide();
+                isMenuActive = false;
+                menuKeys = true;
+            } if(e.keyCode == 108 && isMenuActive){
+                loadGame();
+                $("#main-menu").hide();
+                isMenuActive = false;
+                menuKeys = true;
             }
         });
     }
@@ -147,7 +151,7 @@ var start = function () {
 
     var mainCharacter = Characters.Gandalf; // Karakteri oluşturduk.
     //console.log(mainCharacter);
-    //useSkill(mainCharacter, 1); // Skill kullandık.
+    useSkill(mainCharacter, 1); // Skill kullandık.
     
 
     return {

@@ -9,29 +9,12 @@ var dialogueCount = 0;
 var storyCount = 0;
 var current_dialogue_name = ""; // action() içinde, action_type = "dialogue_answer" devam ediyor ise hangi diyaloğa cevap vereceğini tutuyor.
 
+var isFight = false;
+
 //init object
 var options = new Options();
 
-var stories = {
-    starting_story :
-    {
-        id : 1,
-        isShown: false,
-        keyName : "starting_story",
-        text : "There once was a little boy who had a bad temper. His father gave him a bag of nails and told him that every time he lost his temper, he must hammer "+
-        "a nail into the back of the fence. The first day, the boy had driven 37 nails into the fence. Over the next few weeks, as he learned to control his anger, "+
-        "the number of nails hammered daily gradually dwindled down. He discovered it was easier to hold his temper than to drive those nails into the fence. "
-    },
-    second_story :
-    {
-        id : 2,
-        isShown: false,
-        keyName : "second_story",
-        text : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse porta, urna eu molestie condimentum, urna felis tincidunt lectus, id finibus nibh"+
-        "nibh vitae nulla. Etiam euismod leo ante, id ultricies odio mollis ut. Vestibulum ante ipsum, scelerisque eu aliquet vitae, tincidunt non ligula. Sed in euismod urna. "+
-        "Proin lobortis porttitor lacus, vitae tempor risus tempor in. In gravida id tellus vitae tincidunt. Etiam lectus libero, volutpat in lacus eu, bibendum porttitor nisi."
-    }
-}
+
 
 var dialogues = {
     name_dialogue :
@@ -40,6 +23,9 @@ var dialogues = {
         keyName : "name_dialogue",
         type : "text",
         question : "Hello my friend, tell me your name?",
+        printText : function(input){
+            return "<div style='color: #0F0'>OK, your name is "+input;
+        },
         saveAnswer : function (answer){
             dialogueAnswers[this.keyName] = answer; // dialogueAnswers objesine diyalog key ve cevabı yazdırdık
             options.name = answer; // options objesindeki name özelliğine gelen cevabı yazdırdık
@@ -109,4 +95,89 @@ var dialogues = {
                 }
             }]
     },
+    do_you_wanna_fight :
+    {
+        id : 4,
+        keyName : "do_you_wanna_fight",
+        type : "number",
+        question : "Do you wanna fight?",
+        answers : 
+            [{
+                id : 1,
+                inputText : "Yes.",
+                saveAnswer : function (keyName){
+                    dialogueAnswers[keyName] = this.inputText;
+                    return "Prepare to fight!";
+                },
+                action : function (keyName){
+                    dialogueAnswers[keyName] = this.inputText;
+                    isFight = true;
+                    action_type = "prepare_fight";
+                }
+            },
+            {
+                id : 2,
+                inputText : "No.",
+                saveAnswer : function (keyName){
+                    dialogueAnswers[keyName] = this.inputText;
+                    return "Okey then, go on...";
+                },
+                action : function (keyName){
+                    dialogueAnswers[keyName] = this.inputText;
+                }
+            }]
+    },
+}
+
+var stories = {
+    starting_story :
+    {
+        id : 1,
+        isShown: false,
+        keyName : "starting_story",
+        text : "There once was a little boy who had a bad temper. His father gave him a bag of nails and told him that every time he lost his temper, he must hammer "+
+        "a nail into the back of the fence. The first day, the boy had driven 37 nails into the fence. Over the next few weeks, as he learned to control his anger, "+
+        "the number of nails hammered daily gradually dwindled down. He discovered it was easier to hold his temper than to drive those nails into the fence. ",
+    },
+    second_story :
+    {
+        id : 2,
+        isShown: false,
+        keyName : "second_story",
+        text : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse porta, urna eu molestie condimentum, urna felis tincidunt lectus, id finibus nibh"+
+        "nibh vitae nulla. Etiam euismod leo ante, id ultricies odio mollis ut. Vestibulum ante ipsum, scelerisque eu aliquet vitae, tincidunt non ligula. Sed in euismod urna. "+
+        "Proin lobortis porttitor lacus, vitae tempor risus tempor in. In gravida id tellus vitae tincidunt. Etiam lectus libero, volutpat in lacus eu, bibendum porttitor nisi.",
+    },
+    accept_fight :
+    {
+        id : 3,
+        isShown: false,
+        keyName : "accept_fight",
+        text : "STORY dovusu kabul ettin",
+        doAction : function(){
+            
+        }
+    },
+    decline_fight :
+    {
+        id : 4,
+        isShown: false,
+        keyName : "decline_fight",
+        text : "STORY dovusu kabul reddettin",
+        doAction : function(){
+            action_type = 0;
+        }
+    },
+    force_fight :
+    {
+        id : 5,
+        isShown: false,
+        keyName : "force_fight",
+        text : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse porta, urna eu molestie condimentum, urna felis tincidunt lectus, id finibus nibh"+
+        "nibh vitae nulla. Etiam euismod leo ante, id ultricies odio mollis ut. Vestibulum ante ipsum, scelerisque eu aliquet vitae, tincidunt non ligula. Sed in euismod urna. "+
+        "Proin lobortis porttitor lacus, vitae tempor risus tempor in. In gravida id tellus vitae tincidunt. Etiam lectus libero, volutpat in lacus eu, bibendum porttitor nisi.",
+        doAction : function(){
+            
+        }
+    }
 }

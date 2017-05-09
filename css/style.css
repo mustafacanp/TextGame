@@ -166,6 +166,34 @@ input#input{
 }
 
 
+
+#character, #enemy{
+    float: left;
+    position: relative;
+    padding-left: 10px;
+    width: calc(50% - 24px);
+    height: 100%;
+    border-right: 4px dashed #AAA;
+} #enemy{border: 0; padding-left: 20px}
+#container2 .attr{
+    float: left;
+    width: 50%;
+    height: 20%;
+    line-height: 100%;
+    font-size: 1.2em;
+}
+
+#ch-health, #en-health{
+    color: #F00;
+}
+#ch-mana, #en-mana{
+    color: #00F;
+}
+
+
+
+
+
 @media(max-width: 991px){
     #container{
         top: 0;
@@ -202,6 +230,7 @@ input#input{
         line-height: 13vh;
     }
 }
+
 @-moz-document url-prefix() { /*mozilla için*/
     #container-out{
         background-color: #000;

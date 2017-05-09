@@ -27,11 +27,19 @@ function answerQuestion(question, input){
     var response = dialogueAnswer( question, input);
     if(response){ // Cevap doğru ise
         //cout(path, input, "", 1); // Son girdini yazdır
-        cout("", response, "green", 0); // Cevabından gelen response'u(karşı cevabı) yazdır.
+        cout("", response, "green", 0); // Cevabını(67. satırdan gelen return <div style='color: #00F; color: red'>) ve cevabından gelen response'u(karşı cevabı) yazdır. YEŞİL.
         $(".line").each(function(){var isInputLine = $(this).children(".text").hasClass("option");if(isInputLine){$(this).remove();}}); // Doğru cevap sonrası yanlış cevapları siler.
         cout("", "<br>", "", 0); // Doğru cevap sonrası boş satır atlat.
         finished_action++;
         action_type = 0;
+         
+        //////////////////////
+        if(dialogues[question].type == "number"){
+            if(dialogues[question].answers && dialogues[question].answers[input-1].action){
+                dialogues[question].answers[input-1].action();
+            }
+        }
+        ///////////////////////
     }
     if(!response){ // Cevap yanlış ise
         //cout(path, input, "", 1); // Son girdini yazdır
@@ -49,19 +57,22 @@ function dialogueQuestion(question){
     }
 }
 function dialogueAnswer(question, input){
-    if(dialogues[question].type == "text" && input != ""){ // Text tipi cevap isteyen soru ise
-        dialogues[question].saveAnswer(input);
+    if(dialogues[question].type == "text" && input != ""){ // Text tipi cevap isteyen soru ise (Story)
+        dialogues[question].saveAnswer(input); // Story'nin cevabını kaydetti ve yapması gereken işlem varsa yaptı.
+        var printText = dialogues[question].printText(input);
         action_type = 0;
         scrollBottom();
-        return "<div style='color: #0F0'>OK, your name is "+input; // Girdi doğru ise;
-    } else if(input == ""){
+        return printText;
+    } else if(input == ""){ // Cevap boş ise (tip fark etmez)
         action_type = "dialogue_answer";
         return false;
     }
-    if(dialogues[question].type == "number"){// Number tipi cevap isteyen soru ise
+    else if(dialogues[question].type == "number"){// Number tipi cevap isteyen soru ise
         if(dialogues[question].answers[input-1]){ // number type sorudan geçerli cevap gelirse
             action_type = 0;
-            return "<div style='color: #00F'>"+(dialogues[question].answers[input-1].id)+'.'+dialogues[question].answers[input-1].inputText+'</div>'+dialogues[question].answers[input-1].saveAnswer(dialogues[question].keyName); // Girdi doğru ise
+            //1.Yes i like OK, man nice. MAVİ (Seçtiğin cevap).
+            return "<div style='color: #00F;'>"+(dialogues[question].answers[input-1].id)+'.'+dialogues[question].answers[input-1].inputText+'</div>'+dialogues[question].answers[input-1].saveAnswer(dialogues[question].keyName); // Girdi doğru ise
+            //1.Yes i like OK, man nice.
         } else { // number type sorudan geçersiz cevap gelirse
             action_type = "dialogue_answer";
             return false;

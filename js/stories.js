@@ -1,9 +1,10 @@
 
 function createStoryText(storyName){
-    storyCount++;
-    cout("",stories[storyName ].text,"",0); // Hikayeyi yazdırdı.
+    //console.log(stories);
+    cout("",stories[storyName].text,"",0); // Hikayeyi yazdırdı.
     cout("", "<br>", "", 0); // Hikaye sonrası boş satır atlat.
     stories[storyName].isShown = true;
+    storyCount++;
     finished_action++;
     action_type = 0;
 }

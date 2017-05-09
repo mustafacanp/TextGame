@@ -1,6 +1,4 @@
-
-//'use strict';
-
+'use strict';
 var start = function () {
     var keyPress = function(){ // Enter'a basınca newLine() fonksiyonu ile yeni satıra geç.
         $(document).on("keyup",function(e) {
@@ -87,14 +85,14 @@ var start = function () {
     return {
         init: function () { // Sayfa yüklenince (initialize olunca)
             keyPress(); // Enter kontrolünü ekledi.
-            setInterval(drawMatrix, 35);
+            //setInterval(drawMatrix, 35);
         }
     };
 }();
 
 jQuery(document).ready(function () {
     //createDialogue("name_dialogue");
-    disableRightClick();
+    //disableRightClick();
     cin(); // İlk satırı oluşturdu.
     cout("", "Welcome visitor. Press enter to continue...<br><br>", "green", 0);
     refreshInputLine(); // #input'un değerini sıfırlar, input'u cursor'a bağlar(input'da değişen değeri cursor'a yazar)

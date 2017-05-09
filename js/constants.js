@@ -1,18 +1,18 @@
 
 var path = "Homepage"; // Satır başı yazısı
 var blinkCursor; // İmleç
-var menuKeys = false;
-var isMenuActive = false;
-var actionType = 0;
-var finishedAction = 0;
+var is_menu_active = false; // Main menu açık iken input'a hiç birşey yazdırmaması kontrolü.
+var menu_keys = false; // Main menu'den birşey seçip menüyü kapatınca input'a seçtiğin değeri yazdırmaması kontrolü.
+var action_type = 0;
+var finished_action = 0;
 var dialogueCount = 0;
 var storyCount = 0;
+var current_dialogue_name = ""; // action() içinde, action_type = "dialogue_answer" devam ediyor ise hangi diyaloğa cevap vereceğini tutuyor.
 
 //init object
 var options = new Options();
 
-
-var story = {
+var stories = {
     starting_story :
     {
         id : 1,
@@ -24,7 +24,7 @@ var story = {
     },
     second_story :
     {
-        id : 1,
+        id : 2,
         isShown: false,
         keyName : "second_story",
         text : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse porta, urna eu molestie condimentum, urna felis tincidunt lectus, id finibus nibh"+
@@ -32,8 +32,6 @@ var story = {
         "Proin lobortis porttitor lacus, vitae tempor risus tempor in. In gravida id tellus vitae tincidunt. Etiam lectus libero, volutpat in lacus eu, bibendum porttitor nisi."
     }
 }
-
-
 
 var dialogues = {
     name_dialogue :

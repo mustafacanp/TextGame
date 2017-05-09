@@ -1,13 +1,20 @@
+
+function disableRightClick(){ //Disable Right Click
+    //Disable full page
+    $("body").on("contextmenu",function(e){
+        return false;
+    });
+}
 function scrollBottom(){
     $('#container').animate({scrollTop: $('#container')[0].scrollHeight}, 300);
 }
-var focusInput = function(){ // Sayfada herhangi bir yere tıklansa da inputa focuslanması
+function focusInput(){ // Sayfada herhangi bir yere tıklansa da inputa focuslanması
     $("#input").focus();
     $(document).click(function(e) {
         $("#input").focus();
     });
 }
-var hideInputCursor = function(){ // İmleç
+function hideInputCursor(){ // İmleç
     clearInterval(blinkCursor);
     $('#input').focus();
     blinkCursor = window.setInterval(function() {
@@ -18,11 +25,11 @@ var hideInputCursor = function(){ // İmleç
         }
     }, 500);
     $('input').keyup(function() {
-        if(!menuKeys){
+        if(!menu_keys && !is_menu_active){
             $('#cmd span').text($(this).val());
         } else {
             $('#input').val("");
-            menuKeys = false;
+            menu_keys = false;
         }
     });
 }
@@ -42,15 +49,14 @@ function removeInputLine(){ // Tüm girdi satırlarını siler.
         if(isInputLine){$(this).remove();}
     });
 }
-
-
-var isMenuActive = false;
-
-function refreshInputLine(){ // Yeni girdi satırı oluşturur.
-    removeInputLine();
-    cin();
+function refreshInputLine(){ // Girdi satırını temizle.
+    //removeInputLine();
+    //cin();
+    $("#input").val("");
     hideInputCursor();
 }
+
+
 
 function loadMenu(menu){
     if(menu == "character"){
@@ -63,7 +69,6 @@ function loadMenu(menu){
         $("#container2").html("map");
     }
 }
-
 function saveGame(){
     console.log("Saving...");
     // pc'ye cookie bırakıp ajax ile verileri gönderecek
@@ -72,3 +77,26 @@ function loadGame(){
     console.log("Loading...");
     // pc'den cookie alıp ajax ile verileri getirecek
 }
+
+
+
+// TODO: KALDIR
+$("#statistics-button").click(function(){
+    $("#statistics").toggle();
+    if(options){
+        var string = "";
+        for(var key in options) {
+            var value = options[key];
+            string += "<div class='left'>"+key+"</div><div class='right'>"+value+"</div>"
+        }
+        $("#general .content").html(string);
+    }
+    if(dialogueAnswers){
+        var string = "";
+        for(var key in dialogueAnswers) {
+            var value = dialogueAnswers[key];
+            string += "<div class='left'>"+key+"</div><div class='right'>"+value+"</div>"
+        }
+        $("#your_answers .content").html(string);
+    }
+});

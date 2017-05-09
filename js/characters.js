@@ -11,25 +11,21 @@ function useSkill(character, skill){
 
     var damage;
     var chSkill = character.skills[skill-1];
-    /*
-    if(chSkill.type == "atk"){ // skill tipi atk ise character.attack'ı al
-        var power = character.attack;
-    } if(chSkill.type == "magic"){ // skill tipi magic ise character.intelligence'ı al
-        var power = character.intelligence;
-    }*/
-    var skillTypeStat = (chSkill.type == "atk") ? character.attack : character.intelligence; // Inline if diye geçiyor. Yukarıdaki ifler ile aynı işi yapıyor.
+    
+    var skillTypeStat = (chSkill.type == "atk") ? character.attack : character.intelligence;
+    // if(chSkill.type == "atk"){ skillTypeStat=character.attack } else { skillTypeStat=character.intelligence } (Üst satır)
 
     damage = Math.round(skillTypeStat * chSkill.damageRate * getRandomInt(100,130)/100);
+    // skillTypeStat      : Karakterin int i
+    // chSkill.damageRate : Skill Gücü
+    // getRandomInt       : Vuruş farklılığı yaratmak için
     
     critLuck = getRandomInt(0,100) / 100; // Crit ihtimali için sayı oluştur.
     if(critLuck < character.criticalRate){ // Sayı karakterin şansının içindeyse criticalDamage katı vur.
-        //console.log("Critical Hit!");
+        console.log("Critical Hit!");
         damage *= character.criticalDamage;
     }
     console.log("Damage: " + damage);
-    // intelligence       : Karakterin int i
-    // chSkill.damageRate : Skill Gücü
-    // getRandomInt       : Vuruş farklılığı yaratmak için
     
 }
 

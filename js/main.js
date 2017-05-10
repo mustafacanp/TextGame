@@ -28,7 +28,7 @@ function action(){
     }
     skill = $("#input").val();
     if(action_type == "fight"){
-        
+        $("#fight").show();        
         var mainCharacter = Characters.gandalf;
         var enemy = Characters.saruman;
 
@@ -36,6 +36,8 @@ function action(){
             useSkill(skill, mainCharacter, enemy);
         }
         doldur(mainCharacter, enemy);
+    } else {
+        $("#fight").hide();
     }
     if (action_type == "prepare_fight"){action_type = "fight";}
     scrollBottom();
@@ -60,7 +62,7 @@ function useSkill(skill, mainCharacter, enemy){
     } else if (dmg == 0){
         cout("",enemy.name+" evaded your attack.","purple",0);
     }
-    if(enemy.health < 0){
+    if(enemy.health <= 0){
         enemy.health = 0;
         action_type = 0;
         cout("","YOU WIN! GET xx EXP.","green",0);
@@ -78,7 +80,7 @@ function useSkill(skill, mainCharacter, enemy){
     } else if (dmg2 == 0){
         cout("","Evaded "+enemy.name+"'s attack.","purple",0);
     }
-    if(mainCharacter.health < 0){
+    if(mainCharacter.health <= 0){
         mainCharacter.health = 0;
         action_type = 0;
         cout("","YOU LOSE!","red",0);
@@ -91,6 +93,7 @@ function useSkill(skill, mainCharacter, enemy){
 }
 
 function doldur(mainCharacter, enemy){
+    $("#ch-health").width(Math.round(mainCharacter.health/mainCharacter.max_health*100)+"%");
     $("#ch-health").text("Health:"+mainCharacter.health);
     $("#ch-skill1").text("1."+mainCharacter.skills[0].name);
     $("#ch-skill2").text("2."+mainCharacter.skills[1].name);
@@ -98,12 +101,14 @@ function doldur(mainCharacter, enemy){
     $("#ch-skill4").text("4."+mainCharacter.skills[3].name);
     
     $("#ch-mana").text("Mana:"+mainCharacter.mana);
-    $("#ch-skill1-mana-cost").text(mainCharacter.skills[0].mana_cost+" Mana");
+    $("#ch-mana").width(Math.round(mainCharacter.mana/mainCharacter.max_mana*100)+"%");
+    $("#ch-skill1-mana-cost").text("-");
     $("#ch-skill2-mana-cost").text(mainCharacter.skills[1].mana_cost+" Mana");
     $("#ch-skill3-mana-cost").text(mainCharacter.skills[2].mana_cost+" Mana");
     $("#ch-skill4-mana-cost").text(mainCharacter.skills[3].mana_cost+" Mana");
 
     
+    $("#en-health").width(Math.round(enemy.health/enemy.max_health*100)+"%");
     $("#en-health").text("Health:"+enemy.health);
     $("#en-skill1").text("1."+enemy.skills[0].name);
     $("#en-skill2").text("2."+enemy.skills[1].name);
@@ -111,7 +116,8 @@ function doldur(mainCharacter, enemy){
     $("#en-skill4").text("4."+enemy.skills[3].name);
     
     $("#en-mana").text("Mana:"+enemy.mana);
-    $("#en-skill1-mana-cost").text(enemy.skills[0].mana_cost+" Mana");
+    $("#en-mana").width(Math.round(enemy.mana/enemy.max_mana*100)+"%");
+    $("#en-skill1-mana-cost").text("-");
     $("#en-skill2-mana-cost").text(enemy.skills[1].mana_cost+" Mana");
     $("#en-skill3-mana-cost").text(enemy.skills[2].mana_cost+" Mana");
     $("#en-skill4-mana-cost").text(enemy.skills[3].mana_cost+" Mana");

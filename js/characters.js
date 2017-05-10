@@ -14,9 +14,18 @@ function getSkillDamage(character, enemy, skill_id, is_main_character){
             character.mana -= skill.mana_cost;
         }
     }
+    
     if(skill.buff){
         skill.buff(character);
     }
+    if(character.health > character.max_health){
+        character.health = character.max_health;
+    }
+    if(character.mana > character.max_mana){
+        character.mana = character.max_mana;
+    }
+
+
 
     /*Evade*/
     evade_luck = getRandomInt(1,100)/100;
@@ -60,6 +69,7 @@ var Characters = {
         name: "Gandalf",
         max_health: 130, // Health değeri biraz fazla olsun hemen ölürler :D
         health: 130,
+        max_mana: 100,
         mana: 100,
         attack: 10,
         defense: 20,
@@ -71,8 +81,8 @@ var Characters = {
         critical_damage: 2,
         skills: [
             skill1 = {
-                name : "Yirmih",
-                damageRate : 0.13,
+                name : "Attack",
+                damageRate : 0.15,
                 type : "atk",
                 mana_cost: 0
             },
@@ -95,9 +105,6 @@ var Characters = {
                 mana_cost: 20,
                 buff: function(character){
                     character.health += 5;
-                    if(character.health > character.max_health){
-                        character.health = character.max_health;
-                    }
                 }
             }
         ]
@@ -107,6 +114,7 @@ var Characters = {
         name: "Saruman",
         max_health: 120, // Health değeri biraz fazla olsun hemen ölürler :D
         health: 120,
+        max_mana: 100,
         mana: 100,
         attack: 15,
         defense: 25,
@@ -118,8 +126,8 @@ var Characters = {
         critical_damage: 2,
         skills: [
             skill1 = {
-                name : "Depik",
-                damageRate : 0.14,
+                name : "Attack",
+                damageRate : 0.16,
                 type : "atk",
                 mana_cost: 0
             },

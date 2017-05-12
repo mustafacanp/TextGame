@@ -67,12 +67,12 @@ var Characters = {
     gandalf : {
         id: 1,
         name: "Gandalf",
-        max_health: 130, // Health değeri biraz fazla olsun hemen ölürler :D
-        health: 130,
+        max_health: 500, // Health değeri biraz fazla olsun hemen ölürler :D
+        health: 500,
         max_mana: 100,
         mana: 100,
-        attack: 10,
-        defense: 20,
+        attack: 12,
+        defense: 22,
         magic_resistance: 30,
         speed : 1, // ???
         intelligence: 55,
@@ -82,25 +82,29 @@ var Characters = {
         skills: [
             skill1 = {
                 name : "Attack",
-                damageRate : 0.15,
+                damageRate : 0.7,
                 type : "atk",
                 mana_cost: 0
             },
             skill2 = {
                 name : "W",
-                damageRate : 0.2,
+                damageRate : 0.8,
                 type : "magic",
-                mana_cost: 10
+                mana_cost: 10,
+                    buff: function(character){
+               //   character.evade += 0.01/character.evade;
+                }
+                
             },
             skill3 = {
                 name : "E",
-                damageRate : 0.22,
+                damageRate : 1,
                 type : "magic",
                 mana_cost: 10
             },
             ulti = {
                 name : "R",
-                damageRate : 0.25,
+                damageRate : 1.2,
                 type : "magic",
                 mana_cost: 20,
                 buff: function(character){
@@ -112,11 +116,11 @@ var Characters = {
     saruman : {
         id: 1,
         name: "Saruman",
-        max_health: 120, // Health değeri biraz fazla olsun hemen ölürler :D
-        health: 120,
-        max_mana: 100,
+        max_health: 5500, // Health değeri biraz fazla olsun hemen ölürler :D
+        health: 5500,
+        max_mana: 250,
         mana: 100,
-        attack: 15,
+        attack: 155,
         defense: 25,
         speed : 1, // ???
         magic_resistance: 35,
@@ -127,28 +131,105 @@ var Characters = {
         skills: [
             skill1 = {
                 name : "Attack",
-                damageRate : 0.16,
+                damageRate : 0.7,
                 type : "atk",
-                mana_cost: 0
+                mana_cost: 0,
+                 buff: function(character){
+                    character.mana += 7;
+                }
             },
             skill2 = {
                 name : "W",
-                damageRate : 0.2,
+                damageRate : 1,
                 type : "magic",
-                mana_cost: 10
+                mana_cost: 10,
+                   buff: function(character){
+                        Characters.analkin.defense -= character.defense/10;
+                }
             },
             skill3 = {
                 name : "E",
-                damageRate : 0.25,
+                damageRate : 0.5,
                 type : "magic",
-                mana_cost: 12
+                mana_cost: 12,
+                  buff: function(character){
+                        Characters.analkin.health -= Math.floor(Characters.analkin.health*2/10);
+                        character.health += Math.floor(character.health*2/10);
+                }
             },
             ulti = {
                 name : "R",
-                damageRate : 0.3,
+                damageRate : 1.2,
                 type : "magic",
                 mana_cost: 15
             }
         ]
     },
+
+
+
+
+        analkin : {
+
+
+        id: 1,
+        name: "Analkin",
+        max_health: 5500, // Health değeri biraz fazla olsun hemen ölürler :D
+        health: 5500,
+        max_mana: 250,
+        mana: 100,
+        attack: 155,
+        defense: 25,
+        speed : 1, // ???
+        magic_resistance: 35,
+        intelligence: 50,
+        evade: 0.1, // %0 - %100
+        critical_rate: 0.18,
+        critical_damage: 2,
+        skills: [
+            skill1 = {
+                name : "Light Saber Strike",
+                damageRate : 0.7,
+                type : "atk",
+                   buff: function(character){
+                    character.mana += 4;
+                }
+            },
+            skill2 = {
+                name : "Force Grab",
+                damageRate : 0.8,
+                type : "magic",
+                mana_cost: 20,
+                  buff: function(character){
+                    character.evade += 0.01/character.evade;
+                }
+            },
+            skill3 = {
+                name : "Pew / Pew",
+                damageRate : 2,
+                type : "magic",
+                mana_cost: 12,
+                buff: function(character){
+                    character.defense -= character.defense/10;
+                 //   console.log(character.defense);
+                }
+            },
+            ulti = {
+                 name : "Oppi",
+                damageRate : 1.2,
+                type : "magic",
+                mana_cost: 15,
+                buff: function(character){
+                Characters.saruman.mana -= Math.floor(Characters.saruman.mana*3/10); //!
+                Characters.saruman.health -= Math.floor(Characters.saruman.health*1/10);
+                character.health += Math.floor(Characters.saruman.health*2/10);
+                
+              
+
+                }
+            }
+        ]
+    }
+
+
 }

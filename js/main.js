@@ -29,7 +29,7 @@ function action(){
     skill = $("#input").val();
     if(action_type == "fight"){
         $("#fight").show();        
-        var mainCharacter = Characters.gandalf;
+        var mainCharacter = Characters.analkin;
         var enemy = Characters.saruman;
 
         if(skill=="1" || skill=="2" || skill=="3" || skill=="4"){

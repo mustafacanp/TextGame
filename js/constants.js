@@ -110,7 +110,6 @@ var dialogues = {
                     return "Prepare to fight!";
                 },
                 action : function (keyName){
-                    dialogueAnswers[keyName] = this.inputText;
                     isFight = true;
                     action_type = "prepare_fight";
                 }
@@ -123,7 +122,7 @@ var dialogues = {
                     return "Okey then, go on...";
                 },
                 action : function (keyName){
-                    dialogueAnswers[keyName] = this.inputText;
+                    
                 }
             }]
     },

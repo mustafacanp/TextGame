@@ -84,7 +84,10 @@ var Characters = {
                 name : "Attack",
                 damageRate : 0.7,
                 type : "atk",
-                mana_cost: 0
+                mana_cost: 0,
+                buff: function(character){
+                    character.mana += 5;
+                }
             },
             skill2 = {
                 name : "W",
@@ -113,6 +116,7 @@ var Characters = {
             }
         ]
     },
+
     saruman : {
         id: 1,
         name: "Saruman",
@@ -165,13 +169,8 @@ var Characters = {
             }
         ]
     },
-
-
-
-
-        analkin : {
-
-
+    
+     analkin : {
         id: 1,
         name: "Analkin",
         max_health: 5500, // Health değeri biraz fazla olsun hemen ölürler :D

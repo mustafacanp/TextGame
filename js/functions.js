@@ -104,3 +104,51 @@ $("#statistics-button").click(function(){
         $("#your_answers .content").html(string);
     }
 });
+/*
+addSpaces(''+
+'                                                                  ..-`          '+'<br>'+ // http://www.text-image.com/convert/ascii.html
+'                                                                ./+yo-          '+'<br>'+ // Image width: 30 characters + 50 sola ben ekledim
+'                                                              ./osyy-           '+'<br>'+
+'                                                             .+sssyyy-          '+'<br>'+
+'                                                           ./osssssyyyo.        '+'<br>'+
+'                                                        -:oo++++++++oooyo.      '+'<br>'+
+'                                                           `/+---:-s--:/.       '+'<br>'+
+'                                                           .--:-:-/:::::`       '+'<br>'+
+'                                                          ...:::::++++:`        '+'<br>'+
+'                                                          .//://:/osh+`         '+'<br>'+
+'                                                           /o-/hs+hddd-         '+'<br>'+
+'                                                           +o -dhyddds.         '+'<br>'+
+'                                                           +o -ddhdddh+.        '+'<br>'+
+'                                                           +o -dh/hddhy+.       '+'<br>'+
+'                                                              .o+  oo.          '+'<br>'+
+'');
+
+ addSpaces(''+
+'                      ``.:ssso-              <br>'+
+'                    `./+syy+:                <br>'+
+'                   -/oosyyy.                 <br>'+
+'                 .:oosssyyys+                <br>'+
+'                .:+ssssssyyys-`              <br>'+
+'              .-oossssssssyyyho/             <br>'+
+'         -///++oooooooooosssyyyyoo+`         <br>'+
+'         ```:s+/o+///////+o+/+++y+`          <br>'+
+'              .-s/----::-/s--:::/-           <br>'+
+'              .----:::::::---:::/-           <br>'+
+'              .-:::--:--+//////:``           <br>'+
+'            `-``::::::::++++++:-             <br>'+
+'            .++/`.-::://oosys:.              <br>'+
+'              /++osso:/+syhdhy-              <br>'+
+'              sh``.hhhoohhdddd:              <br>'+
+'              yd   hddyyddddhy-              <br>'+
+'              yd   hddhyddddho-              <br>'+
+'              yd   hdddddddddhso             <br>'+
+'              yd   hddysdddddhyyo:     `` `` <br>'+
+'              /+   hdm:`+sdmh///       -y+/- <br>'+
+'                   ://.  .//:          ....` <br>'+
+'');
+
+function addSpaces(string){
+    $("#container").html(string.replace(/ /g, "&nbsp;"));
+    console.log(string.replace(" ", "&nbsp"));
+}
+*/

@@ -66,8 +66,8 @@ function useSkill(skill, mainCharacter, enemy){
         enemy.health = 0;
         action_type = 0;
         cout("","YOU WIN! GET xx EXP.","green",0);
+        return;
     }
-
 
     var random_skill, dmg2;
     do{
@@ -91,7 +91,7 @@ function useSkill(skill, mainCharacter, enemy){
     //console.log("Saruman HP = " + enemy.health);
     //console.log("--------------");
 }
-
+    
 function doldur(mainCharacter, enemy){
     $("#ch-health").width(Math.round(mainCharacter.health/mainCharacter.max_health*100)+"%");
     $("#ch-health").text("Health:"+mainCharacter.health);
@@ -102,10 +102,10 @@ function doldur(mainCharacter, enemy){
     
     $("#ch-mana").text("Mana:"+mainCharacter.mana);
     $("#ch-mana").width(Math.round(mainCharacter.mana/mainCharacter.max_mana*100)+"%");
-    $("#ch-skill1-mana-cost").text("-");
-    $("#ch-skill2-mana-cost").text(mainCharacter.skills[1].mana_cost+" Mana");
-    $("#ch-skill3-mana-cost").text(mainCharacter.skills[2].mana_cost+" Mana");
-    $("#ch-skill4-mana-cost").text(mainCharacter.skills[3].mana_cost+" Mana");
+    $("#ch-skill1-mana-cost").text("+5 Mana");
+    $("#ch-skill2-mana-cost").text("-"+mainCharacter.skills[1].mana_cost+" Mana");
+    $("#ch-skill3-mana-cost").text("-"+mainCharacter.skills[2].mana_cost+" Mana");
+    $("#ch-skill4-mana-cost").text("-"+mainCharacter.skills[3].mana_cost+" Mana");
 
     
     $("#en-health").width(Math.round(enemy.health/enemy.max_health*100)+"%");
@@ -117,8 +117,8 @@ function doldur(mainCharacter, enemy){
     
     $("#en-mana").text("Mana:"+enemy.mana);
     $("#en-mana").width(Math.round(enemy.mana/enemy.max_mana*100)+"%");
-    $("#en-skill1-mana-cost").text("-");
-    $("#en-skill2-mana-cost").text(enemy.skills[1].mana_cost+" Mana");
-    $("#en-skill3-mana-cost").text(enemy.skills[2].mana_cost+" Mana");
-    $("#en-skill4-mana-cost").text(enemy.skills[3].mana_cost+" Mana");
+    $("#en-skill1-mana-cost").text("+5 Mana");
+    $("#en-skill2-mana-cost").text("-"+enemy.skills[1].mana_cost+" Mana");
+    $("#en-skill3-mana-cost").text("-"+enemy.skills[2].mana_cost+" Mana");
+    $("#en-skill4-mana-cost").text("-"+enemy.skills[3].mana_cost+" Mana");
 }

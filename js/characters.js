@@ -7,11 +7,17 @@ function getSkillDamage(character, enemy, skill_id, is_main_character){
     skill = character.skills[skill_id-1];
     //console.log(skill);
 
-
-
-
-
-    //console.log(skill.current_cooldown);
+    // is Mana Enough
+    if(skill.mana_cost){
+        if(character.mana < skill.mana_cost){
+            return "no_mana";
+        } else {
+            character.mana -= skill.mana_cost;
+        }
+    }
+    // is Mana Enough
+    
+    // is Cooldown Available
     if(skill.cooldown != 0){ // skillin cooldownu varsa
         if(skill.current_cooldown != 0){
             //console.log("Cooldown = "+skill.cooldown);
@@ -35,21 +41,7 @@ function getSkillDamage(character, enemy, skill_id, is_main_character){
         }
         skill.current_cooldown = skill.cooldown;
     }
-    //console.log(skill.current_cooldown);
-
-
-
-
-
-
-
-    if(skill.mana_cost){
-        if(character.mana < skill.mana_cost){
-            return "no_mana";
-        } else {
-            character.mana -= skill.mana_cost;
-        }
-    }
+    // is Cooldown Available
     
     if(skill.buff){
         skill.buff(character, enemy);

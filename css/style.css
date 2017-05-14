@@ -32,7 +32,7 @@ body {
     background-color: #000;
     color: #AAA;
     width: 50%;
-    height: 47.5%;
+    height: 42.5%;
     margin: auto;
     position: fixed;
     overflow-y: scroll;
@@ -46,12 +46,12 @@ body {
     background-color: #000;
     color: #AAA;
     width: 50%;
-    height: 25%;
+    height: 30%;
     margin: auto;
     position: fixed;
     overflow: auto;
     padding: 10px;
-    top: 60%;
+    top: 55%;
     left: 25%;
     border: 4px dashed #AAA;
 }
@@ -78,20 +78,26 @@ body {
 .text{
     float: left;
 }
-.text.red{
+.red{
     color: #F00
 }
-.text.green{
+.green{
     color: #0F0
 }
-.text.blue{
+.blue{
     color: #00F
 }
-.text.purple{
+.purple{
     color: #808
 }
-.text.yellow{
+.yellow{
     color: #FF0
+}
+.italic{
+    font-style: italic
+}
+.small{
+    font-size: 1em;
 }
 
 /*blinkCursor olduğundan input hidden*/
@@ -271,7 +277,7 @@ input#input{
         background-color: #000;
         color: #AAA;
         width: calc(50% + 20px);
-        height: calc(47.5% + 21px);
+        height: calc(42.5% + 21px);
         margin: auto;
         position: fixed;
         top: 10%;

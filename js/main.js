@@ -98,10 +98,10 @@ function useSkill(skill, mainCharacter, enemy){
 function doldur(mainCharacter, enemy){
     $("#ch-health").width(Math.round(mainCharacter.health/mainCharacter.max_health*100)+"%");
     $("#ch-health").html("Health:"+mainCharacter.health);
-    $("#ch-skill1").html("[1]."+mainCharacter.skills[0].name+coutCooldown(mainCharacter, 0));
-    $("#ch-skill2").html("[2]."+mainCharacter.skills[1].name+coutCooldown(mainCharacter, 1));
-    $("#ch-skill3").html("[3]."+mainCharacter.skills[2].name+coutCooldown(mainCharacter, 2));
-    $("#ch-skill4").html("[4]."+mainCharacter.skills[3].name+coutCooldown(mainCharacter, 3));
+    $("#ch-skill1").html("[1]."+mainCharacter.skills[0].name+isAvailable(mainCharacter, 0));
+    $("#ch-skill2").html("[2]."+mainCharacter.skills[1].name+isAvailable(mainCharacter, 1));
+    $("#ch-skill3").html("[3]."+mainCharacter.skills[2].name+isAvailable(mainCharacter, 2));
+    $("#ch-skill4").html("[4]."+mainCharacter.skills[3].name+isAvailable(mainCharacter, 3));
     
     $("#ch-mana").html("Mana:"+mainCharacter.mana);
     $("#ch-mana").width(Math.round(mainCharacter.mana/mainCharacter.max_mana*100)+"%");
@@ -113,10 +113,10 @@ function doldur(mainCharacter, enemy){
     
     $("#en-health").width(Math.round(enemy.health/enemy.max_health*100)+"%");
     $("#en-health").html("Health:"+enemy.health);
-    $("#en-skill1").html("[1]."+enemy.skills[0].name+coutCooldown(enemy, 0));
-    $("#en-skill2").html("[2]."+enemy.skills[1].name+coutCooldown(enemy, 1));
-    $("#en-skill3").html("[3]."+enemy.skills[2].name+coutCooldown(enemy, 2));
-    $("#en-skill4").html("[4]."+enemy.skills[3].name+coutCooldown(enemy, 3));
+    $("#en-skill1").html("[1]."+enemy.skills[0].name+isAvailable(enemy, 0));
+    $("#en-skill2").html("[2]."+enemy.skills[1].name+isAvailable(enemy, 1));
+    $("#en-skill3").html("[3]."+enemy.skills[2].name+isAvailable(enemy, 2));
+    $("#en-skill4").html("[4]."+enemy.skills[3].name+isAvailable(enemy, 3));
 
     $("#en-mana").html("Mana:"+enemy.mana);
     $("#en-mana").width(Math.round(enemy.mana/enemy.max_mana*100)+"%");
@@ -126,14 +126,18 @@ function doldur(mainCharacter, enemy){
     $("#en-skill4-mana-cost").html("-"+enemy.skills[3].mana_cost+" Mana");
 }
 
-function coutCooldown(character, skillID){
+function isAvailable(character, skillID){
     if(skillID == 0){
-        return "<br />Ready!";
+        return "<br /><span class='small green'>Ready!</span>";
     } else {
         if(character.skills[skillID].current_cooldown == 0){
-            return "<br />Ready!";
+            if(character.skills[skillID].mana_cost > character.mana){
+                return "<br /><span class='small italic blue'>Not Enough Mana</span>";
+            } else {
+                return "<br /><span class='small green'>Ready!</span>";
+            }
         } else {
-            return "<br />Cooldown: "+character.skills[skillID].current_cooldown;
+            return "<br /><span class='small italic red'>Cooldown: "+character.skills[skillID].current_cooldown+"</span>";
         }
     }
 }

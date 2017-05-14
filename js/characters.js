@@ -7,6 +7,42 @@ function getSkillDamage(character, enemy, skill_id, is_main_character){
     skill = character.skills[skill_id-1];
     //console.log(skill);
 
+
+
+
+
+    //console.log(skill.current_cooldown);
+    if(skill.cooldown != 0){ // skillin cooldownu varsa
+        if(skill.current_cooldown != 0){
+            //console.log("Cooldown = "+skill.cooldown);
+            //console.log("Current Cooldown = "+skill.current_cooldown);
+            return "cooldown";
+        } else { // current_cooldown = 0 ise (şuan bekleme süresi yok ise) bekleme süresine sok
+            for(i=1; i<=3; i++){
+                character.skills[i].current_cooldown--;
+                if(character.skills[i].current_cooldown < 0){
+                    character.skills[i].current_cooldown = 0;
+                }
+            }
+            skill.current_cooldown = skill.cooldown;
+        }
+    } else { // 1. skill (Cooldownsuz)
+        for(i=1; i<=3; i++){
+            character.skills[i].current_cooldown--;
+            if(character.skills[i].current_cooldown < 0){
+                character.skills[i].current_cooldown = 0;
+            }
+        }
+        skill.current_cooldown = skill.cooldown;
+    }
+    //console.log(skill.current_cooldown);
+
+
+
+
+
+
+
     if(skill.mana_cost){
         if(character.mana < skill.mana_cost){
             return "no_mana";
@@ -16,7 +52,7 @@ function getSkillDamage(character, enemy, skill_id, is_main_character){
     }
     
     if(skill.buff){
-        skill.buff(character);
+        skill.buff(character, enemy);
     }
     if(character.health > character.max_health){
         character.health = character.max_health;
@@ -28,7 +64,7 @@ function getSkillDamage(character, enemy, skill_id, is_main_character){
 
 
     /*Evade*/
-    evade_luck = getRandomInt(1,100)/100;
+    evade_luck = getRandomInt(1,100);
     if(evade_luck <= enemy.evade){
         is_evade = true;
         return 0;
@@ -76,7 +112,7 @@ var Characters = {
         magic_resistance: 30,
         speed : 1, // ???
         intelligence: 55,
-        evade: 0.1, // %0 - %100
+        evade: 10, // %0 - %100
         critical_rate: 0.15,
         critical_damage: 2,
         skills: [
@@ -85,7 +121,8 @@ var Characters = {
                 damageRate : 0.7,
                 type : "atk",
                 mana_cost: 0,
-                buff: function(character){
+                cooldown: 0,
+                buff: function(character, enemy){
                     character.mana += 5;
                 }
             },
@@ -94,7 +131,9 @@ var Characters = {
                 damageRate : 0.8,
                 type : "magic",
                 mana_cost: 10,
-                    buff: function(character){
+                cooldown: 2,
+                current_cooldown: 0,
+                    buff: function(character, enemy){
                //   character.evade += 0.01/character.evade;
                 }
                 
@@ -103,15 +142,20 @@ var Characters = {
                 name : "E",
                 damageRate : 1,
                 type : "magic",
-                mana_cost: 10
+                mana_cost: 10,
+                cooldown: 3,
+                current_cooldown: 0,
             },
             ulti = {
                 name : "R",
                 damageRate : 1.2,
                 type : "magic",
-                mana_cost: 20,
-                buff: function(character){
-                    character.health += 5;
+                mana_cost: 35,
+                cooldown: 5,
+                current_cooldown: 5,
+                buff: function(character, enemy){
+                    character.health += character.health*1/5;
+                    enemy.magic_resistance -= enemy.magic_resistance*3/10
                 }
             }
         ]
@@ -123,13 +167,13 @@ var Characters = {
         max_health: 5500, // Health değeri biraz fazla olsun hemen ölürler :D
         health: 5500,
         max_mana: 250,
-        mana: 100,
+        mana: 250,
         attack: 155,
         defense: 25,
         speed : 1, // ???
         magic_resistance: 35,
         intelligence: 50,
-        evade: 0.1, // %0 - %100
+        evade: 10, // %0 - %100
         critical_rate: 0.18,
         critical_damage: 2,
         skills: [
@@ -138,7 +182,8 @@ var Characters = {
                 damageRate : 0.7,
                 type : "atk",
                 mana_cost: 0,
-                 buff: function(character){
+                cooldown: 0,
+                 buff: function(character, enemy){
                     character.mana += 7;
                 }
             },
@@ -147,8 +192,10 @@ var Characters = {
                 damageRate : 1,
                 type : "magic",
                 mana_cost: 10,
-                   buff: function(character){
-                        Characters.analkin.defense -= character.defense/10;
+                cooldown: 2,
+                current_cooldown: 0,
+                   buff: function(character, enemy){
+                        enemy.defense -= enemy.defense/10;
                 }
             },
             skill3 = {
@@ -156,33 +203,37 @@ var Characters = {
                 damageRate : 0.5,
                 type : "magic",
                 mana_cost: 12,
-                  buff: function(character){
-                        Characters.analkin.health -= Math.floor(Characters.analkin.health*2/10);
-                        character.health += Math.floor(character.health*2/10);
-                }
+                cooldown: 3,
+                current_cooldown: 0,
             },
             ulti = {
                 name : "R",
                 damageRate : 1.2,
                 type : "magic",
-                mana_cost: 15
+                mana_cost: 30,
+                cooldown: 5,
+                current_cooldown: 5,
+                  buff: function(character, enemy){
+                        enemy.health -= Math.floor(enemy.health*2/10);
+                        character.health += Math.floor(character.health*2/10);
+                }
             }
         ]
     },
-    
+
      analkin : {
         id: 1,
         name: "Analkin",
         max_health: 5500, // Health değeri biraz fazla olsun hemen ölürler :D
         health: 5500,
         max_mana: 250,
-        mana: 100,
+        mana: 250,
         attack: 155,
         defense: 25,
         speed : 1, // ???
         magic_resistance: 35,
         intelligence: 50,
-        evade: 0.1, // %0 - %100
+        evade: 10, // %0 - %100
         critical_rate: 0.18,
         critical_damage: 2,
         skills: [
@@ -190,7 +241,8 @@ var Characters = {
                 name : "Light Saber Strike",
                 damageRate : 0.7,
                 type : "atk",
-                   buff: function(character){
+                cooldown: 0,
+                   buff: function(character, enemy){
                     character.mana += 4;
                 }
             },
@@ -199,8 +251,13 @@ var Characters = {
                 damageRate : 0.8,
                 type : "magic",
                 mana_cost: 20,
-                  buff: function(character){
-                    character.evade += 0.01/character.evade;
+                cooldown: 2,
+                current_cooldown: 0,
+                    buff: function(character, enemy){
+                    if(character.evade < 20){
+                        character.evade += 1;
+                    }
+                    //console.log(character.evade);
                 }
             },
             skill3 = {
@@ -208,23 +265,24 @@ var Characters = {
                 damageRate : 2,
                 type : "magic",
                 mana_cost: 12,
-                buff: function(character){
-                    character.defense -= character.defense/10;
-                 //   console.log(character.defense);
+                cooldown: 3,
+                current_cooldown: 0,
+                buff: function(character, enemy){
+                    enemy.defense -= enemy.defense/10;
+                    enemy.defense = Math.round(enemy.defense);
                 }
             },
             ulti = {
-                 name : "Oppi",
+                name : "Oppi",
                 damageRate : 1.2,
                 type : "magic",
-                mana_cost: 15,
-                buff: function(character){
-                Characters.saruman.mana -= Math.floor(Characters.saruman.mana*3/10); //!
-                Characters.saruman.health -= Math.floor(Characters.saruman.health*1/10);
-                character.health += Math.floor(Characters.saruman.health*2/10);
-                
-              
-
+                mana_cost: 30,
+                cooldown: 5,
+                current_cooldown: 5,
+                buff: function(character, enemy){
+                    enemy.mana -= Math.floor(enemy.mana*5/10); //!
+                    enemy.health -= Math.floor(enemy.health*1/10);
+                    character.health += Math.floor(character.health*2/10);
                 }
             }
         ]

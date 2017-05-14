@@ -53,7 +53,10 @@ function action(){
 
 function useSkill(skill, mainCharacter, enemy){
     var dmg = getSkillDamage(mainCharacter, enemy, skill, 1); // Skill kullandık.
-    if (dmg == "no_mana"){
+    if (dmg == "cooldown"){
+        cout("",mainCharacter.skills[skill-1].name+" cooldown "+mainCharacter.skills[skill-1].current_cooldown+" turn","yellow",0);
+        return;
+    } else if (dmg == "no_mana"){
         cout("","Not Enough Mana for "+mainCharacter.skills[skill-1].name,"purple",0);
         return;
     } else if (dmg != 0){
@@ -73,7 +76,7 @@ function useSkill(skill, mainCharacter, enemy){
     do{
         random_skill = getRandomInt(1,4);
         dmg2 = getSkillDamage(enemy, mainCharacter, random_skill, 0); // Rakip skill kullandı.
-    } while (dmg2 == "no_mana");
+    } while (dmg2 == "no_mana" || dmg2 == "cooldown");
     if (dmg2 != 0){
         mainCharacter.health -= dmg2;
         cout("",enemy.name+" used "+enemy.skills[random_skill-1].name+". Hit "+dmg2+".","red",0);
@@ -94,31 +97,43 @@ function useSkill(skill, mainCharacter, enemy){
     
 function doldur(mainCharacter, enemy){
     $("#ch-health").width(Math.round(mainCharacter.health/mainCharacter.max_health*100)+"%");
-    $("#ch-health").text("Health:"+mainCharacter.health);
-    $("#ch-skill1").text("1."+mainCharacter.skills[0].name);
-    $("#ch-skill2").text("2."+mainCharacter.skills[1].name);
-    $("#ch-skill3").text("3."+mainCharacter.skills[2].name);
-    $("#ch-skill4").text("4."+mainCharacter.skills[3].name);
+    $("#ch-health").html("Health:"+mainCharacter.health);
+    $("#ch-skill1").html("[1]."+mainCharacter.skills[0].name+coutCooldown(mainCharacter, 0));
+    $("#ch-skill2").html("[2]."+mainCharacter.skills[1].name+coutCooldown(mainCharacter, 1));
+    $("#ch-skill3").html("[3]."+mainCharacter.skills[2].name+coutCooldown(mainCharacter, 2));
+    $("#ch-skill4").html("[4]."+mainCharacter.skills[3].name+coutCooldown(mainCharacter, 3));
     
-    $("#ch-mana").text("Mana:"+mainCharacter.mana);
+    $("#ch-mana").html("Mana:"+mainCharacter.mana);
     $("#ch-mana").width(Math.round(mainCharacter.mana/mainCharacter.max_mana*100)+"%");
-    $("#ch-skill1-mana-cost").text("+5 Mana");
-    $("#ch-skill2-mana-cost").text("-"+mainCharacter.skills[1].mana_cost+" Mana");
-    $("#ch-skill3-mana-cost").text("-"+mainCharacter.skills[2].mana_cost+" Mana");
-    $("#ch-skill4-mana-cost").text("-"+mainCharacter.skills[3].mana_cost+" Mana");
+    $("#ch-skill1-mana-cost").html("+5 Mana");
+    $("#ch-skill2-mana-cost").html("-"+mainCharacter.skills[1].mana_cost+" Mana");
+    $("#ch-skill3-mana-cost").html("-"+mainCharacter.skills[2].mana_cost+" Mana");
+    $("#ch-skill4-mana-cost").html("-"+mainCharacter.skills[3].mana_cost+" Mana");
 
     
     $("#en-health").width(Math.round(enemy.health/enemy.max_health*100)+"%");
-    $("#en-health").text("Health:"+enemy.health);
-    $("#en-skill1").text("1."+enemy.skills[0].name);
-    $("#en-skill2").text("2."+enemy.skills[1].name);
-    $("#en-skill3").text("3."+enemy.skills[2].name);
-    $("#en-skill4").text("4."+enemy.skills[3].name);
-    
-    $("#en-mana").text("Mana:"+enemy.mana);
+    $("#en-health").html("Health:"+enemy.health);
+    $("#en-skill1").html("[1]."+enemy.skills[0].name+coutCooldown(enemy, 0));
+    $("#en-skill2").html("[2]."+enemy.skills[1].name+coutCooldown(enemy, 1));
+    $("#en-skill3").html("[3]."+enemy.skills[2].name+coutCooldown(enemy, 2));
+    $("#en-skill4").html("[4]."+enemy.skills[3].name+coutCooldown(enemy, 3));
+
+    $("#en-mana").html("Mana:"+enemy.mana);
     $("#en-mana").width(Math.round(enemy.mana/enemy.max_mana*100)+"%");
-    $("#en-skill1-mana-cost").text("+5 Mana");
-    $("#en-skill2-mana-cost").text("-"+enemy.skills[1].mana_cost+" Mana");
-    $("#en-skill3-mana-cost").text("-"+enemy.skills[2].mana_cost+" Mana");
-    $("#en-skill4-mana-cost").text("-"+enemy.skills[3].mana_cost+" Mana");
+    $("#en-skill1-mana-cost").html("+5 Mana");
+    $("#en-skill2-mana-cost").html("-"+enemy.skills[1].mana_cost+" Mana");
+    $("#en-skill3-mana-cost").html("-"+enemy.skills[2].mana_cost+" Mana");
+    $("#en-skill4-mana-cost").html("-"+enemy.skills[3].mana_cost+" Mana");
+}
+
+function coutCooldown(character, skillID){
+    if(skillID == 0){
+        return "<br />Ready!";
+    } else {
+        if(character.skills[skillID].current_cooldown == 0){
+            return "<br />Ready!";
+        } else {
+            return "<br />Cooldown: "+character.skills[skillID].current_cooldown;
+        }
+    }
 }

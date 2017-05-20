@@ -94,7 +94,7 @@ jQuery(document).ready(function () {
     //createDialogue("name_dialogue");
     //disableRightClick();
     cin(); // İlk satırı oluşturdu.
-    cout("", "Welcome visitor. Press enter to continue...<br><br>", "green", 0);
+    cout("Welcome visitor. Press enter to continue...<br><br>", "green");
     refreshInputLine(); // #input'un değerini sıfırlar, input'u cursor'a bağlar(input'da değişen değeri cursor'a yazar)
     focusInput(); // Sayfada herhangi bir yere basınca input alanına focus olur.
     start.init(); // keyPress && drawMatrix

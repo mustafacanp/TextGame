@@ -1,5 +1,5 @@
 
-var path = "Homepage"; // Satır başı yazısı
+var path = ""; // Satır başı yazısı
 var blinkCursor; // İmleç
 var is_menu_active = false; // Main menu açık iken input'a hiç birşey yazdırmaması kontrolü.
 var menu_keys = false; // Main menu'den birşey seçip menüyü kapatınca input'a seçtiğin değeri yazdırmaması kontrolü.
@@ -180,3 +180,5 @@ var stories = {
         }
     }
 }
+
+

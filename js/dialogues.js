@@ -8,7 +8,6 @@ function createDialogue(dialogueName){
     dialogueCount++;
     askQuestion(dialogueName); // Soruyu sorduk.
     current_dialogue_name = dialogueName;
-    action_type == "dialogue_question";
     answer = $("#input").val(); // Cevaptan gelen response'u alıyor alıyor.
 }
 

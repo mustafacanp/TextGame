@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="tr" xml:lang="tr">
     <head>
 
         <title>TextGame</title>
@@ -34,22 +34,66 @@
         <div id="container-out"><div id="container"></div></div>
         <div id="container2">
             <div id="skills-menu">
-                <div class="skill"></div>
+                <div class="skill skill1">
+                    <div class="name"><span class="attack"></span></div>
+                    <div class="damage"><span class="yellow"></span><span class="attack"></span></div>
+                    <div class="description"></div>
+                    <div class="mana_cost"></div>
+                    <div class="cooldown"></div>
+                </div>
+                <div class="skill skill2">
+                    <div class="name"><span class="magic"></span></div>
+                    <div class="damage"><span class="yellow"></span><span class="magic"></span></div>
+                    <div class="description"></div>
+                    <div class="mana_cost"></div>
+                    <div class="cooldown"></div>
+                </div>
+                <div class="skill skill3">
+                    <div class="name"><span class="magic"></span></div>
+                    <div class="damage"><span class="yellow"></span><span class="magic"></span></div>
+                    <div class="description"></div>
+                    <div class="mana_cost"></div>
+                    <div class="cooldown"></div>
+                </div>
+                <div class="skill skill4">
+                    <div class="name"><span class="magic"></span></div>
+                    <div class="damage"><span class="yellow"></span><span class="magic"></span></div>
+                    <div class="description"></div>
+                    <div class="mana_cost"></div>
+                    <div class="cooldown"></div>
+                </div>
+            </div>
+            <div id="character-menu">
+                <div class="name">Gandalf</div>
+                <div class="health-bar">100%</div>
+                <div class="mana-bar">100%</div>
+                <div class="strength">10</div>
+                <div class="intelligence">10</div>
+                <div class="defense">10</div>
+                <div class="magic_resistance">10</div>
+                <div class="evade">3%</div>
+                <div class="critical_rate">15%</div>
+                <div class="critical_damage">200%</div>
+
+                
+                <div class="level"></div>
+                <div class="exp-bar"></div>
+                <div class="gold"></div>
             </div>
             <div id="fight">
                 <div id="character">
                     <div class="attr" id="ch-health-bar"><div id="ch-health"></div></div><div class="attr" id="ch-mana-bar"><div id="ch-mana"></div></div>
-                    <div class="attr" id="ch-skill1"></div><div class="attr" id="ch-skill1-mana-cost"></div>
-                    <div class="attr" id="ch-skill2"></div><div class="attr" id="ch-skill2-mana-cost"></div>
-                    <div class="attr" id="ch-skill3"></div><div class="attr" id="ch-skill3-mana-cost"></div>
-                    <div class="attr" id="ch-skill4"></div><div class="attr" id="ch-skill4-mana-cost"></div>
+                    <div class="attr" id="ch-skill1"></div><div class="attr blue" id="ch-skill1-mana-cost"></div>
+                    <div class="attr" id="ch-skill2"></div><div class="attr blue" id="ch-skill2-mana-cost"></div>
+                    <div class="attr" id="ch-skill3"></div><div class="attr blue" id="ch-skill3-mana-cost"></div>
+                    <div class="attr" id="ch-skill4"></div><div class="attr blue" id="ch-skill4-mana-cost"></div>
                 </div>
                 <div id="enemy">
                     <div class="attr" id="en-health-bar"><div id="en-health"></div></div><div class="attr" id="en-mana-bar"><div id="en-mana"></div></div>
-                    <div class="attr" id="en-skill1"></div><div class="attr" id="en-skill1-mana-cost"></div>
-                    <div class="attr" id="en-skill2"></div><div class="attr" id="en-skill2-mana-cost"></div>
-                    <div class="attr" id="en-skill3"></div><div class="attr" id="en-skill3-mana-cost"></div>
-                    <div class="attr" id="en-skill4"></div><div class="attr" id="en-skill4-mana-cost"></div>
+                    <div class="attr" id="en-skill1"></div><div class="attr blue" id="en-skill1-mana-cost"></div>
+                    <div class="attr" id="en-skill2"></div><div class="attr blue" id="en-skill2-mana-cost"></div>
+                    <div class="attr" id="en-skill3"></div><div class="attr blue" id="en-skill3-mana-cost"></div>
+                    <div class="attr" id="en-skill4"></div><div class="attr blue" id="en-skill4-mana-cost"></div>
                 </div>
             </div>
         </div>
@@ -60,10 +104,12 @@
     <script src="js/options.js" type="text/javascript"></script>
     <script src="js/constants.js" type="text/javascript"></script>
     <script src="js/functions.js" type="text/javascript"></script>
-    <script src="js/stories.js" type="text/javascript"></script>
-    <script src="js/dialogues.js" type="text/javascript"></script>
-    <script src="js/characters.js" type="text/javascript"></script>
+    <script src="js/story.js" type="text/javascript"></script>
+    <script src="js/dialogue.js" type="text/javascript"></script>
     <script src="js/skill.js" type="text/javascript"></script>
+    <script src="js/character.js" type="text/javascript"></script>
+    <script src="js/main-menu.js" type="text/javascript"></script>
     <script src="js/main.js" type="text/javascript"></script>
     <script src="js/init.js" type="text/javascript"></script>
+    <script>document.write(FindAndReplaceAll("Ä± Å? Ã¶"));</script>
 </html>

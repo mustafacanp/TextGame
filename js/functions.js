@@ -1,4 +1,25 @@
 
+function FindAndReplaceAll(text){
+  var normal = new Array("Ä±","Å?","Ã¼","Ã§","Ã¶","Ä?","ÅŸ","Ã‡","Ä°","ÄŸ","Åž","Ã–","Ãœ","Ä±","Å?","Ã§","Ã¶","Ä?","ÅŸ","Ã‡","Ä°","ÄŸ","Åž","Ã–","Ãœ","Ã¼","ÄŸ");
+  var turkish = new Array("ı","ş","ü","ç","ö","ğ","ş","Ç","i","ğ","Ş","Ö","Ü","ı", "ş", "ç", "ö", "ğ", "ş", "Ç", "i", "ğ", "Ş", "Ö", "Ü", "ü", "ğ");
+
+  for (var i = 0; i < text.length; i+=2) 
+  {
+    for(var j = 0; j < 27;j++)
+        {
+            if((text.charAt(i)+text.charAt(i+1)) == normal[j])
+            {
+
+               text= text.replace((text.charAt(i)+text.charAt(i+1)), turkish[j]);    
+            }
+
+        }
+  }
+
+
+  return text;
+}
+
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max)+1;
@@ -65,80 +86,6 @@ function refreshInputLine(){ // Girdi satırını temizle.
 }
 
 
-/* Load Menu */
-function loadMenu(menu){
-    if(menu == "character"){
-        $("#container2").html("character");
-    } else if(menu == "skill"){
-        $("#container2").html("skill");
-    } else if(menu == "inventory"){
-        $("#container2").html("inventory");
-    } else if(menu == "map"){
-        $("#container2").html("map");
-    }
-}
-function saveGame(){
-    console.log("Saving...");
-    // pc'ye cookie bırakıp ajax ile verileri gönderecek
-}
-function loadGame(){
-    console.log("Loading...");
-    // pc'den cookie alıp ajax ile verileri getirecek
-}
-/* Load Menu */
-
-
-
-
-
-/* Fight Screen UI */
-function fightUI(mainCharacter, enemy){
-    $("#ch-health").width(Math.round(mainCharacter.health/mainCharacter.max_health*100)+"%");
-    $("#ch-health").html("Health:"+mainCharacter.health);
-    $("#ch-skill1").html("[1]."+mainCharacter.skills[0].name+isAvailable(mainCharacter, 0));
-    $("#ch-skill2").html("[2]."+mainCharacter.skills[1].name+isAvailable(mainCharacter, 1));
-    $("#ch-skill3").html("[3]."+mainCharacter.skills[2].name+isAvailable(mainCharacter, 2));
-    $("#ch-skill4").html("[4]."+mainCharacter.skills[3].name+isAvailable(mainCharacter, 3));
-    
-    $("#ch-mana").html("Mana:"+mainCharacter.mana);
-    $("#ch-mana").width(Math.round(mainCharacter.mana/mainCharacter.max_mana*100)+"%");
-    $("#ch-skill1-mana-cost").html("+5 Mana");
-    $("#ch-skill2-mana-cost").html("-"+mainCharacter.skills[1].mana_cost+" Mana");
-    $("#ch-skill3-mana-cost").html("-"+mainCharacter.skills[2].mana_cost+" Mana");
-    $("#ch-skill4-mana-cost").html("-"+mainCharacter.skills[3].mana_cost+" Mana");
-
-    
-    $("#en-health").width(Math.round(enemy.health/enemy.max_health*100)+"%");
-    $("#en-health").html("Health:"+enemy.health);
-    $("#en-skill1").html("[1]."+enemy.skills[0].name+isAvailable(enemy, 0));
-    $("#en-skill2").html("[2]."+enemy.skills[1].name+isAvailable(enemy, 1));
-    $("#en-skill3").html("[3]."+enemy.skills[2].name+isAvailable(enemy, 2));
-    $("#en-skill4").html("[4]."+enemy.skills[3].name+isAvailable(enemy, 3));
-
-    $("#en-mana").html("Mana:"+enemy.mana);
-    $("#en-mana").width(Math.round(enemy.mana/enemy.max_mana*100)+"%");
-    $("#en-skill1-mana-cost").html("+5 Mana");
-    $("#en-skill2-mana-cost").html("-"+enemy.skills[1].mana_cost+" Mana");
-    $("#en-skill3-mana-cost").html("-"+enemy.skills[2].mana_cost+" Mana");
-    $("#en-skill4-mana-cost").html("-"+enemy.skills[3].mana_cost+" Mana");
-}
-
-/* Cooldown & Mana Control */
-function isAvailable(character, skillID){
-    if(skillID == 0){
-        return "<br /><span class='small green'>Ready!</span>";
-    } else {
-        if(character.skills[skillID].current_cooldown == 0){
-            if(character.skills[skillID].mana_cost > character.mana){
-                return "<br /><span class='small italic blue'>Not Enough Mana</span>";
-            } else {
-                return "<br /><span class='small green'>Ready!</span>";
-            }
-        } else {
-            return "<br /><span class='small italic red'>Cooldown: "+character.skills[skillID].current_cooldown+"</span>";
-        }
-    }
-}
 
 // TODO: KALDIR
 $("#statistics-button").click(function(){

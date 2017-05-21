@@ -3,6 +3,8 @@ var path = ""; // Satır başı yazısı
 var blinkCursor; // İmleç
 var is_menu_active = false; // Main menu açık iken input'a hiç birşey yazdırmaması kontrolü.
 var menu_keys = false; // Main menu'den birşey seçip menüyü kapatınca input'a seçtiğin değeri yazdırmaması kontrolü.
+var is_menu_available = true; // Main Menu'ye erişim kontrolü.
+var is_screen_loaded = false; // Main Menu'ye erişim kontrolü.
 var action_type = 0;
 var finished_action = 0;
 var dialogueCount = 0;
@@ -112,6 +114,7 @@ var dialogues = {
                 action : function (keyName){
                     isFight = true;
                     action_type = "prepare_fight";
+                    enemy = Characters.gandalf;
                 }
             },
             {

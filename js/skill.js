@@ -70,16 +70,31 @@ function getSkillDamage(character, enemy, skill_id, is_main_character){
     skill_type_stat = (skill.type == "atk") ? character.strength : character.intelligence;
 
     /*Stat Damage*/
-    damage = Math.round(skill_type_stat * skill.damageRate * getRandomInt(80,130)/100);
+    damage = Math.round(skill_type_stat * skill.damage_rate * getRandomInt(80,130)/100);
     
     /*Add Base Damage*/
     damage = damage + skill.base_damage;
 
     /*Crit*/
-    crit_luck = getRandomInt(1,100) / 100; // Crit ihtimali için sayı oluştur.
-    if(crit_luck <= character.critical_rate){ // Sayı karakterin şansının içindeyse critical_damage katı vur.
-        is_crit = true;
-        damage *= character.critical_damage;
+    crit_luck = getRandomInt(1,100); // Crit ihtimali için sayı oluştur.
+    if(character.temporary.critical_rate){
+        if(crit_luck <= character.temporary.critical_rate){ // Sayı karakterin şansının içindeyse critical_damage katı vur.
+            is_crit = true;
+            if(character.temporary.critical_damage){
+                damage *= character.temporary.critical_damage;
+            } else {
+                damage *= character.critical_damage;
+            }
+        }
+    } else {
+        if(crit_luck <= character.critical_rate){ // Sayı karakterin şansının içindeyse critical_damage katı vur.
+            is_crit = true;
+            if(character.temporary.critical_damage){
+                damage *= character.temporary.critical_damage;
+            } else {
+                damage *= character.critical_damage;
+            }
+        }
     }
 
     /*Defense - Magic Resistance*/
@@ -121,13 +136,29 @@ function getSkillDamage(character, enemy, skill_id, is_main_character){
             } else if (is_main_character && healed_hp == "max_healed") { // Ana karakter full heal
                 cout("You full healed your HP!","green");
             } else if (!is_main_character && healed_hp != "max_healed") { // Rakip normal heal
-                cout(enemy.name + " healed " + healed_hp + " HP.","red");
+                cout(character.name + " healed " + healed_hp + " HP.","red");
             } else if (!is_main_character && healed_hp == "max_healed") { // Rakip full heal
-                cout(enemy.name + " full healed his HP!","green");
+                cout(character.name + " full healed his HP!","green");
             }
         }
 
     }
+
+    character.temporary.strength = 0;
+    character.temporary.intelligence = 0;
+    character.temporary.defense = 0;
+    character.temporary.magic_resistance = 0;
+    character.temporary.evade = 0;
+    character.temporary.critical_rate = 0;
+    character.temporary.critical_damage = 0;
+
+    enemy.temporary.strength = 0;
+    enemy.temporary.intelligence = 0;
+    enemy.temporary.defense = 0;
+    enemy.temporary.magic_resistance = 0;
+    enemy.temporary.evade = 0;
+    enemy.temporary.critical_rate = 0;
+    enemy.temporary.critical_damage = 0;
 
     return damage;
 }
@@ -156,11 +187,10 @@ function useSkill(skill, mainCharacter, enemy){
         return;
     }
 
-
-
+    // Enenmy(AI) Damage
     var random_skill, dmg2;
     do{
-        if(enemy.mana < enemy.skills[3].mana_cost && enemy.health < mainCharacter.health){ // Manası ultiye yetmiyor ve canı bizden az ise:
+        if(enemy.mana < enemy.skills[3].mana_cost && enemy.health * 5/4 < mainCharacter.health){ // Manası ultiye yetmiyor ve canı bizden az ise:
             dmg2 == "ulti_degil";
             dmg2 = getSkillDamage(enemy, mainCharacter, 1, 0); // Basic attack yap.
         } else { // Manası ultiye yetiyor ise:
@@ -180,5 +210,234 @@ function useSkill(skill, mainCharacter, enemy){
         action_type = 0;
         cout("YOU LOSE!","red");
     }
-    cout("---");
+    cout("-----");
 }
+
+
+
+
+/* Cooldown & Mana Control */
+function isSkillAvailable(character, skillID){
+    if(skillID == 0){
+        return "<br /><span class='small green'>Ready!</span>";
+    } else {
+        if(character.skills[skillID].current_cooldown == 0){
+            if(character.skills[skillID].mana_cost > character.mana){
+                return "<br /><span class='small blue'>Not Enough Mana</span>";
+            } else {
+                return "<br /><span class='small green'>Ready!</span>";
+            }
+        } else {
+            return "<br /><span class='small purple'>Cooldown: "+character.skills[skillID].current_cooldown+"</span>";
+        }
+    }
+}
+
+
+
+
+
+
+
+
+Skills = {
+    gandalf1 : {
+        name : "Attack",
+        base_damage: 3,
+        damage_rate : 0.7,
+        type : "atk",
+        mana_regen: 5,
+        mana_cost: 0,
+        cooldown: 0,
+        buff: function(character, enemy){
+            character.mana += 5;
+        },
+        description: "Basic attack skill. Gives 5 Mana.",
+    },
+    gandalf2 : {
+        name : "W",
+        base_damage: 8,
+        damage_rate : 0.8,
+        type : "magic",
+        mana_cost: 10,
+        cooldown: 2,
+        current_cooldown: 0,
+        buff: function(character, enemy){
+            if(enemy.magic_resistance > 0){
+                enemy.magic_resistance -= enemy.magic_resistance * 20/100;
+                enemy.magic_resistance = Math.round(enemy.magic_resistance);
+            }
+        },
+        description: "Enemy's magic resistance -%20",
+        
+    },
+    gandalf3 : {
+        name : "E",
+        base_damage: 7,
+        damage_rate : 1,
+        type : "magic",
+        mana_cost: 10,
+        cooldown: 3,
+        current_cooldown: 0,
+        description: "%5 şansla canını fuller.(Can değerin %30'un altındaysa %20 ihtimalle canını fuller.)",
+        heal: function(character, enemy){
+            var random = getRandomInt(1,100);
+            if(character.health <= character.max_health * 3/10){
+                if(random <= 20){
+                    return "max_healed";
+                } else {
+                    return false;
+                }
+            } else {
+                if(random <= 5){
+                    return "max_healed";
+                } else {
+                    return false;
+                }
+            }
+        }
+    },
+    gandalf4 : {
+        name : "Ultimate",
+        base_damage: 10,
+        damage_rate : 1.2,
+        type : "magic",
+        mana_cost: 35,
+        cooldown: 5,
+        current_cooldown: 5,
+        buff: function(character, enemy){
+            enemy.magic_resistance -= enemy.magic_resistance*3/10;
+            enemy.magic_resistance = Math.round(enemy.magic_resistance);
+        },
+        description: "Canını %15 doldurur ve rakibin büyü direncini %30 azaltır.",
+        heal: function(character, enemy){
+            return Math.floor(character.max_health*15/100);
+        }
+    },
+
+    saruman1 : {
+        name : "Attack",
+        base_damage: 2,
+        damage_rate : 0.7,
+        type : "atk",
+        mana_regen: 7,
+        mana_cost: 0,
+        cooldown: 0,
+        buff: function(character, enemy){
+            character.mana += 7;
+        },
+        description: "Basic attack skill. Gives 7 Mana.",
+    },
+    saruman2 : {
+        name : "W",
+        base_damage: 5,
+        damage_rate : 1,
+        type : "magic",
+        mana_cost: 10,
+        cooldown: 2,
+        current_cooldown: 0,
+        buff: function(character, enemy){
+            enemy.magic_resistance -= enemy.magic_resistance/15;
+            enemy.magic_resistance = Math.round(enemy.magic_resistance);
+        },
+        description: "Enemy's magic resistance -%15",
+    },
+    saruman3 : {
+        name : "E",
+        base_damage: 8,
+        damage_rate : 0.7,
+        type : "magic",
+        mana_cost: 20,
+        cooldown: 3,
+        current_cooldown: 0,
+        buff: function(character, enemy){
+            var random = getRandomInt(1,100);
+            if(random <= 50){
+                character.mana += 20;
+            }
+            character.temporary.critical_rate = 30;
+        },
+        description: "%50 şansla Mana tüketmez ve %30 şansla crit vurur.",
+    },
+    saruman4 : {
+        name : "Ultimate",
+        base_damage: 10,
+        damage_rate : 1,
+        type : "magic",
+        mana_cost: 30,
+        cooldown: 5,
+        current_cooldown: 5,
+        description: "Damage + rakibin o anki can değerinin %15'i vurur. Kendi can değerine max can değerinin %10'u heal yapar.",
+        extraDamage: function(character, enemy){
+            return Math.floor(enemy.health*15/100);
+        },
+        heal: function(character, enemy){
+            return Math.floor(character.max_health*1/10);
+        }
+    },
+
+    analkin1 : {
+        name : "Light Saber Strike",
+        base_damage: 5,
+        damage_rate : 0.7,
+        type : "atk",
+        mana_regen: 4,
+        mana_cost: 0,
+        cooldown: 0,
+        buff: function(character, enemy){
+            character.mana += 4;
+        },
+        description: "Basic attack skill. Gives 4 Mana.",
+    },
+    analkin2 : {
+        name : "Force Grab",
+        base_damage: 10,
+        damage_rate : 0.8,
+        type : "magic",
+        mana_cost: 12,
+        cooldown: 2,
+        current_cooldown: 0,
+        buff: function(character, enemy){
+            if(character.evade < 20){
+                character.evade += 1;
+            }
+            //console.log(character.evade);
+        },
+        description: "Increases Evade %1. (Max %20)",
+    },
+    analkin3 : {
+        name : "Pew / Pew",
+        base_damage: 5,
+        damage_rate : 1.5,
+        type : "atk",
+        mana_cost: 20,
+        cooldown: 3,
+        current_cooldown: 0,
+        buff: function(character, enemy){
+            enemy.defense -= enemy.defense/10;
+            enemy.defense = Math.round(enemy.defense);
+        },
+        description: "Rakibin defansını %10 azaltır.",
+    },
+    analkin4 : {
+        name : "Oppi",
+        base_damage: 5,
+        damage_rate : 1.2,
+        type : "magic",
+        mana_cost: 30,
+        cooldown: 5,
+        current_cooldown: 5,
+        buff: function(character, enemy){
+            enemy.mana -= Math.floor(enemy.mana*3/10); //!
+        },
+        description: "Damage + rakibin o anki can değerinin %10'u vurur, o anki mana değerinin %30'unu tüketir. Kendi can değerine o anki can değerinin %15'i heal yapar.",
+        extraDamage: function(character, enemy){
+            return Math.floor(enemy.health*1/10);
+        },
+        heal: function(character, enemy){
+            return Math.floor(character.health*15/100);
+        }
+    }
+
+}
+

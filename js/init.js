@@ -2,41 +2,43 @@
 var start = function () {
     var keyPress = function(){ // Enter'a basınca newLine() fonksiyonu ile yeni satıra geç.
         $(document).on("keyup",function(e) {
-            if(e.keyCode == 27){
+            if(e.keyCode == 27 && is_menu_available){
                 if(is_menu_active){
                     refreshInputLine();
                     $("#main-menu").hide();
                     is_menu_active = false;
-                } else {
+                    is_screen_loaded = false;
+                } else if(!is_menu_active || is_screen_loaded) {
                     refreshInputLine();
                     $("#main-menu").show();
                     is_menu_active = true;
+                    hideAllMenus();
                 }
             }
         });
         $(document).on("keypress",function(e) {
-            if(is_menu_active == false){
+            if(!is_menu_active && !is_screen_loaded){
                 if(e.which == 13) { // Enter basıldı ise...
                     action(); // Sonraki aksiyonu yap.
                     refreshInputLine(); // input'u temizle.
                 }
             } if(e.keyCode == 99 && is_menu_active){
-                loadMenu("character")
+                loadScreen("character")
                 $("#main-menu").hide();
                 is_menu_active = false;
                 menu_keys = true;
             } if(e.keyCode == 107 && is_menu_active){
-                loadMenu("skill")
+                loadScreen("skill")
                 $("#main-menu").hide();
                 is_menu_active = false;
                 menu_keys = true;
             } if(e.keyCode == 105 && is_menu_active){
-                loadMenu("inventory");
+                loadScreen("inventory");
                 $("#main-menu").hide();
                 is_menu_active = false;
                 menu_keys = true;
             } if(e.keyCode == 109 && is_menu_active){
-                loadMenu("map");
+                loadScreen("map");
                 $("#main-menu").hide();
                 is_menu_active = false;
                 menu_keys = true;
@@ -98,4 +100,5 @@ jQuery(document).ready(function () {
     refreshInputLine(); // #input'un değerini sıfırlar, input'u cursor'a bağlar(input'da değişen değeri cursor'a yazar)
     focusInput(); // Sayfada herhangi bir yere basınca input alanına focus olur.
     start.init(); // keyPress && drawMatrix
+    selectCharacter();
 });

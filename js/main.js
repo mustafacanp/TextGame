@@ -28,15 +28,15 @@ function action() {
     }
     skill = $("#input").val();
     if(action_type == "fight"){
-        $("#fight").show();        
-        var mainCharacter = Characters.saruman;
-        var enemy = Characters.gandalf;
+        is_menu_available = false;
+        $("#fight").show();
 
         if(skill=="1" || skill=="2" || skill=="3" || skill=="4"){
             useSkill(skill, mainCharacter, enemy);
         }
         fightUI(mainCharacter, enemy);
     } else {
+        is_menu_available = true;
         $("#fight").hide();
     }
     if (action_type == "prepare_fight"){action_type = "fight";}
@@ -44,6 +44,9 @@ function action() {
 }
 
 
+function selectCharacter(){
+    mainCharacter = Characters.saruman;
+}
 
 //dialogues["do_you_wanna_fight"].answers[0].action = "function(){dialogueAnswers[keyName] = this.inputText;}createStory('accept_fight');";
 

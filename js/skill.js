@@ -70,17 +70,17 @@ function getSkillDamage(character, enemy, skill_id, is_main_character){
     skill_type_stat = (skill.type == "atk") ? character.strength : character.intelligence;
 
     /*Stat Damage*/
-    damage = Math.round(skill_type_stat * skill.damage_rate * getRandomInt(80,130)/100);
+    damage = Math.round(skill_type_stat * skill.damage_rate * getRandomInt(80,120)/100);
     
     /*Add Base Damage*/
     damage = damage + skill.base_damage;
 
     /*Crit*/
     crit_luck = getRandomInt(1,100); // Crit ihtimali için sayı oluştur.
-    if(character.temporary.critical_rate){
+    if(character.temporary.critical_rate != 0){
         if(crit_luck <= character.temporary.critical_rate){ // Sayı karakterin şansının içindeyse critical_damage katı vur.
             is_crit = true;
-            if(character.temporary.critical_damage){
+            if(character.temporary.critical_damage != 0){
                 damage *= character.temporary.critical_damage;
             } else {
                 damage *= character.critical_damage;
@@ -89,7 +89,7 @@ function getSkillDamage(character, enemy, skill_id, is_main_character){
     } else {
         if(crit_luck <= character.critical_rate){ // Sayı karakterin şansının içindeyse critical_damage katı vur.
             is_crit = true;
-            if(character.temporary.critical_damage){
+            if(character.temporary.critical_damage != 0){
                 damage *= character.temporary.critical_damage;
             } else {
                 damage *= character.critical_damage;

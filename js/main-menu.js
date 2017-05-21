@@ -27,6 +27,7 @@ function loadGame(){
 
 function hideAllMenus(){
     $("#skills-menu").hide();
+    $("#character-menu").hide();
 }
 
 /* Fight Screen UI */

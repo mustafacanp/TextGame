@@ -10,6 +10,8 @@ var finished_action = 0;
 var dialogueCount = 0;
 var storyCount = 0;
 var current_dialogue_name = ""; // action() içinde, action_type = "dialogue_answer" devam ediyor ise hangi diyaloğa cevap vereceğini tutuyor.
+var is_story_writing = false;
+var is_animating = false;
 
 var isFight = false;
 

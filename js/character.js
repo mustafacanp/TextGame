@@ -1,5 +1,33 @@
 var mainCharacter, enemy;
 
+class Character {
+    constructor(name, max_health, health, max_mana, mana, strength, intelligence, defense, magic_resistance, speed, evade, critical_rate, critical_damage, temporary, skill) {
+        
+    }
+}
+
+var Animal = {
+    speak() {
+        console.log(this.name + ' makes a noise.');
+    }
+};
+
+class Dog {
+    constructor(name) {
+        this.name = name;
+    }
+    speak() {
+        console.log(this.name + ' barking.');
+    }
+}
+
+Object.setPrototypeOf(Dog.prototype, Animal);// If you do not do this you will get a TypeError when you invoke speak
+
+var d = new Dog('Mitzie');
+d.speak(); // Mitzie makes a noise.
+
+
+
 var Characters = {
     gandalf : {
         id: 1,

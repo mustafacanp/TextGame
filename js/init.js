@@ -2,56 +2,60 @@
 var start = function () {
     var keyPress = function(){ // Enter'a basınca newLine() fonksiyonu ile yeni satıra geç.
         $(document).on("keyup",function(e) {
-            if(e.keyCode == 27 && is_menu_available){
-                if(is_menu_active){
-                    refreshInputLine();
-                    $("#main-menu").hide();
-                    is_menu_active = false;
-                    is_screen_loaded = false;
-                } else if(!is_menu_active || is_screen_loaded) {
-                    refreshInputLine();
-                    $("#main-menu").show();
-                    is_menu_active = true;
-                    hideAllMenus();
+            if(!is_story_writing && !is_animating){
+                if(e.keyCode == 27 && is_menu_available){
+                    if(is_menu_active){
+                        refreshInputLine();
+                        $("#main-menu").hide();
+                        is_menu_active = false;
+                        is_screen_loaded = false;
+                    } else if(!is_menu_active || is_screen_loaded) {
+                        refreshInputLine();
+                        $("#main-menu").show();
+                        is_menu_active = true;
+                        hideAllMenus();
+                    }
                 }
             }
         });
         $(document).on("keypress",function(e) {
-            if(!is_menu_active && !is_screen_loaded){
-                if(e.which == 13) { // Enter basıldı ise...
-                    action(); // Sonraki aksiyonu yap.
-                    refreshInputLine(); // input'u temizle.
+            if(!is_story_writing && !is_animating){
+                if(!is_menu_active && !is_screen_loaded){
+                    if(e.which == 13) { // Enter basıldı ise...
+                        action(); // Sonraki aksiyonu yap.
+                        refreshInputLine(); // input'u temizle.
+                    }
+                } if(e.keyCode == 99 && is_menu_active){
+                    loadScreen("character")
+                    $("#main-menu").hide();
+                    is_menu_active = false;
+                    menu_keys = true;
+                } if(e.keyCode == 107 && is_menu_active){
+                    loadScreen("skill")
+                    $("#main-menu").hide();
+                    is_menu_active = false;
+                    menu_keys = true;
+                } if(e.keyCode == 105 && is_menu_active){
+                    loadScreen("inventory");
+                    $("#main-menu").hide();
+                    is_menu_active = false;
+                    menu_keys = true;
+                } if(e.keyCode == 109 && is_menu_active){
+                    loadScreen("map");
+                    $("#main-menu").hide();
+                    is_menu_active = false;
+                    menu_keys = true;
+                } if(e.keyCode == 115 && is_menu_active){
+                    saveGame();
+                    $("#main-menu").hide();
+                    is_menu_active = false;
+                    menu_keys = true;
+                } if(e.keyCode == 108 && is_menu_active){
+                    loadGame();
+                    $("#main-menu").hide();
+                    is_menu_active = false;
+                    menu_keys = true;
                 }
-            } if(e.keyCode == 99 && is_menu_active){
-                loadScreen("character")
-                $("#main-menu").hide();
-                is_menu_active = false;
-                menu_keys = true;
-            } if(e.keyCode == 107 && is_menu_active){
-                loadScreen("skill")
-                $("#main-menu").hide();
-                is_menu_active = false;
-                menu_keys = true;
-            } if(e.keyCode == 105 && is_menu_active){
-                loadScreen("inventory");
-                $("#main-menu").hide();
-                is_menu_active = false;
-                menu_keys = true;
-            } if(e.keyCode == 109 && is_menu_active){
-                loadScreen("map");
-                $("#main-menu").hide();
-                is_menu_active = false;
-                menu_keys = true;
-            } if(e.keyCode == 115 && is_menu_active){
-                saveGame();
-                $("#main-menu").hide();
-                is_menu_active = false;
-                menu_keys = true;
-            } if(e.keyCode == 108 && is_menu_active){
-                loadGame();
-                $("#main-menu").hide();
-                is_menu_active = false;
-                menu_keys = true;
             }
         });
     }
@@ -95,10 +99,11 @@ var start = function () {
 jQuery(document).ready(function () {
     //createDialogue("name_dialogue");
     //disableRightClick();
-    cin(); // İlk satırı oluşturdu.
+    cin(); // Girdi satırı oluşturdu.
     cout("Welcome visitor. Press enter to continue...<br><br>", "green");
     refreshInputLine(); // #input'un değerini sıfırlar, input'u cursor'a bağlar(input'da değişen değeri cursor'a yazar)
     focusInput(); // Sayfada herhangi bir yere basınca input alanına focus olur.
     start.init(); // keyPress && drawMatrix
+    intro();
     selectCharacter();
 });

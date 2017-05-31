@@ -48,6 +48,23 @@ function selectCharacter(){
     mainCharacter = Characters.saruman;
 }
 
+
+function lvlUp(lvl){
+    if(lvl==1) return 100;
+    else return Math.log2(lvl) *100 + lvlUp(lvl-1);
+}
+
+console.log("Log2(2)"+lvlUp(2));
+console.log("Log2(3)"+lvlUp(3));
+console.log("Log2(4)"+lvlUp(4));
+console.log("Log2(5)"+lvlUp(5));
+console.log("Log2(6)"+lvlUp(6));
+console.log("Log2(7)"+lvlUp(7));
+console.log("Log2(8)"+lvlUp(8));
+console.log("Log2(9)"+lvlUp(9));
+console.log("Log2(10)"+lvlUp(10));
+
+
 //dialogues["do_you_wanna_fight"].answers[0].action = "function(){dialogueAnswers[keyName] = this.inputText;}createStory('accept_fight');";
 
 

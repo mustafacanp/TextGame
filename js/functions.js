@@ -27,7 +27,6 @@ function getRandomInt(min, max) {
 }
 
 function disableRightClick(){ //Disable Right Click
-    //Disable full page
     $("body").on("contextmenu",function(e){
         return false;
     });
@@ -64,13 +63,29 @@ function cin(){
     $("#container").append('<div class="line input-line"><div class="text">></div><div id="cmd"><span></span><div id="cursor"></div></div><input type="text" id="input" maxlength="50" /></div>');
 }
 function cout(_output, _class, path){
+    console.log(_output.length);
+    $("#container .text").removeClass('writing');
+
     if (arguments.length === 1) {
-        $("#container").append('<div class="line"><div class="text">'+_output+'</div></div>');
+        $("#container").append('<div class="line"><div class="text writing">'+_output+'</div></div>');
     } else if (arguments.length === 2) {
-        $("#container").append('<div class="line"><div class="text '+_class+'">'+_output+'</div></div>');
+        $("#container").append('<div class="line"><div class="text writing '+_class+'">'+_output+'</div></div>');
     } else if (arguments.length === 3) {
-        $("#container").append('<div class="line"><div class="text '+_class+'">'+path+'>'+_output+'</div></div>');
+        $("#container").append('<div class="line"><div class="text writing '+_class+'">'+path+'>'+_output+'</div></div>');
     }
+    
+    $('#container .text.writing').t({
+        speed: t_speed,
+        caret: false
+    });
+    $(".t-container").on('DOMSubtreeModified', function () { // t function sonrası scrollBottom
+        is_writing = true;
+        scrollBottom();
+        console.log("scroll");
+    });
+    setTimeout(function(){
+        is_writing = false;
+    }, (_output.length * t_speed) + 100);
 }
 function removeInputLine(){ // Tüm girdi satırlarını siler.
     $(".line").each(function(){
@@ -153,62 +168,7 @@ addSpaces(''+
 
 */
 
-function addSpaces(string){
-    $("#container").html(string.replace(/ /g, "&nbsp;"));
-}
 
 
 
 
-
-
-function intro(){
-    is_animating = true;
-    addSpaces(''+
-    '                                  |>>><br>'+
-    '                                  |<br>'+
-    '                    |>>>      _  _|_  _         |>>><br>'+
-    '                    |        |;| |;| |;|        |<br>'+
-    '                _  _|_  _    \\.    .   /       _|_  _<br>'+
-    '                |;|_|;|_|;|   \\:. ,   /    |;|_|;|_|;|<br>'+
-    '                \\..      /    ||;   . |     \\.    .  /<br>'+
-    '                 \\.  ,  /     ||:  .  |      \\:  .  /<br>'+
-    '                 ||:   |_   _ ||_ . _ | _   _||:   |<br>'+
-    '                 ||:  .|||_|;|_|;|_|;|_|;|_|;||:.  |<br>'+
-    '                 ||:   ||.    .     .      . ||:  .|<br>'+
-    '                 ||: . || .     . .   .  ,   ||:   |       <span>/`\\</span><br>'+
-    '                 ||:   ||:  ,  _______   .   ||: , |            <span>\\,/</span><br>'+
-    '                 ||:   || .   /+++++++\\   .  ||:   |<br>'+
-    '                 ||:   ||.    |+++++++| .    ||: . |<br>'+
-    '              __ ||: . ||: ,  |+++++++|.  . _||_   |<br>'+
-    '     ____--`~    --~~__|.     |+++++__|----~    ~`---,              ___<br>'+
-    '-~--~                   ~---__|,--~                  ~~----_____-~   ~----~~---_____-~   ~----~~<br><br><br><br><br>'+
-    '');
-    $("#container span:eq(0)").attr('id', 'bird1');
-    $("#container span:eq(1)").attr('id', 'bird2');
-    $("#bird1, #bird2").css('position','absolute');
-    for(var i = 1; i < 22; i++){
-        fly(i);
-    }
-    setTimeout(function(){
-        $("#container").html("");
-        cin(); // Girdi satırı oluşturdu.
-        is_animating = false;
-        cout("Welcome visitor. Press enter to continue...<br><br>", "green");
-    },6300);
-}
-function fly(i){
-    var space = "&nbsp;&nbsp;".repeat(i);
-    if(i%2 == 0){
-        var bird1 = "/`\\";
-        var bird2 = "\\,/";
-    } else {
-        var bird1 = "\\,/";
-        var bird2 = "/`\\";
-    }
-    setTimeout(function(){
-        $("#bird1").html(space+bird1);
-        $("#bird2").html(space+bird2);
-        $("#bird1, #bird2").css('margin-top','-'+i*6+'px' );
-    },i*300);
-}

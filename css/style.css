@@ -44,6 +44,12 @@ body {
     width: 850px;
     height: 430px;
 }
+#container .text{
+    line-height: 30px;
+}
+#container .input-line .text{
+    line-height: 20px;
+}
 #container2{
     float: left;
     background-color: #000;

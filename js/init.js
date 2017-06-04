@@ -2,7 +2,7 @@
 var start = function () {
     var keyPress = function(){ // Enter'a basınca newLine() fonksiyonu ile yeni satıra geç.
         $(document).on("keyup",function(e) {
-            if(!is_story_writing && !is_animating){
+            if(!is_writing && !is_animating){
                 if(e.keyCode == 27 && is_menu_available){
                     if(is_menu_active){
                         refreshInputLine();
@@ -19,7 +19,7 @@ var start = function () {
             }
         });
         $(document).on("keypress",function(e) {
-            if(!is_story_writing && !is_animating){
+            if(!is_writing && !is_animating){
                 if(!is_menu_active && !is_screen_loaded){
                     if(e.which == 13) { // Enter basıldı ise...
                         action(); // Sonraki aksiyonu yap.
@@ -100,10 +100,17 @@ jQuery(document).ready(function () {
     //createDialogue("name_dialogue");
     //disableRightClick();
     cin(); // Girdi satırı oluşturdu.
-    cout("Welcome visitor. Press enter to continue...<br><br>", "green");
     refreshInputLine(); // #input'un değerini sıfırlar, input'u cursor'a bağlar(input'da değişen değeri cursor'a yazar)
     focusInput(); // Sayfada herhangi bir yere basınca input alanına focus olur.
     start.init(); // keyPress && drawMatrix
+    
     intro();
+    setTimeout(function(){
+        $("#container").html(""); // Animasyon temizlendi.
+        cin(); // Girdi satırı oluşturdu.
+        is_animating = false;
+        initStory();
+    },6300);
+    
     selectCharacter();
 });

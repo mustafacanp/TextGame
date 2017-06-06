@@ -1,8 +1,4 @@
 
-function addSpaces(string){
-    $("#container").html(string.replace(/ /g, "&nbsp;"));
-}
-
 function intro(){
     is_animating = true;
     addSpaces(''+

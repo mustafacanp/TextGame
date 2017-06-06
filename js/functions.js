@@ -63,7 +63,6 @@ function cin(){
     $("#container").append('<div class="line input-line"><div class="text">></div><div id="cmd"><span></span><div id="cursor"></div></div><input type="text" id="input" maxlength="50" /></div>');
 }
 function cout(_output, _class, path){
-    console.log(_output.length);
     $("#container .text").removeClass('writing');
 
     if (arguments.length === 1) {
@@ -78,14 +77,21 @@ function cout(_output, _class, path){
         speed: t_speed,
         caret: false
     });
+    
+    var character_counter = 0;
     $(".t-container").on('DOMSubtreeModified', function () { // t function sonrası scrollBottom
         is_writing = true;
-        scrollBottom();
-        console.log("scroll");
+        character_counter++;
+        if(character_counter % t_speed == 0){ // t_speed = 25 olduğundan 25 karakterde bir scrollBottom() çağırır
+            scrollBottom();
+        }
     });
+
     setTimeout(function(){
         is_writing = false;
     }, (_output.length * t_speed) + 100);
+
+
 }
 function removeInputLine(){ // Tüm girdi satırlarını siler.
     $(".line").each(function(){

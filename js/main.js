@@ -1,5 +1,5 @@
 
-var storySequence = ["starting_story", "first_story","second_story","third_story","forth_story","fifth_story"]; // Diyalogları sırası ile bu diziden oluşturuyor.
+var storySequence = ["starting_story", "first_story", "first_story_2","second_story","third_story","forth_story","fifth_story"]; // Diyalogları sırası ile bu diziden oluşturuyor.
 var dialogueSequence = ["name_dialogue","nick_dialogue", "do_you_wanna_fight", "do_you_like_girls", "do_you_like_girls"]; // Diyalogları sırası ile bu diziden oluşturuyor.
 //var dialogueSequence = ["do_you_wanna_fight","nick_dialogue", "do_you_wanna_fight", "do_you_like_girls", "do_you_like_girls"]; // Diyalogları sırası ile bu diziden oluşturuyor.
 
@@ -9,6 +9,7 @@ var processSequence = [ // İşlem Sırası
     {id:1, type:"story"},
     {id:2, type:"dialogue"},
     {id:3, type:"dialogue"},
+    {id:4, type:"story"},
     {id:4, type:"story"},
     {id:5, type:"story"},
     {id:6, type:"story"},

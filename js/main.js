@@ -1,7 +1,8 @@
 
-var storySequence = ["starting_story", "first_story", "first_story_2","second_story","third_story","forth_story","fifth_story"]; // Diyalogları sırası ile bu diziden oluşturuyor.
-var dialogueSequence = ["name_dialogue","nick_dialogue", "do_you_wanna_fight", "do_you_like_girls", "do_you_like_girls"]; // Diyalogları sırası ile bu diziden oluşturuyor.
-//var dialogueSequence = ["do_you_wanna_fight","nick_dialogue", "do_you_wanna_fight", "do_you_like_girls", "do_you_like_girls"]; // Diyalogları sırası ile bu diziden oluşturuyor.
+var storySequence = ["starting_story", "first_story", "first_story_2","second_story","third_story","forth_story","fifth_story","sixth_story","seventh_story",
+"eighth_story","nineth_story"];
+var dialogueSequence = ["name_dialogue","nick_dialogue", "do_you_wanna_fight", "do_you_like_girls", "do_you_like_girls"];
+//var dialogueSequence = ["do_you_wanna_fight","nick_dialogue", "do_you_wanna_fight", "do_you_like_girls", "do_you_like_girls"];
 
 
 
@@ -19,6 +20,7 @@ var processSequence = [ // İşlem Sırası
     {id:10, type:"story"},
     {id:11, type:"story"},
     {id:12, type:"story"},
+    {id:13, type:"dialogue"},
 ];
 /*
 var processSequence = [ // İşlem Sırası
@@ -31,8 +33,8 @@ var processSequence = [ // İşlem Sırası
     {id:7, type:"story"},
     {id:8, type:"story"},
     {id:8, type:"story"},
-];*/
-
+];
+*/
 function action() {
     //console.log(action_type);
     if (action_type == "dialogue_question"){action_type = "dialogue_answer";} // action_type == "dialogue_question" ise cevaplama kısmına geç.
@@ -83,23 +85,41 @@ function selectCharacter(){
     mainCharacter = Characters.saruman;
 }
 
+var current_max_exp = 100;
+function reqExptoLvlUp(lvl){
+    if(lvl==1) return current_max_exp;
+    else return parseInt(Math.log2(lvl) *100 + reqExptoLvlUp(lvl-1));
+}
+/*
+console.log(reqExptoLvlUp(2));
+console.log(reqExptoLvlUp(3));
+console.log(reqExptoLvlUp(4));
+console.log(reqExptoLvlUp(5));
+console.log(reqExptoLvlUp(6));
+console.log(reqExptoLvlUp(7));
+console.log(reqExptoLvlUp(8));
+console.log(reqExptoLvlUp(9));
+console.log(reqExptoLvlUp(10));
+*/
 
-function lvlUp(lvl){
-    if(lvl==1) return 100;
-    else return Math.log2(lvl) *100 + lvlUp(lvl-1);
+var current_max_exp = 100;
+function reqExptoLvlUp2(lvl){
+    if(lvl==1) return current_max_exp;
+    else return parseInt((Math.pow(5 + lvl, 2) + reqExptoLvlUp2(lvl-1) + 1) * 1.1);
 }
 
-console.log("Log2(2)"+lvlUp(2));
-console.log("Log2(3)"+lvlUp(3));
-console.log("Log2(4)"+lvlUp(4));
-console.log("Log2(5)"+lvlUp(5));
-console.log("Log2(6)"+lvlUp(6));
-console.log("Log2(7)"+lvlUp(7));
-console.log("Log2(8)"+lvlUp(8));
-console.log("Log2(9)"+lvlUp(9));
-console.log("Log2(10)"+lvlUp(10));
 
 
-//dialogues["do_you_wanna_fight"].answers[0].action = "function(){dialogueAnswers[keyName] = this.inputText;}createStory('accept_fight');";
-
-
+console.log(reqExptoLvlUp2(2));
+console.log(reqExptoLvlUp2(3));
+console.log(reqExptoLvlUp2(4));
+console.log(reqExptoLvlUp2(5));
+console.log(reqExptoLvlUp2(6));
+console.log(reqExptoLvlUp2(7));
+console.log(reqExptoLvlUp2(8));
+console.log(reqExptoLvlUp2(9));
+console.log(reqExptoLvlUp2(10));
+console.log("15: " + reqExptoLvlUp2(15));
+console.log("20: " + reqExptoLvlUp2(20));
+console.log("50: " + reqExptoLvlUp2(50));
+console.log("100: " + reqExptoLvlUp2(100));

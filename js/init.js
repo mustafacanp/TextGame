@@ -110,7 +110,7 @@ jQuery(document).ready(function () {
         cin(); // Girdi satırı oluşturdu.
         is_animating = false;
         initStory();
-    },6300);*/
-    
+    },6300);
+    */
     selectCharacter();
 });

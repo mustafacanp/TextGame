@@ -1,7 +1,7 @@
 
 function intro(){
     is_animating = true;
-    addSpaces(''+
+    addSpaces(
     '                                  |>>><br>'+
     '                                  |<br>'+
     '                    |>>>      _  _|_  _         |>>><br>'+

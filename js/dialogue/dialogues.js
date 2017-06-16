@@ -21,8 +21,8 @@ var dialogues = {
         type : "text",
         question : "Peki sana nasıl hitap etmemi istersin? Lordum, yabancı, kanka ya da ne istersen.",
         printText : function(input){
-            return "Tamam <span class='green'>" + s_fake_nick + "</span>. Neyse nerede kalmışık sana " + s_city_e + " anlatıyordum. " + s_city_de + " " + s_year_ago + " yıl önce 3 kadim ırk birlikte yaşardı. "+
-            "İnsanlar, " + s_race2 + ", " + s_race3 + ".";
+            return "Tamam <span class='green'>" + s_fake_nick + "</span>. Neyse nerede kalmışık sana " + ek(s_city, "e") + " anlatıyordum. " + ek(s_city, "de") +
+            " yüzlerce yıl önce üç kadim ırk birlikte yaşardı. İnsanlar, " + ek(s_race2, "ler") + " ve " + ek(s_race3, "ler") + ".";
         },
         saveAnswer : function (answer){
             dialogueAnswers[this.keyName] = answer; // dialogueAnswers objesine diyalog key ve cevabı yazdırdık

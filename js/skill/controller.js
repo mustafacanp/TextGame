@@ -9,8 +9,6 @@ function getSkillDamage(character, enemy, skill_id, is_main_character){
     /* is Cooldown Available */
     if(skill.cooldown != 0){ // skillin cooldownu varsa
         if(skill.current_cooldown != 0){
-            //console.log("Cooldown = "+skill.cooldown);
-            //console.log("Current Cooldown = "+skill.current_cooldown);
             return "cooldown";
         } else if (skill.current_cooldown == 0 && character.mana >= skill.mana_cost) { // 1. skill (Cooldownsuz)) { // current_cooldown = 0 ise (şuan bekleme süresi yok ise) bekleme süresine sok
             for(i=1; i<=3; i++){

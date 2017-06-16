@@ -19,29 +19,17 @@ var isFight = false;
 var options = new Options();
 
 s_fake_nick = "sadıç";
-s_fake_nick_e = "sadıca";
-s_fake_nick_i = "sadıcı";
-s_fake_nick_de = "sadıçda";
-s_fake_nick_den = "sadıçdan";
 
 s_city = "Mordor";
-s_city_e = "Mordor'a";
-s_city_i = "Mordor'u";
-s_city_de = "Mordor'da";
-s_city_den = "Mordor'dan";
 
-s_year_ago = "yüzlerce";
+s_town = "Edincik Köyü";
 
-s_race2 = "Orclar";
-s_race3 = "Elfler";
+s_race2 = "orc";
+s_race3 = "elf";
 
 s_human_king = "Gaylord";
-s_human_king_e = "Gaylord'a";
-s_human_king_i = "Gaylord'u";
-s_human_king_de = "Gaylord'da";
-s_human_king_den = "Gaylord'dan";
 
-s_race3_mountain = "Ağrı";
+s_race3_mountain = "Ağrı Dağı";
 
 
 

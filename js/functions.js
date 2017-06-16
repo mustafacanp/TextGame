@@ -32,7 +32,7 @@ function disableRightClick(){ //Disable Right Click
     });
 }
 function scrollBottom(){
-    $('#container').animate({scrollTop: $('#container')[0].scrollHeight}, 300);
+    $('#container').animate({scrollTop: $('#container')[0].scrollHeight}, 100);
 }
 function focusInput(){ // Sayfada herhangi bir yere tıklansa da inputa focuslanması
     $("#input").focus();
@@ -73,24 +73,27 @@ function cout(_output, _class, path){
         $("#container").append('<div class="line"><div class="text writing '+_class+'">'+path+'>'+_output+'</div></div>');
     }
     
-    $('#container .text.writing').t({
-        speed: t_speed,
-        caret: false
-    });
     
-    var character_counter = 0;
-    $(".t-container").on('DOMSubtreeModified', function () { // t function sonrası scrollBottom
-        is_writing = true;
-        character_counter++;
-        if(character_counter % t_speed == 0){ // t_speed = 25 olduğundan 25 karakterde bir scrollBottom() çağırır
-            scrollBottom();
-        }
-    });
+    if(action_type != "fight"){
+        $('#container .text.writing').t({
+            speed: t_speed,
+            caret: false
+        });
+        var character_counter = 0;
+        $(".t-container").on('DOMSubtreeModified', function () { // t function sonrası scrollBottom
+            is_writing = true;
+            character_counter++;
+            if(character_counter % t_speed == 0){ // t_speed = 25 olduğundan 25 karakterde bir scrollBottom() çağırır
+                scrollBottom();
+            }
+        });
 
-    setTimeout(function(){
-        is_writing = false;
-    }, (_output.length * t_speed) + 100);
-
+        setTimeout(function(){
+            is_writing = false;
+        }, (_output.length * t_speed) + 100);
+    } else {
+        scrollBottom();
+    }
 
 }
 function removeInputLine(){ // Tüm girdi satırlarını siler.

@@ -32,42 +32,42 @@ function hideAllMenus(){
 
 /* Fight Screen UI */
 function fightUI(mainCharacter, enemy){
-    $("#ch-health").width(Math.round(mainCharacter.health/mainCharacter.max_health*100)+"%");
-    $("#ch-health").html("Health:"+mainCharacter.health);
-    $("#ch-skill1").html("[1]."+mainCharacter.skills[0].name+isSkillAvailable(mainCharacter, 0));
-    $("#ch-skill2").html("[2]."+mainCharacter.skills[1].name+isSkillAvailable(mainCharacter, 1));
-    $("#ch-skill3").html("[3]."+mainCharacter.skills[2].name+isSkillAvailable(mainCharacter, 2));
-    $("#ch-skill4").html("[4]."+mainCharacter.skills[3].name+isSkillAvailable(mainCharacter, 3));
+    $("#ch-health").width(Math.round(mainCharacter.getHealth()/mainCharacter.getMaxHealth()*100)+"%");
+    $("#ch-health").html("Health:"+mainCharacter.getHealth());
+    $("#ch-skill1").html("[1]."+mainCharacter.getSkill(0).name+isSkillAvailable(mainCharacter, 0));
+    $("#ch-skill2").html("[2]."+mainCharacter.getSkill(1).name+isSkillAvailable(mainCharacter, 1));
+    $("#ch-skill3").html("[3]."+mainCharacter.getSkill(2).name+isSkillAvailable(mainCharacter, 2));
+    $("#ch-skill4").html("[4]."+mainCharacter.getSkill(3).name+isSkillAvailable(mainCharacter, 3));
     
-    $("#ch-mana").html("Mana:"+mainCharacter.mana);
-    $("#ch-mana").width(Math.round(mainCharacter.mana/mainCharacter.max_mana*100)+"%");
-    $("#ch-skill1-mana-cost").html("+"+mainCharacter.skills[0].mana_regen+" Mana");
-    $("#ch-skill2-mana-cost").html("-"+mainCharacter.skills[1].mana_cost+" Mana");
-    $("#ch-skill3-mana-cost").html("-"+mainCharacter.skills[2].mana_cost+" Mana");
-    $("#ch-skill4-mana-cost").html("-"+mainCharacter.skills[3].mana_cost+" Mana");
+    $("#ch-mana").html("Mana:"+mainCharacter.getMana());
+    $("#ch-mana").width(Math.round(mainCharacter.getMana()/mainCharacter.getMaxMana()*100)+"%");
+    $("#ch-skill1-mana-cost").html("+"+mainCharacter.getSkill(0).mana_regen+" Mana");
+    $("#ch-skill2-mana-cost").html("-"+mainCharacter.getSkill(1).mana_cost+" Mana");
+    $("#ch-skill3-mana-cost").html("-"+mainCharacter.getSkill(2).mana_cost+" Mana");
+    $("#ch-skill4-mana-cost").html("-"+mainCharacter.getSkill(3).mana_cost+" Mana");
 
     
-    $("#en-health").width(Math.round(enemy.health/enemy.max_health*100)+"%");
-    $("#en-health").html("Health:"+enemy.health);
-    $("#en-skill1").html("[1]."+enemy.skills[0].name+isSkillAvailable(enemy, 0));
-    $("#en-skill2").html("[2]."+enemy.skills[1].name+isSkillAvailable(enemy, 1));
-    $("#en-skill3").html("[3]."+enemy.skills[2].name+isSkillAvailable(enemy, 2));
-    $("#en-skill4").html("[4]."+enemy.skills[3].name+isSkillAvailable(enemy, 3));
+    $("#en-health").width(Math.round(enemy.getHealth()/enemy.getMaxHealth()*100)+"%");
+    $("#en-health").html("Health:"+enemy.getHealth());
+    $("#en-skill1").html("[1]."+enemy.getSkill(0).name+isSkillAvailable(enemy, 0));
+    $("#en-skill2").html("[2]."+enemy.getSkill(1).name+isSkillAvailable(enemy, 1));
+    $("#en-skill3").html("[3]."+enemy.getSkill(2).name+isSkillAvailable(enemy, 2));
+    $("#en-skill4").html("[4]."+enemy.getSkill(3).name+isSkillAvailable(enemy, 3));
 
-    $("#en-mana").html("Mana:"+enemy.mana);
-    $("#en-mana").width(Math.round(enemy.mana/enemy.max_mana*100)+"%");
-    $("#en-skill1-mana-cost").html("+"+enemy.skills[0].mana_regen+" Mana");
-    $("#en-skill2-mana-cost").html("-"+enemy.skills[1].mana_cost+" Mana");
-    $("#en-skill3-mana-cost").html("-"+enemy.skills[2].mana_cost+" Mana");
-    $("#en-skill4-mana-cost").html("-"+enemy.skills[3].mana_cost+" Mana");
+    $("#en-mana").html("Mana:"+enemy.getMana());
+    $("#en-mana").width(Math.round(enemy.getMana()/enemy.getMaxMana()*100)+"%");
+    $("#en-skill1-mana-cost").html("+"+enemy.getSkill(0).mana_regen+" Mana");
+    $("#en-skill2-mana-cost").html("-"+enemy.getSkill(1).mana_cost+" Mana");
+    $("#en-skill3-mana-cost").html("-"+enemy.getSkill(2).mana_cost+" Mana");
+    $("#en-skill4-mana-cost").html("-"+enemy.getSkill(3).mana_cost+" Mana");
 }
 
 /* Skills Screen UI */
 function skillsUI(character){
     for(var i = 1; i <=4; i++){
-        var skill = character.skills[i-1];
+        var skill = mainCharacter.getSkill(i-1);
         var skill_type_string = (skill.type == "atk") ? "Attack" : "Magic";
-        var skill_type_stat = (skill.type == "atk") ? character.strength : character.intelligence;
+        var skill_type_stat = (skill.type == "atk") ? mainCharacter.getStrength() : mainCharacter.getIntelligence();
         var mana_cost = (skill.mana_cost != 0) ? skill.mana_cost+" Mana" : "None";
         var cooldown = (skill.cooldown != 0) ? skill.cooldown+ " Turns" : "None";
         var skill_type_string_lower = skill_type_string.charAt(0).toLowerCase()+skill_type_string.slice(1);
@@ -92,14 +92,14 @@ function skillsUI(character){
     <div class="critical_damage">200%</div>
 */
 function characterUI(character){
-    $("#character-menu .name").text(character.name);
-    $("#character-menu .health-bar").text(character.health);
-    $("#character-menu .mana-bar").text(character.mana);
-    $("#character-menu .strength").text("Strength: "+character.strength);
-    $("#character-menu .intelligence").text("Intelligence: "+character.intelligence);
-    $("#character-menu .defense").text("Defense: "+character.defense);
-    $("#character-menu .magic_resistance").text("Magic Resistance: "+character.magic_resistance);
-    $("#character-menu .evade").text("Evade Rate: "+character.evade);
-    $("#character-menu .critical_rate").text("Critical Rate: "+character.critical_rate);
-    $("#character-menu .critical_damage").text("Critical Damage: "+character.critical_damage);
+    $("#character-menu .name").text(character.getName());
+    $("#character-menu .health-bar").text(character.getHealth());
+    $("#character-menu .mana-bar").text(character.getMana());
+    $("#character-menu .strength").text("Strength: "+character.getStrength());
+    $("#character-menu .intelligence").text("Intelligence: "+character.getIntelligence());
+    $("#character-menu .defense").text("Defense: "+character.getDefense());
+    $("#character-menu .magic_resistance").text("Magic Resistance: "+character.getMagic_resistance());
+    $("#character-menu .evade").text("Evade Rate: "+character.getEvade());
+    $("#character-menu .critical_rate").text("Critical Rate: "+character.getCritical_rate());
+    $("#character-menu .critical_damage").text("Critical Damage: "+character.getCritical_damage());
 }

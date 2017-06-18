@@ -1,11 +1,12 @@
 
 var storySequence = ["starting_story", "first_story", "first_story_2","second_story","third_story","forth_story","fifth_story","sixth_story","seventh_story",
 "eighth_story","nineth_story"];
-var dialogueSequence = ["name_dialogue","nick_dialogue", "do_you_wanna_fight", "do_you_like_girls", "do_you_like_girls"];
-//var dialogueSequence = ["do_you_wanna_fight","nick_dialogue", "do_you_wanna_fight", "do_you_like_girls", "do_you_like_girls"];
+//var dialogueSequence = ["name_dialogue","nick_dialogue", "do_you_wanna_fight", "do_you_like_girls", "do_you_like_girls"];
+var dialogueSequence = ["do_you_wanna_fight","do_you_wanna_fight", "do_you_wanna_fight", "do_you_like_girls", "do_you_like_girls"];
 
 
 
+/*
 var processSequence = [ // İşlem Sırası
     {id:1, type:"story"},
     {id:2, type:"dialogue"},
@@ -22,7 +23,7 @@ var processSequence = [ // İşlem Sırası
     {id:12, type:"story"},
     {id:13, type:"dialogue"},
 ];
-/*
+*/
 var processSequence = [ // İşlem Sırası
     {id:1, type:"dialogue"},
     {id:2, type:"dialogue"},
@@ -34,7 +35,6 @@ var processSequence = [ // İşlem Sırası
     {id:8, type:"story"},
     {id:8, type:"story"},
 ];
-*/
 function action() {
     //console.log(action_type);
     if (action_type == "dialogue_question"){action_type = "dialogue_answer";} // action_type == "dialogue_question" ise cevaplama kısmına geç.
@@ -60,7 +60,7 @@ function action() {
         }
         fightUI(mainCharacter, enemy);
     } else {
-        is_menu_available = true;
+        //is_menu_available = true;
         $("#fight").hide();
     }
     if (action_type == "prepare_fight"){action_type = "fight";}
@@ -73,17 +73,51 @@ function action() {
 
 
 
-
-
-
-
-
-
-
-
 function selectCharacter(){
-    mainCharacter = Characters.saruman;
+    const saruman = new Saruman();
+    const gandalf = new Gandalf();
+    mainCharacter = new Character(saruman);
+
+    //console.log(mainCharacter);
+    mainCharacter.setName("Main")
+    console.log(mainCharacter.getName());
+    
+    //console.log(mainCharacter.getSkills()[0]);
+
+    //console.log(mainCharacter.getSkills()[0].description);
+    //mainCharacter = Characters.saruman;
+    //console.log(mainCharacter._character);
 }
+
+
+function loadEnemy(gandalf){
+    enemy = new Character(gandalf);
+    /*
+    console.log("---");
+    console.log("Main Character's HP : " + mainCharacter.getHealth());
+    console.log("Enemy's HP : " + enemy.getHealth());
+    console.log("---");
+    */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 var current_max_exp = 100;
 function reqExptoLvlUp(lvl){
@@ -109,7 +143,7 @@ function reqExptoLvlUp2(lvl){
 }
 
 
-
+/*
 console.log(reqExptoLvlUp2(2));
 console.log(reqExptoLvlUp2(3));
 console.log(reqExptoLvlUp2(4));
@@ -123,3 +157,4 @@ console.log("15: " + reqExptoLvlUp2(15));
 console.log("20: " + reqExptoLvlUp2(20));
 console.log("50: " + reqExptoLvlUp2(50));
 console.log("100: " + reqExptoLvlUp2(100));
+*/

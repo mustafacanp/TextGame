@@ -110,7 +110,8 @@ var dialogues = {
                 action : function (keyName){
                     isFight = true;
                     action_type = "prepare_fight";
-                    enemy = Characters.gandalf;
+                    const gandalf = new Gandalf();
+                    loadEnemy(gandalf);
                 }
             },
             {

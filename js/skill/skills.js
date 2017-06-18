@@ -9,7 +9,7 @@ Skills = {
         mana_cost: 0,
         cooldown: 0,
         buff: function(character, enemy){
-            character.mana += 5;
+            character.manaUp(5);
         },
         description: "Basic attack skill. Gives 5 Mana.",
     },
@@ -22,9 +22,8 @@ Skills = {
         cooldown: 2,
         current_cooldown: 0,
         buff: function(character, enemy){
-            if(enemy.magic_resistance > 0){
-                enemy.magic_resistance -= enemy.magic_resistance * 20/100;
-                enemy.magic_resistance = Math.round(enemy.magic_resistance);
+            if(enemy.getMagicResistance() > 0){
+                enemy.setMagicResistance(Math.round(enemy.getMagicResistance() * 1 / 5));
             }
         },
         description: "Enemy's magic resistance -%20",
@@ -41,7 +40,7 @@ Skills = {
         description: "%5 şansla canını fuller.(Can değerin %30'un altındaysa %20 ihtimalle canını fuller.)",
         heal: function(character, enemy){
             var random = getRandomInt(1,100);
-            if(character.health <= character.max_health * 3/10){
+            if(character.getHealth() <= character.getMaxHealth() * 3 / 10){
                 if(random <= 20){
                     return "max_healed";
                 } else {
@@ -65,12 +64,11 @@ Skills = {
         cooldown: 5,
         current_cooldown: 5,
         buff: function(character, enemy){
-            enemy.magic_resistance -= enemy.magic_resistance*3/10;
-            enemy.magic_resistance = Math.round(enemy.magic_resistance);
+            enemy.magicResistanceDown(Math.round(enemy.getMagicResistance() * 3 / 10));
         },
         description: "Canını %15 doldurur ve rakibin büyü direncini %30 azaltır.",
         heal: function(character, enemy){
-            return Math.floor(character.max_health*15/100);
+            return Math.floor(character.getMaxHealth()*15/100);
         }
     },
 
@@ -83,7 +81,7 @@ Skills = {
         mana_cost: 0,
         cooldown: 0,
         buff: function(character, enemy){
-            character.mana += 7;
+            character.manaUp(7);
         },
         description: "Basic attack skill. Gives 7 Mana.",
     },
@@ -96,8 +94,7 @@ Skills = {
         cooldown: 2,
         current_cooldown: 0,
         buff: function(character, enemy){
-            enemy.magic_resistance -= enemy.magic_resistance/15;
-            enemy.magic_resistance = Math.round(enemy.magic_resistance);
+            enemy.magicResistanceDown(Math.round( enemy.getMagicResistance() * 1 / 15));
         },
         description: "Enemy's magic resistance -%15",
     },
@@ -112,9 +109,9 @@ Skills = {
         buff: function(character, enemy){
             var random = getRandomInt(1,100);
             if(random <= 50){
-                character.mana += 20;
+                character.manaUp(20);
             }
-            character.temporary.critical_rate = 30;
+            character.getTemporary().critical_rate = 30;
         },
         description: "%50 şansla Mana tüketmez ve %30 şansla crit vurur.",
     },
@@ -128,10 +125,10 @@ Skills = {
         current_cooldown: 5,
         description: "Damage + rakibin o anki can değerinin %15'i vurur. Kendi can değerine max can değerinin %10'u heal yapar.",
         extraDamage: function(character, enemy){
-            return Math.floor(enemy.health*15/100);
+            return Math.floor(enemy.getHealth() * 15 / 100);
         },
         heal: function(character, enemy){
-            return Math.floor(character.max_health*1/10);
+            return Math.floor(character.getMaxHealth() * 1 / 10);
         }
     },
 
@@ -144,7 +141,7 @@ Skills = {
         mana_cost: 0,
         cooldown: 0,
         buff: function(character, enemy){
-            character.mana += 4;
+            character.manaUp(4);
         },
         description: "Basic attack skill. Gives 4 Mana.",
     },
@@ -157,10 +154,10 @@ Skills = {
         cooldown: 2,
         current_cooldown: 0,
         buff: function(character, enemy){
-            if(character.evade < 20){
-                character.evade += 1;
+            if(character.getEvade() < 20){
+                character.evadeUp(1);
             }
-            //console.log(character.evade);
+            //console.log(character.getEvade());
         },
         description: "Increases Evade %1. (Max %20)",
     },
@@ -173,8 +170,7 @@ Skills = {
         cooldown: 3,
         current_cooldown: 0,
         buff: function(character, enemy){
-            enemy.defense -= enemy.defense/10;
-            enemy.defense = Math.round(enemy.defense);
+            enemy.defenseDown(Math.round(enemy.getDefense() / 10));
         },
         description: "Rakibin defansını %10 azaltır.",
     },
@@ -187,14 +183,14 @@ Skills = {
         cooldown: 5,
         current_cooldown: 5,
         buff: function(character, enemy){
-            enemy.mana -= Math.floor(enemy.mana*3/10); //!
+            enemy.manaDown(Math.floor(enemy.getMana() * 3 / 10)); //!
         },
         description: "Damage + rakibin o anki can değerinin %10'u vurur, o anki mana değerinin %30'unu tüketir. Kendi can değerine o anki can değerinin %15'i heal yapar.",
         extraDamage: function(character, enemy){
-            return Math.floor(enemy.health*1/10);
+            return Math.floor(enemy.getHealth() * 1 / 10);
         },
         heal: function(character, enemy){
-            return Math.floor(character.health*15/100);
+            return Math.floor(character.getHealth() * 15/100);
         }
     }
 

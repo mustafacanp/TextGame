@@ -342,8 +342,8 @@ input#input{
         line-height: 13vh;
     }
 }
-
-@-moz-document url-prefix() { /*mozilla için*/
+/*mozilla için
+@-moz-document url-prefix() { 
     #container-out{
         background-color: #000;
         color: #AAA;
@@ -368,7 +368,7 @@ input#input{
         left: auto;
         border: 0;
         overflow-y: scroll;
-        padding-right: 17px; /* Increase/decrease this value for cross-browser compatibility */
+        padding-right: 17px;
     }
     @media(max-width: 991px){
         #container{
@@ -378,17 +378,17 @@ input#input{
             top: 0;
             left: 0;
             height: calc(60% + 20px);
-            width: calc(100% - 1px); /* Moz Hide */
+            width: calc(100% - 1px); // Moz Hide
             border: 0;
         }
     }
     @media(min-width: 991px){
         #container-out{
             height: calc(50% - 4px);
-            width: calc(50% + 20px); /* Moz Hide */
+            width: calc(50% + 20px); // Moz Hide
         }
     }
     #container{
         height: calc(100% - 25px);
     }
-}
+}*/

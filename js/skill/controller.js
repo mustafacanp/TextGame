@@ -1,5 +1,5 @@
 
-/* Damage */
+/* Calculate Damage */
 function getSkillDamage(character, enemy, skill_id, is_main_character){
     actionType = "skill";
     var skill, damage, skill_type_stat, def_type_stat, crit_luck, evade_luck, damage_multipler, is_crit, is_evade, is_heal;
@@ -104,7 +104,7 @@ function getSkillDamage(character, enemy, skill_id, is_main_character){
 
     
 
-    /* COUT */
+    /* Cout */
     if(is_crit){
         if(is_main_character){
             cout("You used "+skill.name+". Hit "+damage+". Critical Hit!","green");
@@ -160,10 +160,12 @@ function getSkillDamage(character, enemy, skill_id, is_main_character){
 
     return damage;
 }
-/* Damage */
 
 
 
+
+
+/* UseSkill (Controls Health, Mana and Cooldown) */
 function useSkill(skill, mainCharacter, enemy){
     var dmg = getSkillDamage(mainCharacter, enemy, skill, 1); // Skill kullandık.
     if (dmg == "cooldown"){
@@ -220,19 +222,21 @@ function useSkill(skill, mainCharacter, enemy){
 
 
 
+
+
 /* Cooldown & Mana Control */
 function isSkillAvailable(character, skillID){
     if(skillID == 0){
         return "<br /><span class='small green'>Ready!</span>";
     } else {
-        if(character.getSkill(skillID).current_cooldown == 0){
-            if(character.getSkill(skillID).mana_cost > character.getMana()){
+        if(character.getSkill(skillID).getCurrentCooldown() == 0){
+            if(character.getSkill(skillID).getManaCost() > character.getMana()){
                 return "<br /><span class='small blue'>Not Enough Mana</span>";
             } else {
                 return "<br /><span class='small green'>Ready!</span>";
             }
         } else {
-            return "<br /><span class='small purple'>Cooldown: "+character.getSkill(skillID).current_cooldown+"</span>";
+            return "<br /><span class='small purple'>Cooldown: "+character.getSkill(skillID).getCurrentCooldown()+"</span>";
         }
     }
 }

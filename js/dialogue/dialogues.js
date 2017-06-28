@@ -98,14 +98,14 @@ var dialogues = {
         id : 4,
         keyName : "do_you_wanna_fight",
         type : "number",
-        question : "Do you wanna fight?",
+        question : "Savaşmak istiyor musun?",
         answers : 
             [{
                 id : 1,
-                inputText : "Yes.",
+                inputText : "Evet.",
                 saveAnswer : function (keyName){
                     dialogueAnswers[keyName] = this.inputText;
-                    return "Prepare to fight!";
+                    return "Savaşa hazırlan!";
                 },
                 action : function (keyName){
                     isFight = true;
@@ -116,10 +116,10 @@ var dialogues = {
             },
             {
                 id : 2,
-                inputText : "No.",
+                inputText : "Hayır.",
                 saveAnswer : function (keyName){
                     dialogueAnswers[keyName] = this.inputText;
-                    return "Okey then, go on...";
+                    return "Tamam, devam edebilirsin...";
                 },
                 action : function (keyName){
                     

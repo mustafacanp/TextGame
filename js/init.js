@@ -92,7 +92,7 @@ var start = function () {
     return {
         init: function () { // Sayfa yüklenince (initialize olunca)
             keyPress(); // Enter kontrolünü ekledi.
-            setInterval(drawMatrix, 35);
+            //setInterval(drawMatrix, 35);
         }
     };
 }();

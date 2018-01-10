@@ -155,7 +155,7 @@ function ek(metin, ekler){
         }
         if (metin.match(/[aıou].$|[aıou][bcçdfgğhjklmnprsştvwxyz']|[aıou][bcçdfgğhjklmnprsştvwxyz][bcçdfgğhjklmnprsştvwxyz']|[aıou][bcçdfgğhjklmnprsştvwxyz][bcçdfgğhjklmnprsştvwxyz][bcçdfgğhjklmnprsştvwxyz'].$/i)) {
             metin += "a";
-        } else if (metin.match(/[eiöü].$|[eiöü][bcçdfgğhjklmnprsştvwxyz']|[eiöü][bcçdfgğhjklmnprsştvwxyz][bcçdfgğhjklmnprsştvwxyz']|[eiöü][bcçdfgğhjklmnprsştvwxyz][bcçdfgğhjklmnprsştvwxyz][bcçdfgğhjklmnprsştvwxyz'].$/i)) {
+        } if (metin.match(/[eiöü].$|[eiöü][bcçdfgğhjklmnprsştvwxyz']|[eiöü][bcçdfgğhjklmnprsştvwxyz][bcçdfgğhjklmnprsştvwxyz']|[eiöü][bcçdfgğhjklmnprsştvwxyz][bcçdfgğhjklmnprsştvwxyz][bcçdfgğhjklmnprsştvwxyz'].$/i)) {
             metin += "e";
         }
 

@@ -1,10 +1,6 @@
 
-//class Gandalf extends Character {
 class Gandalf {
-
     constructor() {
-        //super();
-        
         this._id = 1;
         this._name = "Gandalf",
         this._max_health = 250,
@@ -28,10 +24,11 @@ class Gandalf {
             critical_rate: 0,
             critical_damage: 0,
         }
-        this._skill1 = new Skill(Skills.gandalf1);
-        this._skill2 = new Skill(Skills.gandalf2);
-        this._skill3 = new Skill(Skills.gandalf3);
-        this._skill4 = new Skill(Skills.gandalf4);
-    }    
-    
+        this._skills = [
+            skill1 = Skills.gandalf1,
+            skill2 = Skills.gandalf2,
+            skill3 = Skills.gandalf3,
+            skill4 = Skills.gandalf4
+        ];
+    }
 }

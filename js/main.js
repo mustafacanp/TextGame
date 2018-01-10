@@ -1,14 +1,13 @@
 
 var storySequence = ["starting_story", "first_story", "first_story_2","second_story","third_story","forth_story","fifth_story","sixth_story","seventh_story",
 "eighth_story","nineth_story"];
-var dialogueSequence = ["name_dialogue","nick_dialogue", "do_you_wanna_fight", "do_you_like_girls", "do_you_like_girls"];
-//var dialogueSequence = ["do_you_wanna_fight","do_you_wanna_fight", "do_you_wanna_fight", "do_you_like_girls", "do_you_like_girls"];
+//var dialogueSequence = ["name_dialogue","nick_dialogue", "do_you_wanna_fight", "do_you_like_girls", "do_you_like_girls"];
+var dialogueSequence = ["do_you_wanna_fight","do_you_wanna_fight", "do_you_wanna_fight", "do_you_like_girls", "do_you_like_girls"];
 
 
-var dialogueSequence = ["do_you_wanna_fight","name_dialogue","nick_dialogue", "do_you_wanna_fight", "do_you_like_girls", "do_you_like_girls"];
 
+/*
 var processSequence = [ // İşlem Sırası
-    {id:0, type:"dialogue"},
     {id:1, type:"story"},
     {id:2, type:"dialogue"},
     {id:3, type:"dialogue"},
@@ -24,7 +23,7 @@ var processSequence = [ // İşlem Sırası
     {id:12, type:"story"},
     {id:13, type:"dialogue"},
 ];
-/*
+*/
 var processSequence = [ // İşlem Sırası
     {id:1, type:"dialogue"},
     {id:2, type:"dialogue"},
@@ -36,9 +35,6 @@ var processSequence = [ // İşlem Sırası
     {id:8, type:"story"},
     {id:8, type:"story"},
 ];
-*/
-
-
 function action() {
     //console.log(action_type);
     if (action_type == "dialogue_question"){action_type = "dialogue_answer";} // action_type == "dialogue_question" ise cevaplama kısmına geç.
@@ -78,13 +74,13 @@ function action() {
 
 
 function selectCharacter(){
-    let saruman = new Saruman();
-    let gandalf = new Gandalf();
-    mainCharacter = new Character(gandalf);
+    const saruman = new Saruman();
+    const gandalf = new Gandalf();
+    mainCharacter = new Character(saruman);
 
     //console.log(mainCharacter);
-    //mainCharacter.setName("Main")
-    //console.log(mainCharacter.getName());
+    mainCharacter.setName("Main")
+    console.log(mainCharacter.getName());
     
     //console.log(mainCharacter.getSkills()[0]);
 
@@ -94,8 +90,8 @@ function selectCharacter(){
 }
 
 
-function loadEnemy(mob){
-    enemy = new Character(mob);
+function loadEnemy(gandalf){
+    enemy = new Character(gandalf);
     /*
     console.log("---");
     console.log("Main Character's HP : " + mainCharacter.getHealth());

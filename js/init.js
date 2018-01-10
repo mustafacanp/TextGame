@@ -103,15 +103,14 @@ jQuery(document).ready(function () {
     refreshInputLine(); // #input'un değerini sıfırlar, input'u cursor'a bağlar(input'da değişen değeri cursor'a yazar)
     focusInput(); // Sayfada herhangi bir yere basınca input alanına focus olur.
     start.init(); // keyPress && drawMatrix
-    
+    /*
     intro();
     setTimeout(function(){
         $("#container").html(""); // Animasyon temizlendi.
         cin(); // Girdi satırı oluşturdu.
         is_animating = false;
-        initDialogue(); // TODO: Bu satrı kaldır, alt satırı çalıştır.
-        //initStory();
-    }, 6300);
-    
+        initStory();
+    },6300);
+    */
     selectCharacter();
 });

@@ -4,12 +4,13 @@
 
         <title>TextGame</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
 
         <link rel="stylesheet" href="css/style.css"></link>
     </head>
     <body>
 
-    
+
         <canvas id="matrix"></canvas>
 
         <div id="main-menu">
@@ -32,7 +33,55 @@
         </div>
         <div id="statistics-button">Statistics</div>
         <div id="container-out"><div id="container"></div></div>
+
+        <div id="container-info" style="display:none">
+          <div class="bar"></div>
+          <div id="character-exp">
+            <div class="info">1 LVL <small>0/100</small></div>
+          </div>
+          <div id="character-gold">
+            <div class="info">0 Gold</div>
+          </div>
+        </div>
+
         <div id="container2">
+            <div id="main-screen">
+
+                <div class="places"></div>
+
+                <div class="statics">
+                  Hello stranger i am terminal. I am here to help you to save your kingdom. Please try to listen my advices...
+                </div>
+
+                <div class="menu-items">
+                  <div class="menu-item">[R] <span class="name">Rest</span></p></div>
+                  <div class="menu-item">[C] <span class="name">Character</span></p></div>
+                  <div class="menu-item">[K] <span class="name">Skills</span></p></div>
+                  <div class="menu-item">[M] <span class="name">Map</span></p></div>
+                  <div class="menu-item">[S] <span class="name">Save</span></p></div>
+                </div>
+
+
+            </div>
+
+            <div id="character-menu">
+                <div class="option character-name"><div class="name">Character Name:</div><span class="value"></span></div>
+                <div class="option health-bar"><div class="name">HP:</div><span class="value"></span></div>
+                <div class="option mana-bar"><div class="name">MP:</div><span class="value"></span></div>
+                <div class="option strength"><div class="name">Strength:</div><span class="value"></span></div>
+                <div class="option intelligence"><div class="name">Intelligence:</div><span class="value"></span></div>
+                <div class="option defense"><div class="name">Defense:</div><span class="value"></span></div>
+                <div class="option magic_resistance"><div class="name">Magic Resistance:</div><span class="value"></span></div>
+                <div class="option evade"><div class="name">Evade Rate:</div><span class="value"></span></div>
+                <div class="option critical_rate"><div class="name">Critical Rate:</div><span class="value"></span></div>
+                <div class="option critical_damage"><div class="name">Critical Damage:</div><span class="value"></span></div>
+
+
+                <div class="level"></div>
+                <div class="exp-bar"></div>
+                <div class="gold"></div>
+            </div>
+
             <div id="skills-menu">
                 <div class="skill skill1">
                     <div class="name"><span class="attack"></span></div>
@@ -63,23 +112,15 @@
                     <div class="cooldown"></div>
                 </div>
             </div>
-            <div id="character-menu">
-                <div class="name">Gandalf</div>
-                <div class="health-bar">100%</div>
-                <div class="mana-bar">100%</div>
-                <div class="strength">10</div>
-                <div class="intelligence">10</div>
-                <div class="defense">10</div>
-                <div class="magic_resistance">10</div>
-                <div class="evade">3%</div>
-                <div class="critical_rate">15%</div>
-                <div class="critical_damage">200%</div>
 
-                
-                <div class="level"></div>
-                <div class="exp-bar"></div>
-                <div class="gold"></div>
+            <div id="inventory-menu">
+
             </div>
+
+            <div id="map-menu">
+              map..
+            </div>
+
             <div id="fight">
                 <div id="character">
                     <div class="attr" id="ch-health-bar"><div id="ch-health"></div></div><div class="attr" id="ch-mana-bar"><div id="ch-mana"></div></div>
@@ -96,13 +137,14 @@
                     <div class="attr" id="en-skill4"></div><div class="attr blue" id="en-skill4-mana-cost"></div>
                 </div>
             </div>
+
         </div>
 
     </body>
 
     <script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>
     <script src="plugins/t.min.js" type="text/javascript"></script>
-    <script src="plugins/tradds.1.0.min.js" type="text/javascript"></script>
+    <script src="plugins/tradds.1.0.js" type="text/javascript"></script>
     <script src="js/options.js" type="text/javascript"></script>
     <script src="js/constants.js" type="text/javascript"></script>
     <script src="js/functions.js" type="text/javascript"></script>
@@ -111,18 +153,23 @@
     <script src="js/animation/controller.js" type="text/javascript"></script>
     <script src="js/story/controller.js" type="text/javascript"></script>
     <script src="js/dialogue/controller.js" type="text/javascript"></script>
+    <script src="js/fight/controller.js" type="text/javascript"></script>
     <script src="js/skill/controller.js" type="text/javascript"></script>
+    <script src="js/character/controller.js" type="text/javascript"></script>
+    <script src="js/map/controller.js" type="text/javascript"></script>
 
     <script src="js/animation/animations.js" type="text/javascript"></script>
     <script src="js/story/stories.js" type="text/javascript"></script>
     <script src="js/dialogue/dialogues.js" type="text/javascript"></script>
     <script src="js/skill/skills.js" type="text/javascript"></script>
+    <script src="js/inventory/inventory.js" type="text/javascript"></script>
 
+    <script src="js/mob/controller.js" type="text/javascript"></script>
+    <script src="js/mob/load-mobs.js" type="text/javascript"></script>
 
-    <script src="js/character/character.js" type="text/javascript"></script>
     <script src="js/character/load-characters.js" type="text/javascript"></script>
+
     <script src="js/main-menu.js" type="text/javascript"></script>
     <script src="js/main.js" type="text/javascript"></script>
     <script src="js/init.js" type="text/javascript"></script>
-    <script>document.write(FindAndReplaceAll("Ä± Å? Ã¶"));</script>
 </html>

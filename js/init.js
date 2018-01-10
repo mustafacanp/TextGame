@@ -2,14 +2,14 @@
 var start = function () {
     var keyPress = function(){ // Enter'a basınca newLine() fonksiyonu ile yeni satıra geç.
         $(document).on("keyup",function(e) {
+            //console.log(is_menu_available);
             if(!is_writing && !is_animating){
                 if(e.keyCode == 27 && is_menu_available){
                     if(is_menu_active){
                         refreshInputLine();
                         $("#main-menu").hide();
                         is_menu_active = false;
-                        is_screen_loaded = false;
-                    } else if(!is_menu_active || is_screen_loaded) {
+                    } else if(!is_menu_active) {
                         refreshInputLine();
                         $("#main-menu").show();
                         is_menu_active = true;
@@ -20,7 +20,7 @@ var start = function () {
         });
         $(document).on("keypress",function(e) {
             if(!is_writing && !is_animating){
-                if(!is_menu_active && !is_screen_loaded){
+                if(!is_menu_active){
                     if(e.which == 13) { // Enter basıldı ise...
                         action(); // Sonraki aksiyonu yap.
                         refreshInputLine(); // input'u temizle.
@@ -59,7 +59,7 @@ var start = function () {
             }
         });
     }
-    
+
     /* Matrix */
     var canvas = document.getElementById("matrix");
     var ctx = canvas.getContext("2d");
@@ -88,10 +88,11 @@ var start = function () {
             drops[i]++;
         }
     }
+
     return {
         init: function () { // Sayfa yüklenince (initialize olunca)
             keyPress(); // Enter kontrolünü ekledi.
-            //setInterval(drawMatrix, 35);
+            setInterval(drawMatrix, 35);
         }
     };
 }();
@@ -103,14 +104,18 @@ jQuery(document).ready(function () {
     refreshInputLine(); // #input'un değerini sıfırlar, input'u cursor'a bağlar(input'da değişen değeri cursor'a yazar)
     focusInput(); // Sayfada herhangi bir yere basınca input alanına focus olur.
     start.init(); // keyPress && drawMatrix
-    /*
+
+    initDialogue(); // TODO: Bu satrı kaldır, alt satırları çalıştır.
+/*
     intro();
     setTimeout(function(){
         $("#container").html(""); // Animasyon temizlendi.
         cin(); // Girdi satırı oluşturdu.
         is_animating = false;
         initStory();
-    },6300);
-    */
-    selectCharacter();
+    }, 6300);
+*/
+    let gandalf = new Saruman();
+    selectCharacter(gandalf);
+    mainScreenUI();
 });

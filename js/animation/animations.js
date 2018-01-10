@@ -25,10 +25,10 @@ function intro(){
     $("#container span:eq(1)").attr('id', 'bird2');
     $("#bird1, #bird2").css('position','absolute');
     for(var i = 1; i < 22; i++){
-        fly(i);
+        introBirdsFly(i);
     }
 }
-function fly(i){
+function introBirdsFly(i){
     var space = "&nbsp;&nbsp;".repeat(i);
     if(i%2 == 0){
         var bird1 = "/`\\";

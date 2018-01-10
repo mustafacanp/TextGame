@@ -1,7 +1,7 @@
 
 function initDialogue(){
     if(dialogueCount < dialogueSequence.length){
-        createDialogue(dialogueSequence[dialogueCount]); // if(dialogueCount == 1){createDialogue("do_you_like_girls");}
+        createDialogue(dialogueSequence[dialogueCount]); // if(dialogueCount == 1){createDialogue("name_dialogue");}
     }
 }
 function createDialogue(dialogueName){
@@ -34,7 +34,7 @@ function answerQuestion(question, input){
         cout(" "); // Doğru cevap sonrası boş satır atlat.
         finished_action++;
         action_type = 0;
-         
+
         //////////////////////
         if(dialogues[question].type == "number"){
             if(dialogues[question].answers && dialogues[question].answers[input-1].action){

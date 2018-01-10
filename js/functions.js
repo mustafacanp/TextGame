@@ -3,14 +3,14 @@ function FindAndReplaceAll(text){
   var normal = new Array("Ä±","Å?","Ã¼","Ã§","Ã¶","Ä?","ÅŸ","Ã‡","Ä°","ÄŸ","Åž","Ã–","Ãœ","Ä±","Å?","Ã§","Ã¶","Ä?","ÅŸ","Ã‡","Ä°","ÄŸ","Åž","Ã–","Ãœ","Ã¼","ÄŸ");
   var turkish = new Array("ı","ş","ü","ç","ö","ğ","ş","Ç","i","ğ","Ş","Ö","Ü","ı", "ş", "ç", "ö", "ğ", "ş", "Ç", "i", "ğ", "Ş", "Ö", "Ü", "ü", "ğ");
 
-  for (var i = 0; i < text.length; i+=2) 
+  for (var i = 0; i < text.length; i+=2)
   {
     for(var j = 0; j < 27;j++)
         {
             if((text.charAt(i)+text.charAt(i+1)) == normal[j])
             {
 
-               text= text.replace((text.charAt(i)+text.charAt(i+1)), turkish[j]);    
+               text= text.replace((text.charAt(i)+text.charAt(i+1)), turkish[j]);
             }
 
         }
@@ -47,7 +47,7 @@ function hideInputCursor(){ // İmleç
         if ($('#cursor').css('visibility') === 'visible') {
             $('#cursor').css({ visibility: 'hidden' });
         } else {
-            $('#cursor').css({ visibility: 'visible' });  
+            $('#cursor').css({ visibility: 'visible' });
         }
     }, 500);
     $('input').keyup(function() {
@@ -72,8 +72,8 @@ function cout(_output, _class, path){
     } else if (arguments.length === 3) {
         $("#container").append('<div class="line"><div class="text writing '+_class+'">'+path+'>'+_output+'</div></div>');
     }
-    
-    
+
+
     if(action_type != "fight"){
         $('#container .text.writing').t({
             speed: t_speed,
@@ -176,8 +176,3 @@ addSpaces(''+
 
 
 */
-
-
-
-
-

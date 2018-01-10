@@ -25,8 +25,8 @@ var dialogues = {
             " yüzlerce yıl önce üç kadim ırk birlikte yaşardı. İnsanlar, " + ek(s_race2, "ler") + " ve " + ek(s_race3, "ler") + ".";
         },
         saveAnswer : function (answer){
-            dialogueAnswers[this.keyName] = answer; // dialogueAnswers objesine diyalog key ve cevabı yazdırdık
-            options.name = answer; // options objesindeki name özelliğine gelen cevabı yazdırdık
+            dialogueAnswers[this.keyNickName] = answer; // dialogueAnswers objesine diyalog key ve cevabı yazdırdık
+            options.nickName = answer; // options objesindeki name özelliğine gelen cevabı yazdırdık
         }
     },
     do_you_like_beer :
@@ -35,7 +35,7 @@ var dialogues = {
         keyName : "do_you_like_beer",
         type : "number",
         question : "Do you like beer?",
-        answers : 
+        answers :
             [{
                 id : 1,
                 inputText : "Yes i like",
@@ -61,68 +61,35 @@ var dialogues = {
                 }
             }]
     },
-    do_you_like_girls :
-    {
-        id : 3,
-        keyName : "do_you_like_girls",
-        type : "number",
-        question : "Do you like girls?",
-        answers : 
-            [{
-                id : 1,
-                inputText : "Of course i like girls.",
-                saveAnswer : function (keyName){
-                    dialogueAnswers[keyName] = this.inputText;
-                    return "OK, nice.";
-                }
-            },
-            {
-                id : 2,
-                inputText : "I am a girl...",
-                saveAnswer : function (keyName){
-                    dialogueAnswers[keyName] = this.inputText;
-                    return "OK lady, calm down.. Sorry about for calling you 'man'.";
-                }
-            },
-            {
-                id : 3,
-                inputText : "Girls? I am Gay.",
-                saveAnswer : function (keyName){
-                    dialogueAnswers[keyName] = this.inputText;
-                    return "From now on your name is Gaylord";
-                }
-            }]
-    },
     do_you_wanna_fight :
     {
         id : 4,
         keyName : "do_you_wanna_fight",
         type : "number",
         question : "Do you wanna fight?",
-        answers : 
+        answers :
             [{
                 id : 1,
-                inputText : "Yes.",
+                inputText : "Yes",
                 saveAnswer : function (keyName){
                     dialogueAnswers[keyName] = this.inputText;
-                    return "Prepare to fight!";
+                    return "Be ready for fight!";
                 },
                 action : function (keyName){
-                    isFight = true;
-                    action_type = "prepare_fight";
-                    const gandalf = new Gandalf();
-                    loadEnemy(gandalf);
+                    $("#container-info").css("display","block"); // TODO: #container-info göster
+                    const goblin = new Goblin();
+                    startFight(goblin, 1);
                 }
             },
             {
                 id : 2,
-                inputText : "No.",
+                inputText : "No",
                 saveAnswer : function (keyName){
                     dialogueAnswers[keyName] = this.inputText;
-                    return "Okey then, go on...";
+                    return "Tamam, devam edebilirsin...";
                 },
                 action : function (keyName){
-                    
+
                 }
             }]
     },

@@ -1,33 +1,21 @@
-@font-face {
+@font-face{
     font-family: Consolas;
     src: url('../fonts/Consolas.ttf');
 }
 
-*{
-    font-family: Consolas;
-    font-size: 16px;
-    cursor: pointer;
-}
-font{
-    font-size: .8em !important;
-}
-pre{
-    line-height: .7em !important;
-}
-body{
-    background-color: #000;
-    margin: 0;
-    overflow: hidden;
-}
+*{font-family:Consolas;font-size:16px;}
+body{cursor:pointer;-ms-overflow-style:none;}
+font{font-size:.8em !important;}
+pre{line-height:.7em !important;}
+body{background-color:#000;margin:0;overflow:hidden;}
+del{text-decoration:none;}
+p{margin:0;}
 
-::-webkit-scrollbar {display: none;}
-::-webkit-scrollbar-button {display: none;}
-::-moz-scrollbar {display: none;}
-::-moz-scrollbar-button {display: none;}
+::-webkit-scrollbar{display: none;}
+::-webkit-scrollbar-button{display: none;}
+::-moz-scrollbar{display: none;}
+::-moz-scrollbar-button{display: none;}
 
-body {
-  -ms-overflow-style:none;
-}
 #container{
     background-color: #000;
     color: #AAA;
@@ -50,6 +38,61 @@ body {
 #container .input-line .text{
     line-height: 20px;
 }
+#container-info{
+    float: left;
+    background-color: #000;
+    color: #AAA;
+    width: 50%;
+    height: 30%;
+    margin: auto;
+    position: fixed;
+    overflow: auto;
+    padding: 5px;
+    top: 55%;
+    top: 504px;
+    left: 25%;
+    border: 4px dashed #AAA;
+    width: 860px;
+    height: 30px;
+}
+#container-info #character-exp{
+    position: relative;
+    float: left;
+    padding-top: 5px;
+    padding-left: 10px;
+    margin: 0;
+    width: auto;
+    height: 28px;
+}
+#container-info #character-gold{
+  position: relative;
+  float: right;
+  padding-top: 5px;
+  padding-right: 10px;
+  margin: 0;
+  width: auto;
+  height: 28px;
+  width: auto;
+  height: 28px;
+}
+#container-info #character-exp .info, #container-info #character-gold .info{
+  left: 30%;
+  top: 5px;
+  color: #777 !important;
+  font-weight: 900;
+}
+#container-info #character-exp .info small{
+  font-size: 12px;
+}
+#container-info .bar{
+  position: absolute;
+  float:left;
+  background-color: yellow;
+  height: calc(100% - 10px);
+  width: 0;
+}
+
+
 #container2{
     float: left;
     background-color: #000;
@@ -61,11 +104,11 @@ body {
     overflow: auto;
     padding: 10px;
     top: 55%;
-    top: 504px;
+    top: 548px;
     left: 25%;
     border: 4px dashed #AAA;
     width: 850px;
-    height: 280px;
+    height: 236px;
 }
 
 .line{
@@ -122,10 +165,10 @@ input#input{
     opacity: 0;
 }
 /*blinkCursor*/
-#cmd span {
+#cmd span{
     float: left;
 }
-#cursor {
+#cursor{
     float: left;
     width: 5px;
     height: 18px;
@@ -133,6 +176,8 @@ input#input{
 }
 
 
+
+/*Statics*/
 #statistics-button{
     position: fixed;
     top: 15px;
@@ -141,8 +186,6 @@ input#input{
     color: #FFF;
     padding: 10px;
 }
-
-
 #statistics{
     display: none;
     position: fixed;
@@ -163,17 +206,18 @@ input#input{
     float: left;
     width: 70%;
 }
-
 #statistics .title, #statistics .content, #general, #your_answers{
     float: left;
     width: 100%;
 }
-
 #general, #your_answers{
     margin-bottom: 30px;
 }
+/*Statics*/
 
 
+
+/*Main Menu (ESC)*/
 #main-menu{
     display: none;
     position: fixed;
@@ -193,9 +237,11 @@ input#input{
 #main-menu .item .sk{
     font-size: 4vh;
 }
+/*Main Menu (ESC)*/
 
 
-/*fight screen*/
+
+/*Fight Screen*/
 #fight{
     display: none;
     float: left;
@@ -247,16 +293,71 @@ input#input{
     height: 100%;
     line-height: 1.6em;
 }
-/*fight screen*/
+/*Fight Screen*/
 
 
-#skills-menu, #character-menu{
+
+/*Container2 Menus*/
+#skills-menu, #character-menu, #main-screen{
     float: left;
     position: relative;
     width: 100%;
     height: 100%;
     display: none;
 }
+/*Container2 Menus*/
+
+#main-screen{
+  display: block;
+  font-size: 16px;
+}
+
+/*Main Screen*/
+#main-screen .places, #main-screen .statics, #main-screen .menu-items{
+  padding: 10px;
+  width: calc(33% - 19px);
+  height: calc(100% - 20px);
+  float: left;
+  border-right: 2px dashed #CCC;
+}
+#main-screen .menu-items{
+  border: 0;
+}
+#main-screen .statics{
+  padding-top: 5px;
+  line-height: 30px;
+}
+#main-screen .places .place{
+  margin-bottom: 10px;
+}
+#main-screen .lvl{
+  float: right;
+  margin-right: 10px;
+}
+
+#main-screen .menu-items .menu-item{
+  margin-bottom: 25px;
+}
+/*Main Screen*/
+
+
+/*Character Menu*/
+#character-menu .option{
+  height: 23px;
+}
+#character-menu .name{
+  float: left;
+  width: 160px;
+  color: yellow;
+}
+#character-menu .value{
+  float: left;
+}
+/*Character Menu*/
+
+
+
+/*Skills Menu*/
 #skills-menu .skill{
     width: calc(25% - 10px);
     height: 100%;
@@ -298,9 +399,15 @@ input#input{
 #skills-menu .skill .description{
     height: 65%;
 }
+/*Skills Menu*/
 
 
 
+/*Map Menu*/
+#map-menu{
+  display: none;
+}
+/*Map Menu*/
 
 
 
@@ -343,7 +450,7 @@ input#input{
     }
 }
 /*mozilla için
-@-moz-document url-prefix() { 
+@-moz-document url-prefix(){
     #container-out{
         background-color: #000;
         color: #AAA;

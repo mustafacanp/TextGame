@@ -2,7 +2,7 @@
 var maps = [
   {
     id: 1,
-    name: 'Edincik',
+    name: 'Praven',
     minLvl: 1,
     minMobLvl: "01",
     maxMobLvl: "05",

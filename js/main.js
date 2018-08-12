@@ -1,13 +1,33 @@
 
-var storySequence = ["starting_story", "first_story", "first_story_2","second_story","third_story","forth_story","fifth_story","sixth_story","seventh_story","eighth_story","nineth_story"];
+var storySequence = [
+    "starting_story",
+    "first_story",
+    "first_story_2",
+    "second_story",
+    "third_story",
+    "forth_story",
+    "fifth_story",
+    "sixth_story",
+    "seventh_story",
+    "eighth_story",
+    "nineth_story",
+    "tenth_story",
+    "eleventh_story",
+    "four_years_later",
+];
 //var dialogueSequence = ["name_dialogue","nick_dialogue", "do_you_wanna_fight"];
-var dialogueSequence = ["do_you_wanna_fight","do_you_wanna_fight","name_dialogue","nick_dialogue", "do_you_wanna_fight"];
+var dialogueSequence = [
+    "do_you_wanna_fight",
+    "name_dialogue",
+    "nick_dialogue",
+    "do_you_wanna_fight"
+];
 
 var processSequence = [ // İşlem Sırası
-    {id:0, type:"story"},
-    {id:1, type:"dialogue"},
+    {id:0, type:"dialogue"},
+    {id:1, type:"story"},
     {id:2, type:"dialogue"},
-    {id:3, type:"story"},
+    {id:3, type:"dialogue"},
     {id:4, type:"story"},
     {id:5, type:"story"},
     {id:6, type:"story"},
@@ -17,7 +37,12 @@ var processSequence = [ // İşlem Sırası
     {id:10, type:"story"},
     {id:11, type:"story"},
     {id:12, type:"story"},
-    {id:13, type:"dialogue"},
+    {id:13, type:"story"},
+    {id:14, type:"story"},
+    {id:15, type:"story"},
+    {id:16, type:"story"},
+    {id:17, type:"story"},
+    {id:18, type:"dialogue"},
 ];
 /*
 var processSequence = [ // İşlem Sırası
@@ -99,7 +124,7 @@ var mob = new Mob(goblin, 2);
 
 
 
-
+/*
 console.log("1 :" + reqExptoLvlUp(1));
 console.log("2 :" + reqExptoLvlUp(2));
 console.log("3 :" + reqExptoLvlUp(3));
@@ -116,3 +141,4 @@ console.log("50: " + reqExptoLvlUp(50));
 console.log("100: " + reqExptoLvlUp(100));
 
 console.log("-----------------");
+*/

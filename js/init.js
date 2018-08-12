@@ -105,17 +105,19 @@ jQuery(document).ready(function () {
     focusInput(); // Sayfada herhangi bir yere basınca input alanına focus olur.
     start.init(); // keyPress && drawMatrix
 
-    initDialogue(); // TODO: Bu satrı kaldır, alt satırları çalıştır.
-/*
+    //initDialogue(); // TODO: Bu satrı kaldır, alt satırları çalıştır.
+
     intro();
     setTimeout(function(){
         $("#container").html(""); // Animasyon temizlendi.
-        cin(); // Girdi satırı oluşturdu.
+        cin();
+        refreshInputLine();
+        focusInput();
         is_animating = false;
-        initStory();
+        initDialogue();
     }, 6300);
-*/
-    let gandalf = new Saruman();
+
+    let gandalf = new Gandalf();
     selectCharacter(gandalf);
     mainScreenUI();
 });

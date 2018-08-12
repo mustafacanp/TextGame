@@ -25,7 +25,7 @@ var dialogues = {
             " yüzlerce yıl önce üç kadim ırk birlikte yaşardı. İnsanlar, " + ek(s_race2, "ler") + " ve " + ek(s_race3, "ler") + ".";
         },
         saveAnswer : function (answer){
-            dialogueAnswers[this.keyNickName] = answer; // dialogueAnswers objesine diyalog key ve cevabı yazdırdık
+            dialogueAnswers[this.keyName] = answer; // dialogueAnswers objesine diyalog key ve cevabı yazdırdık
             options.nickName = answer; // options objesindeki name özelliğine gelen cevabı yazdırdık
         }
     },
@@ -66,14 +66,14 @@ var dialogues = {
         id : 4,
         keyName : "do_you_wanna_fight",
         type : "number",
-        question : "Do you wanna fight?",
+        question : "Önünü kestiler savaşmak istiyor musun?",
         answers :
             [{
                 id : 1,
-                inputText : "Yes",
+                inputText : "Evet",
                 saveAnswer : function (keyName){
                     dialogueAnswers[keyName] = this.inputText;
-                    return "Be ready for fight!";
+                    return "Hazırlıklarını bitir savaş başlıyor!";
                 },
                 action : function (keyName){
                     $("#container-info").css("display","block"); // TODO: #container-info göster
@@ -83,10 +83,10 @@ var dialogues = {
             },
             {
                 id : 2,
-                inputText : "No",
+                inputText : "Hayır",
                 saveAnswer : function (keyName){
                     dialogueAnswers[keyName] = this.inputText;
-                    return "Tamam, devam edebilirsin...";
+                    return "Koşarak uzaklaştın...";
                 },
                 action : function (keyName){
 

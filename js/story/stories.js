@@ -25,14 +25,14 @@ var stories = {
         keyName : "first_story_2",
         text : "Kendini sadece teknoloji ve gelişmeye adayan " + ek(s_race3, "ler") + " çok dayanamadı. " +
         "Şehirlerini terk ederek bir daha görünmemek üzere dağlara kaçtılar. Nereye gittikleri hiç bilinmedi. Kimilerine göre Toprak Tanrısı halkını göğe yükseltti, " +
-        "kimilerine göre hiç kimsenin görmediği " + ek(s_race3_mountain, "in,de") + " tanrıları tarafından korunuyorlar, kimilerine göre de haydut oldular.",
+        "kimilerine göre efsanevi " + ek(s_race3_mountain, "in,de") + " tanrıları tarafından korunuyorlar, kimilerine göre de kulaklarını keserek insanların arasına karıştılar.",
     },
     second_story :
     {
         id : 4,
         isShown: false,
         keyName : "second_story",
-        text : "Bu arada " + ek(s_race3, "ler,in") + " hikaye ile hiçbir alakası yok, genel kültür olsun diye anlattım. " +
+        text : "Bu arada " + ek(s_race3, "ler,in") + " şimdilik hikaye ile hiçbir alakası yok, genel kültür olsun diye anlattım. " +
         "Ortamlarda satarsın kim bilecek? Ihımh neyse asıl hikayeye gelelim.",
     },
     third_story :
@@ -104,7 +104,7 @@ var stories = {
     },
     eleventh_story :
     {
-        id : 12,
+        id : 13,
         isShown: false,
         keyName : "tenth_story",
         text : "<del>Baban ... Pardon . . . </del>Annen seni doğurduktan sonra intihar etti. " +
@@ -112,7 +112,7 @@ var stories = {
     },
     four_years_later :
     {
-        id : 12,
+        id : 14,
         isShown: false,
         keyName : "four_years_later",
         text : "<div style='text-align:center;width:850px'>" +
@@ -126,7 +126,7 @@ var stories = {
         id : 101,
         isShown: false,
         keyName : "accept_fight",
-        text : "STORY dovusu kabul ettin",
+        text : "STORY dövüşü kabul ettin.",
         doAction : function(){
 
         }
@@ -136,7 +136,7 @@ var stories = {
         id : 102,
         isShown: false,
         keyName : "decline_fight",
-        text : "STORY dovusu kabul reddettin",
+        text : "STORY dövüşü reddettin.",
         doAction : function(){
             action_type = 0;
         }
@@ -146,7 +146,7 @@ var stories = {
         id : 103,
         isShown: false,
         keyName : "force_fight",
-        text : "Suspendisse porta, urna eu molestie condimentum, urna felis tincidunt lectus.",
+        text : "STORY dövüşmek zorundasın.",
         doAction : function(){
 
         }
